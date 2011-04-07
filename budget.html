@@ -1,8 +1,45 @@
 <html>
+<head>
+<script>
 
-<div>
-Budget page!
+$(function(){
+    $("#budget-tabs").tabs();
+    $("#percent-progress").progressbar({value:37});
+});
+
+</script>
+</head>
+<body>
+
+<h2>Monthly Budget</h2>
+
+<div id="budget-tabs">
+<ul>
+    <li><a href="#percent">Percent</a></li>
+    <li><a href="#spending">Spending over time</a></li>
+</ul>
+<div id="percent">
+    <div id="percent-progress"><span style="position:absolute;">Hello</span></div>
+    You've spent ?? of your $300.00 budget.<br/>
+    To stay on track, you have $65 left to spend this week.<br/>
+    You have $slkjf left to spend this month.
+</div>
+<div id="spending">
+Pretty graph here
+</div>
 
 </div>
 
+<h2>Latest Purchases</h2>
+
+<div id="purchases" style="overflow:auto;">
+stuff here in a div.
+<table>
+
+
+</table>
+</div>
+
+
+</body>
 </html>

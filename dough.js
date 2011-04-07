@@ -2,7 +2,6 @@
 
 $(function() {
 
-    $("#after").load("budget.html");
     $("#tabs").tabs({
         ajaxOptions: {
             error: function( xhr, status, index, anchor ) {
