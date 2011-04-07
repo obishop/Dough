@@ -4,6 +4,36 @@ html, body {
     margin:0;
 }
 
-#tabs {
+.vert-space {
+    height: 30px;
+}
+
+.horiz-space {
+    width: 220px;
+}
+
+#logo {
+    position: absolute;
+    left: 30px;
+}
+
+#main-tabs {
+    padding: 0px;
+    background: none;
+    border-width: 0px;
+    height: 100%;
+}
+
+#main-tabs > .ui-tabs-nav {
+    padding-left: 0px;
+    background: transparent;
+    border-width: 0px 0px 1px 0px;
+    border-radius: 0px;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+}
+
+#main-tabs > .ui-tabs-panel {
+    border-width: 0px 1px 1px 1px;
     height: 100%;
 }
