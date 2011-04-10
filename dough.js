@@ -13,7 +13,15 @@ $(function() {
     });
 
     $("#food-button").button();
+    $("#food-button").click(function(){
+        $("#main-tabs").tabs("option","selected",1); 
+    });
     $("#budget-button").button();
+    $("#budget-button").click(function(){
+        $("#main-tabs").tabs("option","selected",2); 
+    });
     $("#recipes-button").button();
-
+    $("#recipes-button").click(function(){
+        $("#main-tabs").tabs("option","selected",3); 
+    });
 });
