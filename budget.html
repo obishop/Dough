@@ -1,11 +1,36 @@
 <html>
 <head>
+
+<style>
+#purchases {
+    overflow: auto;
+    width: 100%;
+    height: 100px;
+}
+
+#purchases table {
+    border-collapse:collapse;
+}
+
+#purchases table, th, td {
+    //border: 1px solid black;
+}
+
+</style>
+
 <script>
 
 $(function(){
     $("#budget-tabs").tabs();
-    $("#percent-progress").progressbar({value:37});
+    $("#percent-progress").progressbar({value:13.8});
+
+    setBudgetProgress(41.27);
 });
+
+var setBudgetProgress = function(progress) {
+    $("#budget-progress-spent").html(progress);
+}
+
 
 </script>
 </head>
@@ -17,24 +42,49 @@ $(function(){
 <ul>
     <li><a href="#percent">Percent</a></li>
     <li><a href="#spending">Spending over time</a></li>
+    <li><a href="#edit-budget">Edit Budget</a></li>
 </ul>
 <div id="percent">
-    <div id="percent-progress"><span style="position:absolute;">Hello</span></div>
-    You've spent ?? of your $300.00 budget.<br/>
-    To stay on track, you have $65 left to spend this week.<br/>
-    You have $slkjf left to spend this month.
+    <p><div id="percent-progress">
+        <span id="budget-progress-spent" style="position:absolute;top:85px;left:45px">$41.27</span>
+        <span id="budget-progress-left" style="position:absolute;top:85px;left:400px">$258.73</span>
+    </div></p>
+    
+    <p>You've spent $41.27 of your $300.00 budget.</p>
+    <p>To stay on track, you have $65 left to spend this week.</p>
+    <p>You have $258.73 left to spend this month.</p>
 </div>
 <div id="spending">
 Pretty graph here
+</div>
+<div id="edit-budget">
+Sorry, you can't edit your budget yet!
 </div>
 
 </div>
 
 <h2>Latest Purchases</h2>
 
-<div id="purchases" style="overflow:auto;">
-stuff here in a div.
-<table>
+<div id="purchases">
+<table style="width=100%">
+<tr class="ui-widget-header">
+    <td>$41.27</td>
+    <td width="100%" style="text-align:right;">3/15/11</td>
+</tr>
+<tr class="ui-state-default">
+    <td>$12.38</td>
+    <td style="text-align:right;">3/2/11</td>
+</tr>
+<tr class="ui-widget-header">
+    <td>$37.19</td>
+    <td width="100%" style="text-align:right;">2/28/11</td>
+</tr>
+<tr class="ui-state-default">
+    <td>$24.88</td>
+    <td style="text-align:right;">2/17/11</td>
+</tr>
+
+
 
 
 </table>
