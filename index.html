@@ -24,18 +24,58 @@
 <div id="main-tabs">
 <ul>
     <li><div class="horiz-space"></div></li>
-    <li><a href="#tabs-1">Home</a></li>
+    <li><a href="#home-tab">Home</a></li>
     <li><a href="nothing.html">Food</a></li>
     <li><a href="budget.html">Budget</a></li>
     <li><a href="recipes.html">Recipes</a></li>
 
 </ul>
-<div id="tabs-1">
-<p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci. Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique tempus lectus.</p>
+<div id="home-tab">
+
+<div class="ui-dialog ui-widget ui-widget-content ui-corner-all" style="position:static;width:100%">
+    <div class="ui-widget-header ui-dialog-titlebar ui-corner-all">
+        <span class="ui-dialog-title-dialog">Food</span>
+    </div>
+    <div class="ui-dialog-content">
+    You have 1 food about to expire:
+    <ul>
+        <li>Milk</li>
+    </ul>
+    <button id="food-button">Manage food supply</button>    
+    </div>
+</div>
+
+<br/>
+
+<div class="ui-dialog ui-widget ui-widget-content ui-corner-all" style="position:static;width:100%">
+    <div class="ui-widget-header ui-dialog-titlebar ui-corner-all">
+        <span class="ui-dialog-title-dialog">Budget</span>
+    </div>
+    <div class="ui-dialog-content">
+    You've spent $41.27 of your $300 budget.
+
+    <button id="budget-button">Manage budget</button>
+    </div>
+</div>
+
+<br/>
+
+<div class="ui-dialog ui-widget ui-widget-content ui-corner-all" style="position:static;width:100%">
+    <div class="ui-widget-header ui-dialog-titlebar ui-corner-all">
+        <span class="ui-dialog-title-dialog">Recipes</span>
+    </div>
+    <div class="ui-dialog-content">
+    Some recipes you could make right now:
+    <ul>
+        <li>Beef stew</li>
+        <li>Bread pudding</li>
+    </ul>
+    <button id="recipes-button">Search for recipes</button>
+    </div>
 </div>
 
 </div>
-
+</div>
 </body>
 
 </html>

@@ -11,4 +11,9 @@ $(function() {
             }
         }
     });
+
+    $("#food-button").button();
+    $("#budget-button").button();
+    $("#recipes-button").button();
+
 });
