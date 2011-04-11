@@ -1,1 +1,156 @@
-Recipes page
+<html> 
+<head>
+
+<script type="text/javascript"> 
+
+function popup(mylink, windowname){
+	if (! window.focus)return true;
+	var href;
+	if (typeof(mylink) == 'string')
+   		href=mylink;
+	else
+   		href=mylink.href;
+	window.open(href, windowname, 'width=900,height=600,scrollbars=yes');
+	return false;
+}
+
+function uncheckAll(form) {
+	for (i=0;i<document.forms[form].chbx.length;i++) {
+    	document.forms[form].chbx[i].checked=false;
+   	}
+}
+
+function checkFirst(form) {
+	document.forms[form].chbx[0].checked = true;
+}
+
+$(document).ready(function(){
+
+	checkFirst("mealform");
+
+	$("#search").click(function(){
+		var valid = !document.forms["mealform"].chbx[1].checked && 
+					!document.forms["mealform"].chbx[4].checked &&
+					!document.forms["needsform"].chbx[0].checked &&
+					!document.forms["needsform"].chbx[1].checked &&
+					!document.forms["needsform"].chbx[2].checked &&
+					!document.forms["needsform"].chbx[3].checked &&
+					!document.forms["needsform"].chbx[4].checked &&
+					!document.forms["needsform"].chbx[5].checked;
+		for (i=1;i<document.forms["foodform"].chbx.length;i++)
+		{
+			valid = valid && !document.forms["foodform"].chbx[i].checked
+			if (!valid) break;
+		}
+		if (valid)
+		{
+			document.getElementById("error-msg").style.display = "none";
+			document.getElementById("search-results").style.display = "block";
+		}
+		else
+		{
+			document.getElementById("search-results").style.display = "none";
+			document.getElementById("error-msg").style.display = "block";
+		}
+			
+	});
+	
+	$("#clear").click(function(){
+		document.getElementById("search-results").style.display = "none";
+		document.getElementById("error-msg").style.display = "none";
+		uncheckAll("mealform");
+		checkFirst("mealform");
+		uncheckAll("needsform");
+		uncheckAll("foodform");
+	});
+	
+	$("#any-button").click(function(){
+		if (document.forms["mealform"].chbx[0].checked)
+		{
+			uncheckAll("mealform");
+			checkFirst("mealform");
+		}
+	});
+	
+	$(".other-button").click(function(){
+		if (this.checked)
+		{
+			document.forms["mealform"].chbx[0].checked = false;
+		}
+	});
+
+});
+
+</script> 
+
+</head>
+
+<body>
+
+<div class="ui-dialog ui-widget ui-widget-content ui-corner-all" style="position:static;width:45%;height:80%;float:left;margin:5px;"> 
+    <div class="ui-widget-header ui-dialog-titlebar ui-corner-all"> 
+        <span class="ui-dialog-title-dialog">Recipe Search</span> 
+    </div> 
+    <div style="padding:20px;">
+	<h4>Meal Type:</h4>
+	<form id="mealform">
+		<input type="checkbox" id="any-button" name="chbx" value="any"/>Any<br>
+		<input type="checkbox" class="other-button" name="chbx" value="breakfast"/>Breakfast
+		<input type="checkbox" class="other-button" name="chbx" value="lunch"/>Lunch
+		<input type="checkbox" class="other-button" name="chbx" value="dinner"/>Dinner
+		<input type="checkbox" class="other-button" name="chbx" value="dessert"/>Dessert
+		<input type="checkbox" class="other-button" name="chbx" value="snack"/>Snack
+	</form>
+	<h4>Special Requirements:</h4>
+	<form id="needsform">
+		<input type="checkbox" name="chbx" value="vegetarian"/>Vegetarian
+		<input type="checkbox" name="chbx" value="vegan"/>Vegan
+		<input type="checkbox" name="chbx" value="dairy"/>Dairy-Free<br>
+		<input type="checkbox" name="chbx" value="gluten"/>Gluten-Free
+		<input type="checkbox" name="chbx" value="sodium"/>Low-Sodium
+		<input type="checkbox" name="chbx" value="calorie"/>Low-Calorie
+	</form>
+	<h4>Have something you want to use up?</h4>
+	<div style="height:170px;width:100%;overflow:auto;border:1px solid black;">
+	<form id="foodform">
+		<input type="checkbox" name="chbx" value="asparagus"/>Asparagus<br>
+		<input type="checkbox" name="chbx" value="milk"/>Milk<br>
+		<input type="checkbox" name="chbx" value="beef"/>Beef<br>
+		<input type="checkbox" name="chbx" value="carrots"/>Carrots<br>
+		<input type="checkbox" name="chbx" value="bread"/>Bread<br>
+		<input type="checkbox" name="chbx" value="brocolli"/>Broccoli<br>
+		<input type="checkbox" name="chbx" value="tofu"/>Tofu<br>
+		<input type="checkbox" name="chbx" value="rice"/>Rice
+	</form>
+	</div>
+	<br>
+	<button id="clear">Clear</button>
+    <button id="search">Search</button>
+    </div>
+</div>
+
+<div class="ui-dialog ui-widget ui-widget-content ui-corner-all" style="position:static;width:45%;height:80%;float:left;margin:5px;"> 
+    <div class="ui-widget-header ui-dialog-titlebar ui-corner-all"> 
+        <span class="ui-dialog-title-dialog">Results</span>
+    </div>
+    <div style="padding:20px;">
+	<div style="height:458px;width:100%;overflow:auto;border:1px solid black;">
+	<div id="search-results" style="display:none;">
+	<form>
+		<a href="http://allrecipes.com/Recipe/Parmesan-Asparagus/Detail.aspx" onClick="return popup(this, 'Recipe Result')">Parmesan Asparagus</a><br>
+		<a href="http://allrecipes.com/Recipe/Seasoned-Asparagus/Detail.aspx" onClick="return popup(this, 'Recipe Result')">Seasoned Asparagus</a><br>
+		<a href="http://allrecipes.com/Recipe/Asparagus-Vinaigrette/Detail.aspx" onClick="return popup(this, 'Recipe Result')">Asparagus Vinaigrette</a><br>
+		<a href="http://allrecipes.com/Recipe/Sugared-Asparagus/Detail.aspx" onClick="return popup(this, 'Recipe Result')">Sugared Asparagus</a><br>
+		<a href="http://allrecipes.com/Recipe/Divine-Asparagus/Detail.aspx" onClick="return popup(this, 'Recipe Result')">Divine Asparagus</a><br>
+	</form>
+	</div>
+	<div id="error-msg" style="display:none;">
+	Search results are not available for this kind of search yet. Please follow these guidelines detailed on the wiki.
+	</div>
+	</div>
+	</div>
+</div> 
+
+</body>
+
+</html> 
