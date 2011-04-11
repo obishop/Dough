@@ -1,0 +1,254 @@
+<html> 
+<head> 
+<link rel="stylesheet" type="text/css" href="foodlayout.css" />
+<link rel="stylesheet" type="text/css" href="jquery/css/redmond/jquery-ui-1.8.11.custom.css" />
+<script type="text/javascript" src="jquery/js/jquery-1.5.1.min.js"></script> 
+<script type="text/javascript" src="jquery/js/jquery-ui-1.8.11.custom.min.js"></script> 
+<script type="text/javascript"> 
+	$(function() {
+		$( "#datepicker" ).datepicker();
+	});
+		$(function() {
+		$( "#datepicker2" ).datepicker();
+	});
+		$(function() {
+		$( "#datepicker3" ).datepicker();
+	});
+	
+			$(function() {
+		$( "#datepickerI" ).datepicker();
+	});
+
+	
+	$(function() {
+		$( "button, input:submit, a", ".demo" ).button();
+		$( "a", ".demo" ).click(function() { return false; });
+	});
+ 
+ 
+ $(document).ready(function(){
+
+ $("#checkboxall").click(function()
+  {
+   var checked_status = this.checked;
+   $("input[name=checkall]").each(function()
+   {
+    this.checked = checked_status;
+   });
+  });
+
+});
+
+ $(document).ready(function(){
+$("#addsubmit").click(function()
+	{
+	$('#mask, .window').hide();
+
+		$('.foodin').each(function(index)
+   {
+    	//add food to list
+    	if($(this).val().length >0  ){
+    		$('#foods').append( '<tr><td><input type="checkbox" name="checkall" value="food2"/></td><td>' + $(this).val() +  '</td><td>Tags</td><td>4/19/11</td><td>4/1/11</td></tr>') ;
+    		$(this).val("");
+    	}
+   });
+   	
+	
+	
+	});
+});
+
+
+//modal adding window
+$(document).ready(function() {	
+
+	//select all the a tag with name equal to modal
+	$('button[name=modal]').click(function(e) {
+		//Cancel the link behavior
+		e.preventDefault();
+		//Get the A tag
+		var id = $(this).attr('href');
+	
+		//Get the screen height and width
+		var maskHeight = $(document).height();
+		var maskWidth = $(window).width();
+	
+		//Set height and width to mask to fill up the whole screen
+		$('#mask').css({'width':maskWidth,'height':maskHeight});
+		
+		//transition effect		
+		$('#mask').fadeIn(1000);	
+		$('#mask').fadeTo("slow",0.8);	
+	
+		//Get the window height and width
+		var winH = $(window).height();
+		var winW = $(window).width();
+              
+		//Set the popup window to center
+		$(id).css('top',  winH/2-$(id).height()/2);
+		$(id).css('left', winW/2-$(id).width()/2);
+	
+		//transition effect
+		$(id).fadeIn(2000); 
+	
+	});
+	
+	//if close button is clicked
+	$('.window .close').click(function (e) {
+		//Cancel the link behavior
+		e.preventDefault();
+		$('#mask, .window').hide();
+		
+		
+	});		
+	
+	//if mask is clicked
+	$('#mask').click(function () {
+		$(this).hide();
+		$('.window').hide();
+	});			
+	
+});
+
+
+
+</script> 
+</head> 
+<body> 
+		<div id="boxes">
+			<!-- #customize your modal window here -->
+
+		<div id="dialog" class="window" class="ui-dialog ui-widget ui-widget-content ui-corner-all">
+		
+    	<div class="ui-widget-header ui-dialog-titlebar ui-corner-all">
+        <span class="ui-dialog-title-dialog">Add Food</span>
+    	</div>
+    	
+		Specify purchase date  <input type="text" id="datepickerI"> for all items. <br>
+		<table style='table-layout:fixed'>
+ 		<col width=160>
+		<col width=100>
+ 		<col width=100>
+ 		<col width=100>
+ 
+		<tr>
+		<td> Item </td><td>  Expiration Date</td><td>Location </td><td>Catagory</td>
+		</tr>
+		
+		<tr>
+		<td> <input type="text" name="foodname" size="25" class="foodin"> </td><td>  <input type="text" id="datepicker"></td><td>Tags </td><td>
+			<select><option>Dairy</option><option>Fruit</option><option>Grains</option><option>Protein</option><option>Vegetables</option></select></td>
+		</tr>
+		<tr>
+		<td> <input type="text" name="foodname" size="25" class="foodin"> </td><td> <input type="text" id="datepicker2"></td><td>Tags </td><td>
+					<select><option>Dairy</option><option>Fruit</option><option>Grains</option><option>Protein</option><option>Vegetables</option></select></td>
+		</tr>
+		<tr>
+		<td> <input type="text" name="foodname" size="25" class="foodin">  </td><td>  <input type="text" id="datepicker3"></td><td>Tags </td><td>	
+			<select><option>Dairy</option><option>Fruit</option><option>Grains</option><option>Protein</option><option>Vegetables</option></select></td>
+		</tr>
+	
+				<tr>
+		<td> </td><td> </td><td> </td><td>	
+			<button><b>+</b></button></td>
+			
+		</tr>
+		<tr>
+		<td><br> Cost of Purchases ($) </td><td><br><input type="text" name="food" size="8"> </td><td> </td><td>	
+		</td>
+			
+		</tr>
+		<tr>
+		<td> </td><td> </td><td> <input type="submit" id="addsubmit" value="Submit"/></td><td>	
+			<input type="submit" class="close" value="Cancel"/></td>
+			
+		</tr>
+		</table>
+		<br>
+		
+		</div>
+	
+		<!-- Do not remove div#mask, because you'll need it to fill the whole screen -->	
+ 		
+	
+		</div>
+ 
+
+	<div id="contentwrapper">
+		<div id="contentcolumn">
+		<div class="ui-dialog ui-widget ui-widget-content ui-corner-all" style="position:static;width:100%">
+    <div class="ui-widget-header ui-dialog-titlebar ui-corner-all">
+        <span class="ui-dialog-title-dialog">Food</span>
+    </div>
+		<div id="foodlist">
+			<div id="flbuttonbar">
+			<button>Select</button>      <button>Tags</button>   <button>Delete</button>   
+			<button>Find Recipes</button>
+			<button name="modal" href="#dialog"><b>Add Foods</b></button>
+
+			</div>
+		<table id="foods" style='table-layout:fixed'>
+ 		<col width=40>
+		<col width=200>
+ 		<col width=150>
+ 		<col width=160>
+ 		<col width=160>
+ 		
+		<tr id="foodlistcol">
+		<td> <input type="checkbox" name="food" id="checkboxall" />  </td><td>  Name</td><td>Tags </td><td>Expiration Date</td><td>Purchase Date</td>
+		</tr>
+		<tr>
+		<td> <input type="checkbox" name="checkall" value="food1" />  </td><td>  Asparagus</td><td>Tags </td><td>4/10/11</td><td>4/5/11</td>
+		</tr>
+		<tr>
+		<td> <input type="checkbox" name="checkall" value="food1" />  </td><td>  Milk</td><td>Tags </td><td>4/12/11</td><td>4/5/11</td>
+		</tr>
+		<tr>
+		<td> <input type="checkbox" name="checkall" value="food2" />  </td><td>  Beef</td><td>Tags </td><td>4/14/11</td><td>4/12/11</td>
+		</tr>
+		<tr>
+		<td> <input type="checkbox" name="checkall" value="food2" />  </td><td>  Cheese</td><td>Tags </td><td>4/19/11</td><td>4/1/11</td>
+		</tr>
+		
+		</table>
+		</div>
+		
+	</div>
+	</div>
+	</div>
+
+	<div id="leftcolumn" class="ui-corner-all">
+
+	<b>Catagories</b> 
+	
+		<div id="navcontainer">
+		<ul id="navlist">
+		<li id="active"><a href="#" id="current"><b>All</b></a></li>
+		<li id="active"><a href="#">Dairy</a></li>
+		<li><a href="#">Fruits</a></li>
+		<li><a href="#">Grains</a></li>
+		<li><a href="#">Protein</a></li>
+		<li><a href="#">Vegetables</a></li>
+		</ul>
+		</div>
+		<br>
+	<b>Location</b> 
+	
+		<div id="navcontainer">
+		<ul id="navlist">
+		<li id="active"><a href="#" id="current"><b>All</b></a></li>
+		<li><a href="#">Refrigerator</a></li>
+		<li><a href="#">Freezer</a></li>
+		<li><a href="#">Cabinet</a></li>
+		</ul>
+		</div>
+		<br><br><br><br><br>
+	
+	
+	
+	
+</div> 
+ 
+ 
+</body> 
+</html> 

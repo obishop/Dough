@@ -1,0 +1,104 @@
+#contentwrapper{
+float: left;
+width: 100%;
+}
+
+#contentcolumn{
+margin-left: 200px; /*Set left margin to LeftColumnWidth*/
+padding-left: 15px;
+padding-right: 40px; 
+}
+
+#leftcolumn{
+float: left;
+width: 200px; /*Width of left column*/
+margin-left: -100%;
+background: #EEE;
+padding: 0px 0px 0px 0px;
+}
+
+#foodlist{
+
+width: 700px; /*Width of left column*/
+padding: 0px 0px 0px 0px;
+}
+
+#flbuttonbar{
+padding-top: 7px; 
+padding-bottom: 5px; 
+}
+
+#foodlistcol{
+font-weight: bold;
+}
+#listcolumnlist{
+list-style-type: none;
+padding:  0px 0px 0px 0px;
+margin: 0px 0px 0px 0px;
+}
+
+#navcontainer { width: 200px; }
+
+#navcontainer ul
+{
+margin-left: 0px;
+margin-top: 0px; 
+padding-top: 3px;
+padding-left: 0px;
+list-style-type: none;
+font-family: Arial, Helvetica, sans-serif;
+}
+
+#navcontainer a
+{
+display: block;
+padding-left: 10px;
+padding-bottom: 5px; 
+padding-top: 5px; 
+width: 189px;
+border-bottom: 1px solid #000;
+
+}
+
+#navcontainer a:link, #navlist a:visited
+{
+color: #000;
+text-decoration: none;
+}
+
+#navcontainer a:hover
+{
+background-color: #369;
+color: #fff;
+}
+
+#leftcolumn b {
+padding-bottom: 4px;
+}
+
+
+
+/* Z-index of #mask must lower than #boxes .window */
+#mask {
+  position:absolute;
+  z-index:9000;
+  background-color:#000;
+  display:none;
+}
+  
+#boxes .window {
+  position:absolute;
+  width:440px;
+  height:200px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+
+/* Customize your modal window here, you can add background image too */
+#boxes #dialog {
+  width:700px; 
+  height:400px;
+  background-color: #FFF; 
+}

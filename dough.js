@@ -1,9 +1,8 @@
 // dough.js: main file for dough project
 
 $(function() {
-    var tabs_top = $("#main-tabs").position().top;
-    var total_height = $("html").height();
-    $("#main-tabs").css("height",(total_height - tabs_top - 50)+"px");
+    onWindowResize();
+    $(window).resize(onWindowResize);
 
     $("#main-tabs").tabs({
         ajaxOptions: {
@@ -31,3 +30,10 @@ $(function() {
     $("#percent-progress-home").progressbar({value:13.8});
     $("#budget-progress-spent-home").html(41.27);
 });
+
+var onWindowResize = function() {
+    var tabs_top = $("#main-tabs").position().top;
+    var total_height = $("html").height();
+    // This is a really crappy way of doing this... find something that works better
+    $("#main-tabs").css("height",(total_height - 120)+"px");
+}
