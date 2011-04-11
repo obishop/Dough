@@ -1,6 +1,6 @@
 <html> 
 <head>
-
+ 
 <script type="text/javascript"> 
 
 function popup(mylink, windowname){
@@ -36,7 +36,8 @@ $(document).ready(function(){
 					!document.forms["needsform"].chbx[2].checked &&
 					!document.forms["needsform"].chbx[3].checked &&
 					!document.forms["needsform"].chbx[4].checked &&
-					!document.forms["needsform"].chbx[5].checked;
+					!document.forms["needsform"].chbx[5].checked &&
+					document.forms["foodform"].chbx[0].checked;
 		for (i=1;i<document.forms["foodform"].chbx.length;i++)
 		{
 			valid = valid && !document.forms["foodform"].chbx[i].checked
@@ -87,7 +88,7 @@ $(document).ready(function(){
 
 <body>
 
-<div class="ui-dialog ui-widget ui-widget-content ui-corner-all" style="position:static;width:45%;height:80%;float:left;margin:5px;"> 
+<div class="ui-dialog ui-widget ui-widget-content ui-corner-all" style="position:static;width:45%;height:600px;float:left;margin:5px;"> 
     <div class="ui-widget-header ui-dialog-titlebar ui-corner-all"> 
         <span class="ui-dialog-title-dialog">Recipe Search</span> 
     </div> 
@@ -129,7 +130,7 @@ $(document).ready(function(){
     </div>
 </div>
 
-<div class="ui-dialog ui-widget ui-widget-content ui-corner-all" style="position:static;width:45%;height:80%;float:left;margin:5px;"> 
+<div class="ui-dialog ui-widget ui-widget-content ui-corner-all" style="position:static;width:45%;height:600px;float:left;margin:5px;"> 
     <div class="ui-widget-header ui-dialog-titlebar ui-corner-all"> 
         <span class="ui-dialog-title-dialog">Results</span>
     </div>
