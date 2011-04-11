@@ -1,31 +1,32 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Dough</title>
+<!DOCTYPE HTML> 
+<html> 
+<head> 
+<meta charset="utf-8"> 
+<title>Dough</title> 
+ 
+<link rel="stylesheet" type="text/css" href="layout.css" /> 
+<link rel="stylesheet" type="text/css" href="jquery/css/redmond/jquery-ui-1.8.11.custom.css" /> 
+ 
+<script type="text/javascript" src="jquery/js/jquery-1.5.1.min.js"></script> 
+<script type="text/javascript" src="jquery/js/jquery-ui-1.8.11.custom.min.js"></script> 
+ 
+<!-- Main javascript file --> 
+<script type="text/javascript" src="dough.js"></script> 
+ 
+</head> 
+ 
+<body> 
 
-<link rel="stylesheet" type="text/css" href="layout.css" />
-<link rel="stylesheet" type="text/css" href="jquery/css/redmond/jquery-ui-1.8.11.custom.css" />
-
-<script type="text/javascript" src="jquery/js/jquery-1.5.1.min.js"></script>
-<script type="text/javascript" src="jquery/js/jquery-ui-1.8.11.custom.min.js"></script>
-
-<!-- Main javascript file -->
-<script type="text/javascript" src="dough.js"></script>
-
-</head>
-
-<body>
-
-<div id="logo"><h1>Dough</h1></div>
-
+<div id="mask"></div>
+<div id="logo"><img src="dough.png" height="100px"/></div> 
+ 
 <div class="vert-space"></div>
 
 <div id="main-tabs">
 <ul>
     <li><div class="horiz-space"></div></li>
     <li><a href="#home-tab">Home</a></li>
-    <li><a href="nothing.html">Food</a></li>
+    <li><a href="food.html">Food</a></li>
     <li><a href="budget.html">Budget</a></li>
     <li><a href="recipes.html">Recipes</a></li>
 
@@ -37,11 +38,12 @@
         <span class="ui-dialog-title-dialog">Food</span>
     </div>
     <div class="ui-dialog-content">
-    You have 1 food about to expire:
+    You have <b>1</b> food about to expire:
     <ul>
-        <li>Milk</li>
+        <li>Asparagus</li>
     </ul>
-    <button id="food-button">Manage food supply</button>    
+    <p>You have <b>4</b> total food items.</p>
+    <button id="food-button" href="food.html">Manage food supply</button>    
     </div>
 </div>
 
@@ -52,9 +54,12 @@
         <span class="ui-dialog-title-dialog">Budget</span>
     </div>
     <div class="ui-dialog-content">
-    You've spent $41.27 of your $300 budget.
-
-    <button id="budget-button">Manage budget</button>
+    <p><div id="percent-progress-home"> 
+        <span id="budget-progress-spent-home" style="position:absolute;top:25px;left:45px">$41.27</span> 
+        <span id="budget-progress-left-home" style="position:absolute;top:25px;left:400px">$258.73</span> 
+    </div></p>
+    <p>You've spent <b>$41.27</b> of your <b>$300</b> budget.</p>
+    <button id="budget-button" href="budget.html">Manage budget</button>
     </div>
 </div>
 
@@ -70,12 +75,13 @@
         <li>Beef stew</li>
         <li>Bread pudding</li>
     </ul>
-    <button id="recipes-button">Search for recipes</button>
+    <button id="recipes-button" href="recipies.html">Search for recipes</button>
     </div>
 </div>
 
 </div>
 </div>
+
 </body>
 
 </html>

@@ -1,6 +1,9 @@
 // dough.js: main file for dough project
 
 $(function() {
+    var tabs_top = $("#main-tabs").position().top;
+    var total_height = $("html").height();
+    $("#main-tabs").css("height",(total_height - tabs_top - 50)+"px");
 
     $("#main-tabs").tabs({
         ajaxOptions: {
@@ -24,4 +27,7 @@ $(function() {
     $("#recipes-button").click(function(){
         $("#main-tabs").tabs("option","selected",3); 
     });
+    
+    $("#percent-progress-home").progressbar({value:13.8});
+    $("#budget-progress-spent-home").html(41.27);
 });

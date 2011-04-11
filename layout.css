@@ -14,11 +14,11 @@ html, body {
 }
 
 .vert-space {
-    height: 30px;
+    height: 40px;
 }
 
 .horiz-space {
-    width: 220px;
+    width: 300px;
 }
 
 #logo {
@@ -30,7 +30,6 @@ html, body {
     padding: 0px;
     background: none;
     border-width: 0px;
-    height: 100%;
 }
 
 #main-tabs > .ui-tabs-nav {
@@ -45,4 +44,5 @@ html, body {
 #main-tabs > .ui-tabs-panel {
     border-width: 0px 1px 1px 1px;
     height: 100%;
+    overflow: auto;
 }
