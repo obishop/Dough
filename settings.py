@@ -55,6 +55,8 @@ MEDIA_ROOT = ''
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
 MEDIA_URL = ''
 
+LOGIN_URL = BASE_URL + "login/"
+
 STATIC_ROOT = ROOT_PATH + "/static/"
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a

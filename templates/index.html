@@ -1,21 +1,13 @@
-<!DOCTYPE HTML> 
-<html> 
-<head> 
-<meta charset="utf-8"> 
-<title>Dough</title> 
- 
+{% extends "base.html" %}
+
+{% block title %}Dough{% endblock %}
+
+{% block resources %}
 <link rel="stylesheet" type="text/css" href="/dough/static/css/layout.css" /> 
-<link rel="stylesheet" type="text/css" href="/dough/static/jquery/css/redmond/jquery-ui-1.8.11.custom.css" /> 
+<script type="text/javascript" src="/dough/static/js/dough.js"></script>  
+{% endblock %}
  
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script> 
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script> 
- 
-<!-- Main javascript file --> 
-<script type="text/javascript" src="/dough/static/js/dough.js"></script> 
- 
-</head> 
- 
-<body> 
+{% block content %}
 
 <div id="mask"></div>
 <div id="logo"><img src="/dough/static/images/dough.png" height="100px"/></div> 
@@ -83,6 +75,4 @@
 
 </div>
 
-</body>
-
-</html>
+{% endblock %}
