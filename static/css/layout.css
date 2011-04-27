@@ -22,6 +22,12 @@ html, body {
     width: 300px;
 }
 
+#account-bar {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 1.1em;
+}
 
 #logo {
     position: absolute;
@@ -52,3 +58,4 @@ html, body {
 .ui-button .ui-button-text {
     font-size: .8em;
 }
+

@@ -4,7 +4,9 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def index(request):
-    return render_to_response('index.html')
+    args = {}
+    args['username'] = request.user.username
+    return render_to_response('index.html',args)
 
 @login_required
 def food(request):

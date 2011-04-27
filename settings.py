@@ -56,6 +56,7 @@ MEDIA_ROOT = ''
 MEDIA_URL = ''
 
 LOGIN_URL = BASE_URL + "login/"
+LOGIN_REDIRECT_URL = BASE_URL
 
 STATIC_ROOT = ROOT_PATH + "/static/"
 
