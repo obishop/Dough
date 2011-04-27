@@ -67,26 +67,12 @@ Sorry, you can't edit your budget yet!
 
 <div id="purchases">
 <table style="width=100%">
-<tr class="ui-widget-header">
-    <td>$41.27</td>
-    <td width="100%" style="text-align:right;">3/15/11</td>
-</tr>
+{% for purchase in purchases %}
 <tr class="ui-state-default">
-    <td>$12.38</td>
-    <td style="text-align:right;">3/2/11</td>
+    <td>${{ purchase.amount }}</td>
+    <td width="100%" style="text-align:right;">{{ purchase.date }}</td>
 </tr>
-<tr class="ui-widget-header">
-    <td>$37.19</td>
-    <td width="100%" style="text-align:right;">2/28/11</td>
-</tr>
-<tr class="ui-state-default">
-    <td>$24.88</td>
-    <td style="text-align:right;">2/17/11</td>
-</tr>
-
-
-
-
+{% endfor %}
 </table>
 </div>
 

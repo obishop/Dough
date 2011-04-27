@@ -2,6 +2,8 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 
+from dough.doughapp import models
+
 @login_required
 def index(request):
     args = {}
@@ -14,7 +16,9 @@ def food(request):
 
 @login_required
 def budget(request):
-    return render_to_response('budget.html')
+    args = {}
+    args['purchases'] = models.Purchase.objects.filter(user=request.user).order_by('-date')
+    return render_to_response('budget.html',args)
 
 @login_required
 def recipes(request):
