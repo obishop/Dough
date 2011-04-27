@@ -107,3 +107,11 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
 )
 
+# If a local_settings.py file is present, then this will import it.
+# You can override any settings you may want for local development.
+
+try:
+    from local_settings import *
+except ImportError, exp:
+    print "did not load any local settings"
+
