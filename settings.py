@@ -1,7 +1,7 @@
 # Django settings for dough project.
 import os
 ROOT_PATH = os.path.dirname(__file__)
-BASE_URL = "/noe/"
+BASE_URL = "/dough/"
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -15,7 +15,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'obishop+dough1',
+        'NAME': 'obishop+dough',
         'USER': 'obishop',
         'PASSWORD': 'via89oli;mysql',
         'HOST': 'sql.mit.edu',
@@ -90,6 +90,7 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
+    'dough.doughapp',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
