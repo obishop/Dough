@@ -24,9 +24,8 @@ html, body {
 
 #account-bar {
     position: absolute;
-    top: 5px;
-    right: 5px;
-    font-size: 1.1em;
+    top: 7px;
+    right: 10px;
 }
 
 #logo {
