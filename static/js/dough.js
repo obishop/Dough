@@ -7,17 +7,10 @@ $(function() {
     var start_tab = tabIndexFromHash();
     $("#main-tabs").tabs({
         'select': function() {
-            $(this).index($(tabFromHash()));   
+            $(this).index($(document.location.hash));   
         },
         'show': function(event, ui){
-            if (ui.panel.id == "home-tab")
-                document.location.hash = "";
-            if (ui.panel.id == "ui-tabs-1")
-                document.location.hash = "food";
-            if (ui.panel.id == "ui-tabs-2")
-                document.location.hash = "budget";
-            if (ui.panel.id == "ui-tabs-3")
-                document.location.hash = "recipes";
+            document.location.hash = ui.panel.id;
         },
 
         ajaxOptions: {
@@ -52,15 +45,6 @@ var onWindowResize = function() {
     var total_height = $("html").height();
     // This is a really crappy way of doing this... find something that works better
     $("#main-tabs").css("height",(total_height - 120)+"px");
-}
-
-var tabFromHash = function() {
-    var hash = document.location.hash;
-    var index = "#home-tab";
-    if (hash == "#food") index = "#ui-tabs-1";
-    if (hash == "#budget") index = "#ui-tabs-2";
-    if (hash == "#recipes") index = "#ui-tabs-3";
-    return index;
 }
 
 var tabIndexFromHash = function() {

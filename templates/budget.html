@@ -45,6 +45,27 @@ $(function(){
 
     //setBudgetProgress(41.27);
 
+    $("#change-budget-submit").button()
+        .click(function(){
+            var val = $("#change-budget-input").val();
+            if (!(/^\d*$/.test(val))) {
+                // If not an integer, don't submit.
+                return true;
+            }
+            $.ajax({
+                type:"POST",
+                url:"/dough/ajax/set_budget/",
+                data:{budget:val},
+                complete:function(res,status){
+                    if (status == "success") {
+                        alert("Success");
+                    } else {
+                        alert("Failed to change budget. Please reload page.");
+                    }
+                }
+            });
+        });
+
     $.plot($("#flot-placeholder"), [
         {
             data: [[0,0],[1,1]],
@@ -79,7 +100,7 @@ var setBudgetProgress = function(progress) {
     <span id="budget-progress-left" style="position:absolute;top:6px;left:300px">$258.73</span>
     </div></p>
 
-    <p>You've spent $41.27 of your $300.00 budget.</p>
+    <p>You've spent $41.27 of your ${{ monthly_budget }} budget.</p>
     <p>To stay on track, you have $65 left to spend this week.</p>
     <p>You have $258.73 left to spend this month.</p>
 </div>
@@ -102,7 +123,11 @@ var setBudgetProgress = function(progress) {
 </div>
 
 <div id="edit-div">
-Edit Budget
+<h3>Change Monthly Budget</h3>
+<form>
+<input id="change-budget-input" type="number" value="{{ monthly_budget }}"/>
+<input type="submit" id="change-budget-submit" />
+</form>
 </div>
 
 

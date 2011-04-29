@@ -21,9 +21,14 @@ urlpatterns = patterns('',
     (r'^static/(?P<path>.*)$', 'django.views.static.serve',
             {'document_root': settings.STATIC_ROOT}),
 
+    # Tabs views, only to be called through the home page
     (r'^food/', 'dough.doughapp.views.food'),
     (r'^budget/', 'dough.doughapp.views.budget'),
     (r'^recipes/', 'dough.doughapp.views.recipes'),
+
+    # Ajax setters
+    (r'^ajax/set_budget/$', 'dough.doughapp.ajax.set_budget'),
+
     (r'/$', 'dough.doughapp.views.index'),
 
 )
