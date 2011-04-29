@@ -60,10 +60,12 @@ $(function(){
                     if (status == "success") {
                         alert("Success");
                     } else {
+                        alert(res.responseText);
                         alert("Failed to change budget. Please reload page.");
                     }
                 }
             });
+            return false;
         });
 
     $.plot($("#flot-placeholder"), [
@@ -123,7 +125,7 @@ var setBudgetProgress = function(progress) {
 </div>
 
 <div id="edit-div">
-<h3>Change Monthly Budget</h3>
+<h3>Change monthly budget</h3>
 <form>
 <input id="change-budget-input" type="number" value="{{ monthly_budget }}"/>
 <input type="submit" id="change-budget-submit" />
