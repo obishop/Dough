@@ -2,29 +2,65 @@
 <head>
 
 <style>
-#purchases {
-    overflow: auto;
-    width: 100%;
+#progress-div {
+    float: left;
+    width: 48%;
+}
+
+#visualization-div {
+    float: right;
+    width: 48%;
+    position: relative;
+}
+
+#edit-div {
+    float: left;
+    width: 48%;
+}
+
+#purchases-div {
+    //overflow: auto;
+    float: left;
+    width: 48%;
     height: 100px;
 }
 
-#purchases table {
+#purchases-div table {
     border-collapse:collapse;
+    overflow: auto;
 }
 
-#purchases table, th, td {
-    //border: 1px solid black;
+#percent-progress span {
+    border-style: none !important;
+    font-weight: bold;
 }
-
 </style>
+
+<script type="text/javascript" src="/dough/static/flot/jquery.flot.min.js"/>
 
 <script>
 
 $(function(){
-    $("#budget-tabs").tabs();
     $("#percent-progress").progressbar({value:13.8});
 
-    setBudgetProgress(41.27);
+    //setBudgetProgress(41.27);
+
+    $.plot($("#flot-placeholder"), [
+        {
+            data: [[0,0],[1,1]],
+            bars: {show: true}
+        }
+    ], {
+        xaxis: {
+            ticks: [[0, "Jan"], [1, "Feb"], [2, "Mar"]]
+        },
+        yaxis: {
+            ticks: 10,
+            min: 0
+        }   
+        
+    });
+
 });
 
 var setBudgetProgress = function(progress) {
@@ -36,44 +72,37 @@ var setBudgetProgress = function(progress) {
 </head>
 <body>
 
-<h2>Monthly Budget</h2>
-
-<div id="budget-tabs">
-<ul>
-    <li><a href="#percent">Percent</a></li>
-    <li><a href="#spending">Spending over time</a></li>
-    <li><a href="#edit-budget">Edit Budget</a></li>
-</ul>
-<div id="percent">
-    <p><div id="percent-progress">
-        <span id="budget-progress-spent" style="position:absolute;top:75px;left:45px">$41.27</span>
-        <span id="budget-progress-left" style="position:absolute;top:75px;left:400px">$258.73</span>
+<div id="progress-div">
+    <h3>Summary</h3>
+    <p><div id="percent-progress" style="position:relative">
+    <span id="budget-progress-spent" class="ui-widget-header" style="position:absolute;top:6px;left:15px">$41.27</span>
+    <span id="budget-progress-left" style="position:absolute;top:6px;left:300px">$258.73</span>
     </div></p>
-    
+
     <p>You've spent $41.27 of your $300.00 budget.</p>
     <p>To stay on track, you have $65 left to spend this week.</p>
     <p>You have $258.73 left to spend this month.</p>
 </div>
-<div id="spending">
-Pretty graph here
-</div>
-<div id="edit-budget">
-Sorry, you can't edit your budget yet!
-</div>
 
+<div id="visualization-div">
+    <h3>Spending over the last year</h3>
+    <div id="flot-placeholder" style="height:300px"></div>
 </div>
 
-<h2>Latest Purchases</h2>
+<div id="purchases-div">
+    <h3>Latest purchases</h3>
+    <table style="width=100%">
+    {% for purchase in purchases %}
+    <tr class="ui-state-default">
+        <td>${{ purchase.amount }}</td>
+        <td width="100%" style="text-align:right;">{{ purchase.date }}</td>
+    </tr>
+    {% endfor %}
+    </table>
+</div>
 
-<div id="purchases">
-<table style="width=100%">
-{% for purchase in purchases %}
-<tr class="ui-state-default">
-    <td>${{ purchase.amount }}</td>
-    <td width="100%" style="text-align:right;">{{ purchase.date }}</td>
-</tr>
-{% endfor %}
-</table>
+<div id="edit-div">
+Edit Budget
 </div>
 
 
