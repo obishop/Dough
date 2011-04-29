@@ -37,6 +37,8 @@ html, body {
     padding: 0px;
     background: none;
     border-width: 0px;
+    max-width: 1000px;
+    margin: auto;
 }
 
 #main-tabs > .ui-tabs-nav {
