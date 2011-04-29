@@ -18,6 +18,7 @@ def food(request):
 def budget(request):
     args = {}
     args['purchases'] = models.Purchase.objects.filter(user=request.user).order_by('-date')
+    args['spent_this_month'] = sum([p.amount for p in args['purchases']])
     args['monthly_budget'] = request.user.profile.monthly_budget
     return render_to_response('budget.html',args)
 

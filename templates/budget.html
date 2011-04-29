@@ -30,20 +30,33 @@
     overflow: auto;
 }
 
-#percent-progress span {
+#progress-div span {
     border-style: none !important;
     font-weight: bold;
 }
+
 </style>
 
 <script type="text/javascript" src="/dough/static/flot/jquery.flot.min.js"/>
 
 <script>
 
-$(function(){
-    $("#percent-progress").progressbar({value:13.8});
+var refreshBudget = function(progress, budget) {
 
-    //setBudgetProgress(41.27);
+    var percent = 100 * progress / budget;
+    $("#progress-bar").progressbar({value:percent}); 
+
+    $("#budget-progress-spent").html("$"+progress);
+    $("#budget-progress-left").html("$"+(budget-progress));
+
+    $("#budget-span").html("$"+budget);
+    $("#spent-span").html("$"+progress);
+    $("#remaining-span").html("$"+(budget-progress));
+}
+
+
+$(function(){
+    refreshBudget({{ spent_this_month }},{{ monthly_budget }});
 
     $("#change-budget-submit").button()
         .click(function(){
@@ -58,7 +71,7 @@ $(function(){
                 data:{budget:val},
                 complete:function(res,status){
                     if (status == "success") {
-                        alert("Success");
+                        refreshBudget({{ spent_this_month }},val);
                     } else {
                         alert(res.responseText);
                         alert("Failed to change budget. Please reload page.");
@@ -86,25 +99,19 @@ $(function(){
 
 });
 
-var setBudgetProgress = function(progress) {
-    $("#budget-progress-spent").html(progress);
-}
-
-
 </script>
 </head>
 <body>
 
 <div id="progress-div">
     <h3>Summary</h3>
-    <p><div id="percent-progress" style="position:relative">
-    <span id="budget-progress-spent" class="ui-widget-header" style="position:absolute;top:6px;left:15px">$41.27</span>
-    <span id="budget-progress-left" style="position:absolute;top:6px;left:300px">$258.73</span>
+    <p><div id="progress-bar" style="position:relative">
+    <span id="budget-progress-spent" class="ui-widget-header" style="position:absolute;top:6px;left:10px">$41.27</span>
+    <span id="budget-progress-left" style="position:absolute;top:6px;right:10px">$258.73</span>
     </div></p>
 
-    <p>You've spent $41.27 of your ${{ monthly_budget }} budget.</p>
-    <p>To stay on track, you have $65 left to spend this week.</p>
-    <p>You have $258.73 left to spend this month.</p>
+    <p>You've spent <span id="spent-span">${{ spent_this_month }}</span> of your <span id="budget-span">${{ monthly_budget }}</span> budget.</p>
+    <p>You have <span id="remaining-span"></span> left to spend this month.</p>
 </div>
 
 <div id="visualization-div">
