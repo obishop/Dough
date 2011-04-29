@@ -49,6 +49,15 @@ var refreshBudget = function(progress, budget) {
     $("#budget-span").html("$"+budget);
     $("#spent-span").html("$"+progress);
     $("#remaining-span").html("$"+remaining);
+
+    // Display negative amounts in red
+    if (remaining < 0) {
+        $("#budget-progress-left").css("color","red");
+        $("#remaining-span").css("color","red");
+    } else {
+        $("#budget-progress-left").css("color","");
+        $("#remaining-span").css("color","");
+    }
 }
 
 var refreshPlot = function(monthly_budget) {
