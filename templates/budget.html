@@ -51,50 +51,56 @@ var refreshBudget = function(progress, budget) {
     $("#remaining-span").html("$"+remaining);
 }
 
-
-$(function(){
-    refreshBudget({{ spent_this_month }},{{ monthly_budget }});
-
-    $("#change-budget-submit").button()
-        .click(function(){
-            var val = $("#change-budget-input").val();
-            if (!(/^\d*$/.test(val))) {
-                // If not an integer, don't submit.
-                return true;
-            }
-            $.ajax({
-                type:"POST",
-                url:"/dough/ajax/set_budget/",
-                data:{budget:val},
-                complete:function(res,status){
-                    if (status == "success") {
-                        refreshBudget({{ spent_this_month }},val);
-                    } else {
-                        alert(res.responseText);
-                        alert("Failed to change budget. Please reload page.");
-                    }
-                }
-            });
-            return false;
-        });
-
+var refreshPlot = function(monthly_budget) {
     $.plot($("#flot-placeholder"), [
         {
-            data: {{ plot_data }}, //[[0,0],[1,1]],
+            data: {{ plot_data }},
             bars: {show: true}
+        },
+        {
+            data: [[1,monthly_budget],[13,monthly_budget]]
         }
     ], {
         xaxis: {
-            ticks: {{ plot_xticks|safe }} //[[0, 'Jan'], [1, 'Feb'], [2, 'Mar']]
+            ticks: {{ plot_xticks|safe }}
         },
         yaxis: {
-            ticks: 10,
             min: 0
-        }   
-        
+        } 
     });
+}
 
+var submitBudgetChange = function() {
+    var val = $("#change-budget-input").val();
+    if (!(/^\d*$/.test(val))) {
+        // If not an integer, don't submit.
+        return true;
+    }
+    $.ajax({
+        type:"POST",
+        url:"/dough/ajax/set_budget/",
+        data:{budget:val},
+        complete:function(res,status){
+            if (status == "success") {
+                refreshBudget({{ spent_this_month }},val);
+                refreshPlot(val);
+            } else {
+                alert(res.responseText);
+                alert("Failed to change budget. Please reload page.");
+            }
+        }
+    });
+    return false;
+}
+
+$(function(){
+    refreshBudget({{ spent_this_month }},{{ monthly_budget }});
+    refreshPlot({{monthly_budget}});
+
+    $("#change-budget-submit").button()
+        .click(submitBudgetChange);
 });
+
 
 </script>
 </head>
