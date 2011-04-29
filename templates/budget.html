@@ -13,21 +13,18 @@
     position: relative;
 }
 
-#edit-div {
+#purchases-div {
     float: left;
     width: 48%;
 }
 
-#purchases-div {
-    //overflow: auto;
-    float: left;
-    width: 48%;
-    height: 100px;
+#purchases-div > div {
+    height: 200px;
+    overflow: auto;
 }
 
 #purchases-div table {
     border-collapse:collapse;
-    overflow: auto;
 }
 
 #progress-div span {
@@ -42,16 +39,16 @@
 <script>
 
 var refreshBudget = function(progress, budget) {
-
     var percent = 100 * progress / budget;
     $("#progress-bar").progressbar({value:percent}); 
 
+    var remaining = Math.round((budget-progress)*100)/100;
     $("#budget-progress-spent").html("$"+progress);
-    $("#budget-progress-left").html("$"+(budget-progress));
+    $("#budget-progress-left").html("$"+remaining);
 
     $("#budget-span").html("$"+budget);
     $("#spent-span").html("$"+progress);
-    $("#remaining-span").html("$"+(budget-progress));
+    $("#remaining-span").html("$"+remaining);
 }
 
 
@@ -83,12 +80,12 @@ $(function(){
 
     $.plot($("#flot-placeholder"), [
         {
-            data: [[0,0],[1,1]],
+            data: {{ plot_data }}, //[[0,0],[1,1]],
             bars: {show: true}
         }
     ], {
         xaxis: {
-            ticks: [[0, "Jan"], [1, "Feb"], [2, "Mar"]]
+            ticks: {{ plot_xticks|safe }} //[[0, 'Jan'], [1, 'Feb'], [2, 'Mar']]
         },
         yaxis: {
             ticks: 10,
@@ -112,6 +109,12 @@ $(function(){
 
     <p>You've spent <span id="spent-span">${{ spent_this_month }}</span> of your <span id="budget-span">${{ monthly_budget }}</span> budget.</p>
     <p>You have <span id="remaining-span"></span> left to spend this month.</p>
+
+<form>
+<input id="change-budget-input" type="number" style="width:80px;" value="{{ monthly_budget }}"/>
+<small><input type="submit" id="change-budget-submit" value="Change monthly budget"/></small>
+</form>
+<br />
 </div>
 
 <div id="visualization-div">
@@ -121,6 +124,7 @@ $(function(){
 
 <div id="purchases-div">
     <h3>Latest purchases</h3>
+    <div>
     <table style="width=100%">
     {% for purchase in purchases %}
     <tr class="ui-state-default">
@@ -129,16 +133,8 @@ $(function(){
     </tr>
     {% endfor %}
     </table>
+    </div>
 </div>
-
-<div id="edit-div">
-<h3>Change monthly budget</h3>
-<form>
-<input id="change-budget-input" type="number" value="{{ monthly_budget }}"/>
-<input type="submit" id="change-budget-submit" />
-</form>
-</div>
-
 
 </body>
 </html>
