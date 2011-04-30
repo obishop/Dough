@@ -9,7 +9,7 @@
  
 {% block content %}
 
-<div id="account-bar">
+<div id="account-bar" class="ui-widget">
 {{ username }} | <a href="/dough/logout/">logout</a>
 </div>
 
@@ -21,13 +21,13 @@
 <div id="main-tabs">
 <ul>
     <li><div class="horiz-space"></div></li>
-    <li><a href="#home-tab">Home</a></li>
-    <li><a href="food">Food</a></li>
-    <li><a href="budget">Budget</a></li>
-    <li><a href="recipes">Recipes</a></li>
+    <li><a href="#home">Home</a></li>
+    <li><a href="food" title="food">Food</a></li>
+    <li><a href="budget" title="budget">Budget</a></li>
+    <li><a href="recipes" title="recipes">Recipes</a></li>
 
 </ul>
-<div id="home-tab">
+<div id="home">
 
 <div class="ui-dialog ui-widget ui-widget-content ui-corner-all" style="position:static;width:100%">
     <div class="ui-widget-header ui-dialog-titlebar ui-corner-all">

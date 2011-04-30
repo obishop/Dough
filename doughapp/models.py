@@ -14,3 +14,9 @@ class Purchase(models.Model):
     amount = models.FloatField()
     date = models.DateField()
     user = models.ForeignKey(User)
+
+class UserProfile(models.Model):
+    user = models.ForeignKey(User, unique=True)
+    monthly_budget = models.IntegerField(default=250)
+
+User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])

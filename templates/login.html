@@ -3,14 +3,27 @@
 {% block title %}Dough Login{% endblock %}
 
 {% block resources %}
+<style>
+#login-div {
+    position:absolute;
+    left:200px;
+    top:200px;
+}
+</style>
 <script>
 $(function() {
-    //stuff
+    $("#login-button").button();
 });
 </script>
 {% endblock %}
 
 {% block content %}
+
+<div id="logo"><img src="/dough/static/images/dough.png" height="100px"/></div>
+
+This page is ugly! Fix it. And allow users to register.
+
+<div id="login-div" class="ui-dialog ui-widget ui-widget-content ui-corner-all">
 
 {% if form.errors %}
 <p>Your username and password didn't match. Please try again.</p>
@@ -21,16 +34,19 @@ $(function() {
 <table>
 <tr>
     <td>{{ form.username.label_tag }}</td>
-        <td>{{ form.username }}</td>
-        </tr>
-        <tr>
-            <td>{{ form.password.label_tag }}</td>
-                <td>{{ form.password }}</td>
-                </tr>
-                </table>
+    <td>{{ form.username }}</td>
+</tr>
+<tr>
+    <td>{{ form.password.label_tag }}</td>
+    <td>{{ form.password }}</td>
+</tr>
+</table>
 
-                <input type="submit" value="login" />
-                <input type="hidden" name="next" value="{{ next }}" />
-                </form>
+<input id="login-button" type="submit" value="login" />
+<input type="hidden" name="next" value="/dough/" />
+</form>
 
-                {% endblock %}
+</div>
+</center>
+
+{% endblock %}

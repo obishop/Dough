@@ -3,9 +3,9 @@
 <link rel="stylesheet" type="text/css" href="/dough/static/css/foodlayout.css" />
 
 <!--
-<link rel="stylesheet" type="text/css" href="jquery/css/redmond/jquery-ui-1.8.11.custom.css" />
-<script type="text/javascript" src="jquery/js/jquery-1.5.1.min.js"></script> 
-<script type="text/javascript" src="jquery/js/jquery-ui-1.8.11.custom.min.js"></script> 
+<link rel="stylesheet" type="text/css" href="/dough/static/jquery/css/redmond/jquery-ui-1.8.11.custom.css" />
+<script type="text/javascript" src="/dough/static/jquery/js/jquery-1.5.1.min.js"></script> 
+<script type="text/javascript" src="/dough/static/jquery/js/jquery-ui-1.8.11.custom.min.js"></script>
 -->
 <script type="text/javascript" src="/dough/static/js/sortable_us.js"></script>
 <script type="text/javascript" src="/dough/static/js/farbtastic/farbtastic.js"></script>
@@ -14,7 +14,30 @@
 
 
 
+
 //add datepicker();
+
+    /*
+    $(function() {
+        var foodItems = [];
+        foodItems[0] = {
+            name: "bananas",
+            expiration: "2012-05-22",
+            location: "1",
+            category: "fruit"
+        };
+        $.ajax({
+            type:"POST",
+            url:"/dough/ajax/add_food_items/",
+            data:{
+                purchase_amount:"88.88",
+                purchase_date:"2011-04-23",
+                food_items:JSON.stringify(foodItems)
+            }
+        });
+    });
+    */
+
 	$(function() {
 	$("#datepickerP").datepicker()
 	$( "#datepickerP" ).datepicker( "option", "dateFormat", 'mm-dd-yy' );
