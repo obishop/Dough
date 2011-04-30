@@ -28,6 +28,7 @@ urlpatterns = patterns('',
 
     # Ajax setters
     (r'^ajax/set_budget/$', 'dough.doughapp.ajax.set_budget'),
+    (r'^ajax/add_food_items/$', 'dough.doughapp.ajax.add_food_items'),
 
     (r'/$', 'dough.doughapp.views.index'),
 

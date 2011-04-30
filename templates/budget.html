@@ -143,7 +143,7 @@ $(function(){
     <table style="width=100%">
     {% for purchase in purchases %}
     <tr class="ui-state-default">
-        <td>${{ purchase.amount }}</td>
+        <td contentEditable="true">${{ purchase.amount }}</td>
         <td width="100%" style="text-align:right;">{{ purchase.date }}</td>
     </tr>
     {% endfor %}
