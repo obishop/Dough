@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
+from models import FoodItem
 
 @login_required
 def index(request):
@@ -10,7 +11,9 @@ def index(request):
 
 @login_required
 def food(request):
-    return render_to_response('food.html')
+    #return render_to_response('food.html')
+    food_list = FoodItem.objects.all()
+    return render_to_response('food.html', {'food_list': food_list})
 
 @login_required
 def budget(request):
@@ -19,3 +22,6 @@ def budget(request):
 @login_required
 def recipes(request):
     return render_to_response('recipes.html')
+
+
+   

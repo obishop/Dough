@@ -7,21 +7,30 @@
 <script type="text/javascript" src="jquery/js/jquery-1.5.1.min.js"></script> 
 <script type="text/javascript" src="jquery/js/jquery-ui-1.8.11.custom.min.js"></script> 
 -->
-
+<script type="text/javascript" src="/dough/static/js/sortable_us.js"></script>
+<script type="text/javascript" src="/dough/static/js/farbtastic/farbtastic.js"></script>
+<link rel="stylesheet" href="/dough/static/js/farbtastic/farbtastic.css" type="text/css" />
 <script type="text/javascript"> 
+
+
+
+//add datepicker();
 	$(function() {
-		$( "#datepicker" ).datepicker();
+	$("#datepickerP").datepicker()
+	$( "#datepickerP" ).datepicker( "option", "dateFormat", 'mm-dd-yy' );
+	$("#datepickerP").datepicker("setDate", new Date()); 
 	});
-		$(function() {
-		$( "#datepicker2" ).datepicker();
-	});
-		$(function() {
-		$( "#datepicker3" ).datepicker();
+
+function registerDP() {
+	$(function() {
+		$('.datep').each(function(index){
+    		$(this).datepicker();
+    		});
+		
 	});
 	
-			$(function() {
-		$( "#datepickerI" ).datepicker();
-	});
+}
+registerDP();
 
 	
 	$(function() {
@@ -48,14 +57,26 @@ $("#addsubmit").click(function()
 	{
 	$('#mask, .window').hide();
 
-		$('.foodin').each(function(index)
+		$('.foodinrow').each(function(index) //each tr 
    {
     	//add food to list
-    	if($(this).val().length >0  ){
-    		$('#foods').append( '<tr><td><input type="checkbox" name="checkall" value="food2"/></td><td>' + $(this).val() +  '</td><td>Tags</td><td>4/19/11</td><td>4/1/11</td></tr>') ;
-    		$(this).val("");
+    	if($(this).find('.foodin').val().length >0  ){
+    	
+    		$('#foods').append( '<tr><td><input type="checkbox" name="checkall" value="food2"/></td><td>' + $(this).find('.foodin').val() +  '</td><td>Tags</td><td>'+ 
+    		$.datepicker.formatDate('mm-dd-yy', $(this).find('.datep').datepicker( "getDate" )) +
+    		'</td><td>'+ $.datepicker.formatDate('mm-dd-yy', $('#datepickerP').datepicker( "getDate" )) + ' </td></tr>') ;
+    		
+    		//clear row
+    		$(this).find('.foodin').val('');
+    		$(this).find('.datep').datepicker( "setDate" , null );
     	}
+    	
+    	
+    	
    });
+   
+   //clear purchase date:
+   $("#datepickerP").datepicker("setDate", new Date());  //reset to today
    	
 	
 	
@@ -89,8 +110,10 @@ $(document).ready(function() {
 		var winW = $(window).width();
               
 		//Set the popup window to center
-		$(id).css('top',  winH/2-$(id).height()/2);
+		$(id).css('top',  winH/2-9*$(id).height()/10);
 		$(id).css('left', winW/2-$(id).width()/2);
+	
+		
 	
 		//transition effect
 		$(id).fadeIn(2000); 
@@ -115,6 +138,81 @@ $(document).ready(function() {
 });
 
 
+//add more food fields button
+var counter = 1;
+var limit = 10;
+ $(document).ready(function(){
+   $("#addinputbutton").click(function(event){
+     if (counter == limit)  {
+          alert("You have reached the limit of adding " + counter + " inputs");
+     }
+     else {
+          var newtr = document.createElement('tr');
+          newtr.class = "foodinrow";
+          foodINum = foodINum + 1; 
+          //newtr.innerHTML ='<td><input type="text" name="foodname" size="25" class="foodin">  </td><td>  <input type="text" id="datepicker3"></td><td>Tags </td><td><select><option>Dairy</option><option>Fruit</option><option>Grains</option><option>Protein</option><option>Vegetables</option></select></td>';
+          //document.getElementById(divName).appendChild(newtr);
+          $("#addfoodtable tr:last").prev().before('<tr><td><input type="text" name="foodname" size="25" class="foodin">  </td><td>  <input type="text" class="datep"></td><td><ui class ="locI"><li><div class ="locButton" ' 
+          + 'name="foodGroup' + foodINum + '" ><img src="/dough/static/images/_fridge_icon.png"></div></li><li><div class ="locButton" '
+          + 'name="foodGroup' + foodINum + '" ><img src="/dough/static/images/_ice_icon.png" ></div></li><li><div class ="locButton" '
+          + 'name="foodGroup' + foodINum + '" ><img src="/dough/static/images/_shelf_icon.png" ></div></li></ui></td><td><select><option>Dairy</option><option>Fruit</option><option>Grains</option><option>Protein</option><option>Vegetables</option></select></td></tr>');
+          registerDP(); //make sure new datepickers are registered
+           //same for buttons
+          counter++;
+     }
+   });
+ });
+ 
+ 
+//menu buttons
+
+//set up extra classes
+function setupLocButtons(){
+foodINum = 1;
+cycleCount = 1; 
+$('.locButton').each(function(index){
+	if(cycleCount < 4) {
+    	//$(this).addClass("foodGroup" + foodINum);	
+    }else{
+    	cycleCount = 1; 
+    	foodINum = foodINum+ 1; 
+    }
+    	$(this).attr('name', "foodGroup" + foodINum);
+    	cycleCount = cycleCount + 1; 
+    	
+    });
+    }
+setupLocButtons()
+ 
+var clickColor = "#80FCB2";
+var clickColorL = "rgb(128, 252, 178)";
+$('.locButton').live('mouseenter', function() {
+	if($(this).css("background-color") != clickColorL){
+		$(this).css("background-color", "#686868"); 
+		}
+});
+
+$('.locButton').live('mouseleave', function() {
+if($(this).css("background-color") != clickColorL){
+	
+  $(this).css("background-color", "#C0C0C0");
+  }
+});
+
+$('.locButton').live('click', function() {
+if($(this).css("background-color") != clickColorL){
+  	
+  	var groupName = $(this).attr('name');
+  	alert(groupName); 
+  	$('[name=' + groupName+']').each(function(index, obj){
+    	if($(obj).css("background-color") == clickColorL){
+			$(obj).css("background-color", "#C0C0C0"); 
+		}
+	});
+	$(this).css("background-color", clickColor);
+}
+});
+
 
 </script> 
 </head> 
@@ -128,40 +226,82 @@ $(document).ready(function() {
         <span class="ui-dialog-title-dialog">Add Food</span>
     	</div>
     	
-		Specify purchase date  <input type="text" id="datepickerI"> for all items. <br>
-		<table style='table-layout:fixed'>
+		Specify purchase date  <input type="text" id="datepickerP" /> for all items. <br>
+		<table id="addfoodtable" style='table-layout:fixed'>
  		<col width=160>
-		<col width=100>
- 		<col width=100>
+		<col width=70>
+ 		<col width=300>
  		<col width=100>
  
 		<tr>
-		<td> Item </td><td>  Expiration Date</td><td>Location </td><td>Catagory</td>
+		<td > Item </td><td>  Expiration Date</td><td>Location </td><td>Catagory</td>
 		</tr>
 		
-		<tr>
-		<td> <input type="text" name="foodname" size="25" class="foodin"> </td><td>  <input type="text" id="datepicker"></td><td>Tags </td><td>
+		<tr class="foodinrow">
+		<td > <input type="text" name="foodname" size="25" class="foodin" height="100"> </td><td>  <input type="text"  class="datep"></td><td>
+		
+		<ui class ="locI">
+		<li><div class ="locButton" ><img src="/dough/static/images/_fridge_icon.png"></div></li>
+		<li><div class ="locButton"><img src="/dough/static/images/_ice_icon.png" ></div></li>
+		<li><div class ="locButton"><img src="/dough/static/images/_shelf_icon.png" ></div></li>
+		</ui>
+		 
+		</td><td>
 			<select><option>Dairy</option><option>Fruit</option><option>Grains</option><option>Protein</option><option>Vegetables</option></select></td>
 		</tr>
-		<tr>
-		<td> <input type="text" name="foodname" size="25" class="foodin"> </td><td> <input type="text" id="datepicker2"></td><td>Tags </td><td>
+		<tr class="foodinrow">
+		<td> <input type="text" name="foodname" size="25" class="foodin"> </td><td> <input type="text"  class="datep"></td><td>
+		<ui class ="locI">
+		<li><div class ="locButton" ><img src="/dough/static/images/_fridge_icon.png"></div></li>
+		<li><div class ="locButton"><img src="/dough/static/images/_ice_icon.png" ></div></li>
+		<li><div class ="locButton"><img src="/dough/static/images/_shelf_icon.png" ></div></li>
+		</ui>
+		</td><td>
 					<select><option>Dairy</option><option>Fruit</option><option>Grains</option><option>Protein</option><option>Vegetables</option></select></td>
 		</tr>
-		<tr>
-		<td> <input type="text" name="foodname" size="25" class="foodin">  </td><td>  <input type="text" id="datepicker3"></td><td>Tags </td><td>	
+		<tr class="foodinrow">
+		<td> <input type="text" name="foodname" size="25" class="foodin">  </td><td>  <input type="text" class="datep"></td><td>
+		<ui class ="locI">
+		<li><div class ="locButton" ><img src="/dough/static/images/_fridge_icon.png"></div></li>
+		<li><div class ="locButton"><img src="/dough/static/images/_ice_icon.png" ></div></li>
+		<li><div class ="locButton"><img src="/dough/static/images/_shelf_icon.png" ></div></li>
+		</ui></td><td>	
 			<select><option>Dairy</option><option>Fruit</option><option>Grains</option><option>Protein</option><option>Vegetables</option></select></td>
 		</tr>
-	
+		<tr class="foodinrow">
+		<td> <input type="text" name="foodname" size="25" class="foodin">  </td><td>  <input type="text"  class="datep"></td><td>
+			<ui class ="locI">
+		<li><div class ="locButton" ><img src="/dough/static/images/_fridge_icon.png"></div></li>
+		<li><div class ="locButton"><img src="/dough/static/images/_ice_icon.png" ></div></li>
+		<li><div class ="locButton"><img src="/dough/static/images/_shelf_icon.png" ></div></li>
+		</ui>
+		</td><td>	
+			<select><option>Dairy</option><option>Fruit</option><option>Grains</option><option>Protein</option><option>Vegetables</option></select></td>
+		</tr>		
+		<tr class="foodinrow">
+		<td> <input type="text" name="foodname" size="25" class="foodin">  </td><td>  <input type="text"  class="datep"></td><td>
+		<ui class ="locI">
+		<li><div class ="locButton" ><img src="/dough/static/images/_fridge_icon.png"></div></li>
+		<li><div class ="locButton"><img src="/dough/static/images/_ice_icon.png" ></div></li>
+		<li><div class ="locButton"><img src="/dough/static/images/_shelf_icon.png" ></div></li>
+		</ui>
+		</td><td>	
+			<select><option>Dairy</option><option>Fruit</option><option>Grains</option><option>Protein</option><option>Vegetables</option></select></td>
+		</tr>	
 				<tr>
 		<td> </td><td> </td><td> </td><td>	
-			<button><b>+</b></button></td>
+			<button  id="addinputbutton" ><b>+</b></button></td>
 			
 		</tr>
+		
 		<tr>
 		<td><br> Cost of Purchases ($) </td><td><br><input type="text" name="food" size="8"> </td><td> </td><td>	
 		</td>
 			
 		</tr>
+		
+		</table>
+		<table>
 		<tr>
 		<td> </td><td> </td><td> <input type="submit" id="addsubmit" value="Submit"/></td><td>	
 			<input type="submit" class="close" value="Cancel"/></td>
@@ -191,30 +331,47 @@ $(document).ready(function() {
 			<button name="modal" href="#dialog"><b>Add Foods</b></button>
 
 			</div>
-		<table id="foods" style='table-layout:fixed'>
+
+		
+		<table id="foods" class="sortable" style='table-layout:fixed'>
  		<col width=40>
-		<col width=200>
- 		<col width=150>
+		<col width=150>
+ 		<col width=100>
+ 		<col width=100>
  		<col width=160>
  		<col width=160>
  		
 		<tr id="foodlistcol">
-		<td> <input type="checkbox" name="food" id="checkboxall" />  </td><td>  Name</td><td>Tags </td><td>Expiration Date</td><td>Purchase Date</td>
+		<td class="unsortable"> <input type="checkbox" name="food" id="checkboxall" />  </td><td>  Name</td><td>Tags </td><td>Catagory </td><td>Expiration Date</td><td>Purchase Date</td>
 		</tr>
-		<tr>
-		<td> <input type="checkbox" name="checkall" value="food1" />  </td><td>  Asparagus</td><td>Tags </td><td>4/10/11</td><td>4/5/11</td>
-		</tr>
-		<tr>
-		<td> <input type="checkbox" name="checkall" value="food1" />  </td><td>  Milk</td><td>Tags </td><td>4/12/11</td><td>4/5/11</td>
-		</tr>
-		<tr>
-		<td> <input type="checkbox" name="checkall" value="food2" />  </td><td>  Beef</td><td>Tags </td><td>4/14/11</td><td>4/12/11</td>
-		</tr>
-		<tr>
-		<td> <input type="checkbox" name="checkall" value="food2" />  </td><td>  Cheese</td><td>Tags </td><td>4/19/11</td><td>4/1/11</td>
-		</tr>
+		{% if food_list %}
+    
+    {% for food in food_list %}
+    	<tr><td> <input type="checkbox" name="checkall" value="food1" />  </td>
+        <td>{{ food.name }}</td>
+        <td class="tag">
+        {% ifequal food.location 0 %}
+        <div class="fridgeTag">Fridge</div> 
+        {% endifequal %} 
+        {% ifequal food.location 1 %}
+        <div class="freezerTag">Freezer</div> 
+        {% endifequal %} 
+        {% ifequal food.location 2 %}
+        <div class="cabinetTag">Cabinet</div> 
+        {% endifequal %} 
+        </td>
+        <td>catagory</td> 
+        <td>{{ food.expiration|date:"m/d/y"  }}</td><td>{{ food.purchase.date|date:"m/d/y" }}</td>
+        </tr>
+    {% endfor %}
+   
+{% else %}
+    <p>No food are available.</p>
+{% endif %}
+		
 		
 		</table>
+
 		</div>
 		
 	</div>
