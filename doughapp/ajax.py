@@ -23,8 +23,23 @@ def set_budget(request):
 
 @login_required
 @csrf_exempt
+def edit_purchase(request, id):
+    if request.method != "POST":
+        return HttpResponseServerError(u"No POST data sent.")
+    post = request.POST.copy()
+    if not post.has_key('amount'):
+        return HttpResponseServerError(u"Insufficient POST data (need 'amount')")
+
+    purchase = models.Purchase.objects.get(id=id)
+    purchase.amount = post['amount']
+    purchase.save()
+
+    return HttpResponse("Success")
+
+@login_required
+@csrf_exempt
 def add_food_items(request):
-q    if request.method != "POST":
+    if request.method != "POST":
         return HttpResponseServerError(u"No POST data sent.")
     post = request.POST.copy()
     if not (post.has_key('food_items') and post.has_key('purchase_amount') and post.has_key('purchase_date')):
