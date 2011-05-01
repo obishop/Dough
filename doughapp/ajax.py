@@ -61,7 +61,7 @@ def add_food_items(request):
 
     return HttpResponse("Success")
     
-    @login_required
+@login_required
 @csrf_exempt
 def delete_food_items(request):
     if request.method != "POST":
@@ -70,7 +70,7 @@ def delete_food_items(request):
     if not (post.has_key('food_items') and post.has_key('purchase_amount') and post.has_key('purchase_date')):
         return HttpResponseServerError(u"Need json encoded 'food_items', along with 'purchase_amount' and 'purchase_date'")
  
- 	p = FoodItem.objects.get(name="Addison-Wesley")
+ 	p = FoodItem.objects.get(name=post)
 	p.delete()
 
     return HttpResponse("Success")

@@ -104,7 +104,8 @@ $("#addsubmit").click(function()
     });
     
     		
-    		$('#foods').append( '<tr><td><input type="checkbox" name="checkall" value="food2"/></td><td>' + $(this).find('.foodin').val() +  '</td><td>Tags</td><td>Catagory</td><td>'+ 
+    		$('#foods').append( '<tr><td><input type="checkbox" name="checkall" value="food2"/></td><td>' + $(this).find('.foodin').val() +  '</td><td>Tags</td><td>' +
+    		$(this).find('.catOption option:selected').text() +'</td><td>'+ 
     		$.datepicker.formatDate('mm/dd/y', $(this).find('.datep').datepicker( "getDate" )) +
     		'</td><td>'+ $.datepicker.formatDate('mm/dd/y', $('#datepickerP').datepicker( "getDate" )) + ' </td></tr>') ;
     		
@@ -197,7 +198,7 @@ var limit = 10;
           $("#addfoodtable tr:last").prev().before('<tr><td><input type="text" name="foodname" size="25" class="foodin">  </td><td>  <input type="text" class="datep"></td><td><ui class ="locI"><li><div class ="locButton" ' 
           + 'name="foodGroup' + foodINum + '" ><img src="/dough/static/images/_fridge_icon.png"></div></li><li><div class ="locButton" '
           + 'name="foodGroup' + foodINum + '" ><img src="/dough/static/images/_ice_icon.png" ></div></li><li><div class ="locButton" '
-          + 'name="foodGroup' + foodINum + '" ><img src="/dough/static/images/_shelf_icon.png" ></div></li></ui></td><td><select><option>Dairy</option><option>Fruit</option><option>Grains</option><option>Protein</option><option>Vegetables</option></select></td></tr>');
+          + 'name="foodGroup' + foodINum + '" ><img src="/dough/static/images/_shelf_icon.png" ></div></li></ui></td><td><select class="catOption" ><option >Dairy</option><option>Fruit</option><option>Grains</option><option>Protein</option><option>Vegetables</option></select></td></tr>');
           registerDP(); //make sure new datepickers are registered
            //same for buttons
           counter++;
@@ -289,7 +290,7 @@ if($(this).css("background-color") != clickColorL){
 		</ui>
 		 
 		</td><td>
-			<select><option>Dairy</option><option>Fruit</option><option>Grains</option><option>Protein</option><option>Vegetables</option></select></td>
+			<select class="catOption"><option>Dairy</option><option>Fruit</option><option>Grains</option><option>Protein</option><option>Vegetables</option></select></td>
 		</tr>
 		<tr class="foodinrow">
 		<td> <input type="text" name="foodname" size="25" class="foodin"> </td><td> <input type="text"  class="datep"></td><td>
@@ -299,7 +300,7 @@ if($(this).css("background-color") != clickColorL){
 		<li><div class ="locButton"><img src="/dough/static/images/_shelf_icon.png" ></div></li>
 		</ui>
 		</td><td>
-					<select><option>Dairy</option><option>Fruit</option><option>Grains</option><option>Protein</option><option>Vegetables</option></select></td>
+					<select class="catOption"><option>Dairy</option><option>Fruit</option><option>Grains</option><option>Protein</option><option>Vegetables</option></select></td>
 		</tr>
 		<tr class="foodinrow">
 		<td> <input type="text" name="foodname" size="25" class="foodin">  </td><td>  <input type="text" class="datep"></td><td>
@@ -308,7 +309,7 @@ if($(this).css("background-color") != clickColorL){
 		<li><div class ="locButton"><img src="/dough/static/images/_ice_icon.png" ></div></li>
 		<li><div class ="locButton"><img src="/dough/static/images/_shelf_icon.png" ></div></li>
 		</ui></td><td>	
-			<select><option>Dairy</option><option>Fruit</option><option>Grains</option><option>Protein</option><option>Vegetables</option></select></td>
+			<select class="catOption"><option>Dairy</option><option>Fruit</option><option>Grains</option><option>Protein</option><option>Vegetables</option></select></td>
 		</tr>
 		<tr class="foodinrow">
 		<td> <input type="text" name="foodname" size="25" class="foodin">  </td><td>  <input type="text"  class="datep"></td><td>
@@ -318,7 +319,7 @@ if($(this).css("background-color") != clickColorL){
 		<li><div class ="locButton"><img src="/dough/static/images/_shelf_icon.png" ></div></li>
 		</ui>
 		</td><td>	
-			<select><option>Dairy</option><option>Fruit</option><option>Grains</option><option>Protein</option><option>Vegetables</option></select></td>
+			<select class="catOption"><option>Dairy</option><option>Fruit</option><option>Grains</option><option>Protein</option><option>Vegetables</option></select></td>
 		</tr>		
 		<tr class="foodinrow">
 		<td> <input type="text" name="foodname" size="25" class="foodin">  </td><td>  <input type="text"  class="datep"></td><td>
@@ -328,7 +329,7 @@ if($(this).css("background-color") != clickColorL){
 		<li><div class ="locButton"><img src="/dough/static/images/_shelf_icon.png" ></div></li>
 		</ui>
 		</td><td>	
-			<select><option>Dairy</option><option>Fruit</option><option>Grains</option><option>Protein</option><option>Vegetables</option></select></td>
+			<select class="catOption"><option>Dairy</option><option>Fruit</option><option>Grains</option><option>Protein</option><option>Vegetables</option></select></td>
 		</tr>	
 				<tr>
 		<td> </td><td> </td><td> </td><td>	

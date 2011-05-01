@@ -31,7 +31,7 @@ urlpatterns = patterns('',
     (r'^ajax/add_food_items/$', 'dough.doughapp.ajax.add_food_items'),
     
     #Ajax deleters ? 
-    (r'^ajax/delete_food_items/$', 'dough.doughapp.ajax.add_food_items'),
+    (r'^ajax/delete_food_items/$', 'dough.doughapp.ajax.delete_food_items'),
 
     (r'/$', 'dough.doughapp.views.index'),
 
