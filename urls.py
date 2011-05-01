@@ -28,6 +28,7 @@ urlpatterns = patterns('',
 
     # Ajax setters
     (r'^ajax/set_budget/$', 'dough.doughapp.ajax.set_budget'),
+    (r'^ajax/edit_purchase/(?P<id>[0-9]*)/$', 'dough.doughapp.ajax.edit_purchase'),
     (r'^ajax/add_food_items/$', 'dough.doughapp.ajax.add_food_items'),
     
     #Ajax deleters ? 

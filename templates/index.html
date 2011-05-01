@@ -4,13 +4,21 @@
 
 {% block resources %}
 <link rel="stylesheet" type="text/css" href="/dough/static/css/layout.css" /> 
-<script type="text/javascript" src="/dough/static/js/dough.js"></script>  
+<script type="text/javascript" src="/dough/static/js/dough.js"></script>
+
+<style>
+.splash-div {
+    position: static;
+    width: 1000px;
+}
+</style>
+
 {% endblock %}
  
 {% block content %}
 
 <div id="account-bar" class="ui-widget">
-{{ username }} | <a href="/dough/logout/">logout</a>
+    {{ username }} | <a href="/dough/logout/">logout</a>
 </div>
 
 <div id="mask"></div>
@@ -29,54 +37,58 @@
 </ul>
 <div id="home">
 
-<div class="ui-dialog ui-widget ui-widget-content ui-corner-all" style="position:static;width:100%">
+
+<div class="splash-div ui-dialog ui-widget ui-widget-content ui-corner-all">
+
     <div class="ui-widget-header ui-dialog-titlebar ui-corner-all">
         <span class="ui-dialog-title-dialog">Food</span>
     </div>
+
     <div class="ui-dialog-content">
-    You have <b>1</b> food about to expire:
-    <ul>
-        <li>Asparagus</li>
-    </ul>
-    <p>You have <b>4</b> total food items.</p>
-    <button id="food-button" href="food.html">Manage food supply</button>    
+        <button id="food-button" href="food.html">Manage food supply</button>    
     </div>
+
 </div>
+
 
 <br/>
 
-<div class="ui-dialog ui-widget ui-widget-content ui-corner-all" style="position:static;width:100%">
+
+<div class="splash-div ui-dialog ui-widget ui-widget-content ui-corner-all">
+
     <div class="ui-widget-header ui-dialog-titlebar ui-corner-all">
         <span class="ui-dialog-title-dialog">Budget</span>
     </div>
+
     <div class="ui-dialog-content">
-    <p><div id="percent-progress-home"> 
-        <span id="budget-progress-spent-home" style="position:absolute;top:20px;left:45px">$41.27</span> 
-        <span id="budget-progress-left-home" style="position:absolute;top:20px;left:400px">$258.73</span> 
-    </div></p>
-    <p>You've spent <b>$41.27</b> of your <b>$300</b> budget.</p>
-    <button id="budget-button" href="budget.html">Manage budget</button>
+        <p><div id="percent-progress-home" style="position:relative">
+            <span id="budget-progress-spent-home" class="ui-widget-header" style="position:absolute;top:6px;left:10px">$</span>
+            <span id="budget-progress-left-home" style="position:absolute;top:6px;right:10px">$</span>
+        </div></p>
+        <p>You've spent <span id="spent-span-home">${{ spent_this_month }}</span> of your <span id="budget-span-home">${{ monthly_budget }}</span> budget.</p>
+        <button id="budget-button" href="budget.html">Manage budget</button>
     </div>
+
 </div>
+
 
 <br/>
 
-<div class="ui-dialog ui-widget ui-widget-content ui-corner-all" style="position:static;width:100%">
+
+<div class="splash-div ui-dialog ui-widget ui-widget-content ui-corner-all">
+
     <div class="ui-widget-header ui-dialog-titlebar ui-corner-all">
         <span class="ui-dialog-title-dialog">Recipes</span>
     </div>
+
     <div class="ui-dialog-content">
-    Some recipes you could make right now:
-    <ul>
-        <li>Beef stew</li>
-        <li>Bread pudding</li>
-    </ul>
-    <button id="recipes-button" href="recipies.html">Search for recipes</button>
+        <button id="recipes-button" href="recipies.html">Search for recipes</button>
     </div>
-</div>
 
 </div>
 
+
+</div>
 </div>
 
 {% endblock %}

@@ -1,5 +1,14 @@
 // dough.js: main file for dough project
 
+var setupTabReload = function(event, ui) {
+    $('#reload-tab-cb', ui.panel).change(function() {
+        $(ui.panel).load(this.name, function() {
+            setupTabReload(event, ui);    
+        });
+        return false;
+    });
+}
+
 $(function() {
     onWindowResize();
     $(window).resize(onWindowResize);
@@ -12,6 +21,8 @@ $(function() {
         'show': function(event, ui){
             document.location.hash = ui.panel.id;
         },
+
+        load: setupTabReload,
 
         ajaxOptions: {
             error: function( xhr, status, index, anchor ) {
@@ -35,9 +46,8 @@ $(function() {
     $("#recipes-button").click(function(){
         $("#main-tabs").tabs("option","selected",3); 
     });
-    
-    $("#percent-progress-home").progressbar({value:13.8});
-    $("#budget-progress-spent-home").html(41.27);
+    alert("did this");
+    //refreshBudget({{ spent_this_month }},{{ monthly_budget }});
 });
 
 var onWindowResize = function() {

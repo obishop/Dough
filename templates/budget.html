@@ -19,7 +19,6 @@
 }
 
 #purchases-div > div {
-    height: 200px;
     overflow: auto;
 }
 
@@ -32,11 +31,23 @@
     font-weight: bold;
 }
 
+td, th {
+    text-align: left;
+    padding: 0.4em;
+}
+
+.jtable tr .ui-state-hover {
+    font-weight: normal;
+}
+
 </style>
 
 <script type="text/javascript" src="/dough/static/flot/jquery.flot.min.js"/>
 
 <script>
+
+// Global state variable
+var currentState = {}
 
 var refreshBudget = function(progress, budget) {
     var percent = 100 * progress / budget;
@@ -102,12 +113,78 @@ var submitBudgetChange = function() {
     return false;
 }
 
+var themeTable = function() {
+    $(".jtable th").each(function(){
+        $(this).addClass("ui-state-default");
+    });
+    $(".jtable td").each(function(){
+        $(this).addClass("ui-widget-content");
+    });
+    $(".jtable tr").hover(
+        function() {
+            $(this).children("td").addClass("ui-state-hover");
+        },
+        function() {
+            $(this).children("td").removeClass("ui-state-hover");
+        }
+    );
+}
+
+var resizePurchasesTable = function() {
+    var offset = $("#purchases-table-div").offset();
+    var height = $(document).height() - offset.top - 25;
+    $("#purchases-table-div").css("height",height);
+}
+
+var purchaseEditSubmit = function(newAmount,obj) {
+    $.ajax({
+        type:"POST",
+        url:"/dough/ajax/edit_purchase/"+currentState.purchaseId+"/",
+        data:{amount:newAmount},
+        complete:function(res,status) {
+            if (status == "success") {
+                $(obj).html("$"+newAmount);
+                $("#reload-tab-cb").get(0).click();
+            } else {
+                alert("Failed to set purchase amount. Please refresh page.");
+            }
+        }
+    });
+}
+
 $(function(){
     refreshBudget({{ spent_this_month }},{{ monthly_budget }});
     refreshPlot({{monthly_budget}});
 
     $("#change-budget-submit").button()
         .click(submitBudgetChange);
+    themeTable();
+    resizePurchasesTable();
+    
+    $(".purchase-edit-span").focus(function(){
+        currentState.purchaseAmount = $(this).html();
+        currentState.purchaseId = $(this).attr("title");
+    }).focusout(function(){
+        // Validate the number
+        var html = $(this).html();
+        var newAmount = parseFloat(html);
+        if (isNaN(newAmount)) {
+            if (html[0] == "$") {
+                newAmount = parseFloat(html.substr(1));
+                if (isNaN(newAmount)) {
+                    // Invalid
+                    $(this).html(currentState.purchaseAmount);
+                } else {
+                    purchaseEditSubmit(newAmount,this);
+                }
+            } else {
+                // Invalid
+                $(this).html(currentState.purchaseAmount);
+            }
+        } else {
+            purchaseEditSubmit(newAmount,this);
+        }
+    });
 });
 
 
@@ -139,17 +216,20 @@ $(function(){
 
 <div id="purchases-div">
     <h3>Latest purchases</h3>
-    <div>
-    <table style="width=100%">
+    <div id="purchases-table-div">
+    <table class="jtable" style="width=100%">
     {% for purchase in purchases %}
-    <tr class="ui-state-default">
-        <td contentEditable="true">${{ purchase.amount }}</td>
-        <td width="100%" style="text-align:right;">{{ purchase.date }}</td>
+    <tr>
+        <td width="40%">{{ purchase.date }}</td>
+        <td><span contentEditable="true" title="{{purchase.id}}" class="purchase-edit-span">${{ purchase.amount }}</span></td>
+        <td width="100%">{{ purchase.foodItems }}</td>
     </tr>
     {% endfor %}
     </table>
     </div>
 </div>
+
+<input type="checkbox" name="budget" id="reload-tab-cb" style="display:none;"/>
 
 </body>
 </html>
