@@ -78,11 +78,11 @@ function displayRecipe(name,url,needed,thumb) {
 	// Extra foods needed to make the recipe
 	var needed_foods;
 	if (needed == undefined) {
-		needed_foods = "<p><img src='../static/images/valid.png' class='validPic' />"+
+		needed_foods = "<p><img src='/dough/static/images/valid.png' class='validPic' />"+
 					   "<b>You have all the ingredients for this recipe!</b>"+
 					   "</p>";
 	} else {
-		needed_foods = "<p><img src='../static/images/attention.png' class='validPic' />"+
+		needed_foods = "<p><img src='/dough/static/images/attention.png' class='validPic' />"+
 					   "<b>You will also need: </b>"+needed.join(", ")+
 					   "</p>";
 	}
