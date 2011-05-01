@@ -35,16 +35,10 @@
 	position: static;
 	padding:.2em;
 	display: inline-block;
+	width: 1000px;
 }
 
 #Pagination {
 	margin-left: auto;
 	margin-right: auto;
-}
-
-#Content {
-	width: 1024px;
-	position: static;
-	padding: 0px;
-	margin: 0px;
 }
