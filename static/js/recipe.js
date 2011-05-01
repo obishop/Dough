@@ -157,7 +157,7 @@ function doQuery(ingredients,needs,focus_,meal_type,page_,do_init) {
 
 $(function() {
 
-	ingredients = {{ food_items }};
+	ingredients = {{ food_list }};
 	
 	if (ingredients)
 		alert("showed up");
