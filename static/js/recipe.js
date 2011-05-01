@@ -155,7 +155,16 @@ function doQuery(ingredients,needs,focus_,meal_type,page_,do_init) {
 
 $(function() {
 
-	ingredients = {{ food_list }};
+	{% if food_list %}
+
+   	{% for food in food_list %}
+       alert(food.name);
+   	{% endfor %}
+
+	{% else %}
+   		alert("no food");
+	{% endif %}
+	
 	try {
 		doQuery(ingredients,excludes,focuses,meal_types,current_page+1,true);
 	} catch (e) {
