@@ -144,6 +144,7 @@ var purchaseEditSubmit = function(newAmount,obj) {
         complete:function(res,status) {
             if (status == "success") {
                 $(obj).html("$"+newAmount);
+                $("#reload-tab-cb").get(0).click();
             } else {
                 alert("Failed to set purchase amount. Please refresh page.");
             }
@@ -227,6 +228,8 @@ $(function(){
     </table>
     </div>
 </div>
+
+<input type="checkbox" name="budget" id="reload-tab-cb" style="display:none;"/>
 
 </body>
 </html>
