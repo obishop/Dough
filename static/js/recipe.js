@@ -159,6 +159,6 @@ $(function() {
 	try {
 		doQuery(ingredients,excludes,focuses,meal_types,current_page+1,true);
 	} catch (e) {
-		alert("Problem performing the requested recipe search. Please try again later.");
+		alert(e);
 	}
 });
