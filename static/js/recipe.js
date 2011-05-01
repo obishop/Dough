@@ -157,10 +157,11 @@ function doQuery(ingredients,needs,focus_,meal_type,page_,do_init) {
 
 $(function() {
 
+	alert("here");
+
 	ingredients = {{ food_list }};
 	
-	if (ingredients)
-		alert("showed up");
+	alert(ingredients);
 		
 	try {
 		doQuery(ingredients,excludes,focuses,meal_types,current_page+1,true);
