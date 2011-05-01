@@ -9,12 +9,35 @@
 	
 	<script type="text/javascript" src="/dough/static/jquery/js/jquery.xdomainajax.js"></script>
 	<script type="text/javascript" src="/dough/static/jquery/js/jquery.pagination.js"></script>
+	<script type="text/javascript" src="/dough/static/jquery/js/jquery.tablesorter.min.js"></script>
 	<script type="text/javascript" src="/dough/static/js/recipe.js"></script>
 	<!--<script type="text/javascript" src="/dough/static/js/prototype.js"></script>-->
 
 </head>
 
 <body>
+
+<table id="myTable" class="tablesorter">
+<thead> 
+<tr> 
+    <th>Food</th> 
+    <th>Expiration</th> 
+</tr> 
+</thead>
+<tbody>
+{% if food_list %}
+{% for food in food_list %}
+	<tr>
+       <td>{{ food.name }}</td>
+       <td>{{ food.expiration|date:"m/d/y"  }}</td>
+    </tr>
+{% endfor %}
+</tbody> 
+</table>
+
+{% else %}
+   <p>No food are available.</p>
+{% endif %}
 
 <div class="searchPanel ui-widget ui-widget-content ui-corner-all ui-dialog">
 	<div class="ui-dialog-content">

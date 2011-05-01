@@ -156,15 +156,10 @@ function doQuery(ingredients,needs,focus_,meal_type,page_,do_init) {
 //////////// Document Ready ////////////
 
 $(function() {
-
-	try{
-		ingredients = {{ food_list }};
-	} catch (e) {
-		alert(e);
-	}
 		
 	try {
-		doQuery(ingredients,excludes,focuses,meal_types,current_page+1,true);
+		 $("#myTable").tablesorter(); 
+		//doQuery(ingredients,excludes,focuses,meal_types,current_page+1,true);
 	} catch (e) {
 		alert(e);
 	}
