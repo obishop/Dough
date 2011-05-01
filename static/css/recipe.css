@@ -34,10 +34,7 @@
 .searchPanel {
 	position: static;
 	padding:.2em;
-}
-
-p {
-	font-size: 12px;
+	display: inline;
 }
 
 #Pagination {
@@ -50,4 +47,6 @@ p {
 	margin-right: auto;
 	width: 1024px;
 	position: static;
+	padding: 0px;
+	margin: 0px;
 }
