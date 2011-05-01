@@ -167,6 +167,7 @@ $(function() {
 
 $(document).ready(function() 
     { 
-        $("#myTable").tablesorter(); 
+        $("#myTable").tablesorter();
+        alert("done");
     } 
 ); 
