@@ -33,7 +33,6 @@
 
 .searchPanel {
 	position: static;
-	height:800px;
 	padding:.2em;
 }
 
@@ -50,6 +49,5 @@ p {
 	margin-left: auto;
 	margin-right: auto;
 	width: 1024px;
-	height: 800px;
 	position: static;
 }
