@@ -15,7 +15,7 @@ function pageselectCallback(page_index, jq){
 	try {
 		doQuery(ingredients,excludes,focuses,meal_types,current_page+1,false);
 	} catch (e) {
-		alert("Problem performing the requested recipe search. Please try again later.");
+		alert(e);
 	}
 	return false;
 }
@@ -109,11 +109,13 @@ function displayRecipe(name,url,needed,thumb) {
 function doQuery(ingredients,needs,focus_,meal_type,page_,do_init) {
 	
 	// Assemble a query string to send to www.supercook.com
-	var query = $H({kitchen:ingredients.join('|'),
-					exclude:needs.join('|'),
-					focus:focus_.join('|'),
-					smode:meal_type.join('|'),
-					page:page_}).toQueryString();
+	var query = $.param({kitchen:ingredients.join('|'),
+						 exclude:needs.join('|'),
+						 focus:focus_.join('|'),
+						 smode:meal_type.join('|'),
+						 page:page_});
+						 
+	alert('http://www.supercook.com/575/main_search.asp?'+query);
 	
 	$.get('http://www.supercook.com/575/main_search.asp?'+query, 
 		function(res) { // Success callback function
@@ -159,6 +161,6 @@ $(function() {
 	try {
 		doQuery(ingredients,excludes,focuses,meal_types,current_page+1,true);
 	} catch (e) {
-		alert("Problem performing the requested recipe search. Please try again later.");
+		alert(e);
 	}
 });

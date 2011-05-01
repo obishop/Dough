@@ -46,8 +46,6 @@ $(function() {
     $("#recipes-button").click(function(){
         $("#main-tabs").tabs("option","selected",3); 
     });
-    alert("did this");
-    //refreshBudget({{ spent_this_month }},{{ monthly_budget }});
 });
 
 var onWindowResize = function() {
