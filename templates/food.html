@@ -80,27 +80,19 @@ $("#addsubmit").click(function()
 	{
 	$('#mask, .window').hide();
 
-		$('.foodinrow').each(function(index) //each tr 
+		var foodIcount = 0; 
+	$('.foodinrow').each(function(index) //each tr 
    {
     	//add food to db
     	if($(this).find('.foodin').val().length >0  ){
     $(function() {
         var foodItems = [];
-        foodItems[0] = {
+        foodItems[foodIcount] = {
             name: $(this).find('.foodin').val(),//"bananas",
             expiration: $.datepicker.formatDate('yy-mm-dd', $(this).find('.datep').datepicker( "getDate" )),
             location: "1",
             category: "fruit"
         };
-        $.ajax({
-            type:"POST",
-            url:"/dough/ajax/add_food_items/",
-            data:{
-                purchase_amount: $(this).find("#purchaseCostI").val(),//"88.88",
-                purchase_date: $.datepicker.formatDate('yy-mm-dd', $(this).find('#datepickerP').datepicker( "getDate" )),//"2011-04-23",
-                food_items:JSON.stringify(foodItems)
-            }
-        });
     });
     
     		
@@ -112,12 +104,25 @@ $("#addsubmit").click(function()
     		//clear row
     		$(this).find('.foodin').val('');
     		$(this).find('.datep').datepicker( "setDate" , null );
+    		foodIcount = foodIcount + 1; 
     	}
     	
     	
     	
    });
    
+   //send ajax request
+    $.ajax({
+            type:"POST",
+            url:"/dough/ajax/add_food_items/",
+            data:{
+                purchase_amount: $(this).find("#purchaseCostI").val(),//"88.88",
+                purchase_date: $.datepicker.formatDate('yy-mm-dd', $(this).find('#datepickerP').datepicker( "getDate" )),//"2011-04-23",
+                food_items:JSON.stringify(foodItems)
+            }
+        });
+        
+        
    //clear purchase date:
    $("#datepickerP").datepicker("setDate", new Date());  //reset to today
    	
