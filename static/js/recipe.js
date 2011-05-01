@@ -15,7 +15,7 @@ function pageselectCallback(page_index, jq){
 	try {
 		doQuery(ingredients,excludes,focuses,meal_types,current_page+1,false);
 	} catch (e) {
-		alert("Problem performing the requested recipe search. Please try again later.");
+		alert(e);
 	}
 	return false;
 }
