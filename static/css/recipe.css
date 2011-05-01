@@ -34,7 +34,7 @@
 .searchPanel {
 	position: static;
 	padding:.2em;
-	display: inline;
+	display: inline-block;
 }
 
 #Pagination {
