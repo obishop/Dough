@@ -46,9 +46,8 @@ $(function() {
     $("#recipes-button").click(function(){
         $("#main-tabs").tabs("option","selected",3); 
     });
-    
-    $("#percent-progress-home").progressbar({value:13.8});
-    $("#budget-progress-spent-home").html(41.27);
+    alert("did this");
+    //refreshBudget({{ spent_this_month }},{{ monthly_budget }});
 });
 
 var onWindowResize = function() {
