@@ -155,7 +155,7 @@ function doQuery(ingredients,needs,focus_,meal_type,page_,do_init) {
 
 $(function() {
 
-	ingredients = ["asparagus","butter"];
+	ingredients = {{ food_list }};
 	try {
 		doQuery(ingredients,excludes,focuses,meal_types,current_page+1,true);
 	} catch (e) {

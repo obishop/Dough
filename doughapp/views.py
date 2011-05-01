@@ -93,7 +93,8 @@ def budget(request):
 
 @login_required
 def recipes(request):
-    return render_to_response('recipes.html')
+	food_list = FoodItem.objects.filter(user=request.user)
+    return render_to_response('recipes.html', {'food_list': food_list})
 
 
    
