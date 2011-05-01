@@ -16,32 +16,6 @@
 
 <body>
 
-	{% if food_list %}
-
-   {% for food in food_list %}
-       <tr><td> <input type="checkbox" name="checkall" value="food1" />  </td>
-       <td>{{ food.name }}</td>
-       <td class="tag">
-       {% ifequal food.location 0 %}
-       <div class="fridgeTag">Fridge</div>
-       {% endifequal %}
-       {% ifequal food.location 1 %}
-       <div class="freezerTag">Freezer</div>
-       {% endifequal %}
-       {% ifequal food.location 2 %}
-       <div class="cabinetTag">Cabinet</div>
-       {% endifequal %}
-       </td>
-       <td>catagory</td>
-       <td>{{ food.expiration|date:"m/d/y"  }}</td><td>{{
-food.purchase.date|date:"m/d/y" }}</td>
-       </tr>
-   {% endfor %}
-
-{% else %}
-   <p>No food are available.</p>
-{% endif %}
-
 <div class="searchPanel ui-widget ui-widget-content ui-corner-all ui-dialog">
 	<div class="ui-dialog-content">
 		<div>
