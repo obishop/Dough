@@ -158,9 +158,15 @@ function doQuery(ingredients,needs,focus_,meal_type,page_,do_init) {
 $(function() {
 		
 	try {
-		 $("#myTable").tablesorter(); 
+		 //$("#myTable").tablesorter(); 
 		//doQuery(ingredients,excludes,focuses,meal_types,current_page+1,true);
 	} catch (e) {
 		alert(e);
 	}
 });
+
+$(document).ready(function() 
+    { 
+        $("#myTable").tablesorter(); 
+    } 
+); 
