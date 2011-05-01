@@ -16,7 +16,7 @@ def index(request):
 @login_required
 def food(request):
     #return render_to_response('food.html')
-    food_list = FoodItem.objects.all()
+    food_list = FoodItem.objects.filter(user=request.user)
     return render_to_response('food.html', {'food_list': food_list})
 
 @login_required

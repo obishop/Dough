@@ -82,12 +82,31 @@ $("#addsubmit").click(function()
 
 		$('.foodinrow').each(function(index) //each tr 
    {
-    	//add food to list
+    	//add food to db
     	if($(this).find('.foodin').val().length >0  ){
-    	
-    		$('#foods').append( '<tr><td><input type="checkbox" name="checkall" value="food2"/></td><td>' + $(this).find('.foodin').val() +  '</td><td>Tags</td><td>'+ 
-    		$.datepicker.formatDate('mm-dd-yy', $(this).find('.datep').datepicker( "getDate" )) +
-    		'</td><td>'+ $.datepicker.formatDate('mm-dd-yy', $('#datepickerP').datepicker( "getDate" )) + ' </td></tr>') ;
+    $(function() {
+        var foodItems = [];
+        foodItems[0] = {
+            name: $(this).find('.foodin').val(),//"bananas",
+            expiration: $.datepicker.formatDate('yy-mm-dd', $(this).find('.datep').datepicker( "getDate" )),
+            location: "1",
+            category: "fruit"
+        };
+        $.ajax({
+            type:"POST",
+            url:"/dough/ajax/add_food_items/",
+            data:{
+                purchase_amount: $(this).find("#purchaseCostI").val(),//"88.88",
+                purchase_date: $.datepicker.formatDate('yy-mm-dd', $(this).find('#datepickerP').datepicker( "getDate" )),//"2011-04-23",
+                food_items:JSON.stringify(foodItems)
+            }
+        });
+    });
+    
+    		
+    		$('#foods').append( '<tr><td><input type="checkbox" name="checkall" value="food2"/></td><td>' + $(this).find('.foodin').val() +  '</td><td>Tags</td><td>Catagory</td><td>'+ 
+    		$.datepicker.formatDate('mm/dd/y', $(this).find('.datep').datepicker( "getDate" )) +
+    		'</td><td>'+ $.datepicker.formatDate('mm/dd/y', $('#datepickerP').datepicker( "getDate" )) + ' </td></tr>') ;
     		
     		//clear row
     		$(this).find('.foodin').val('');
@@ -226,7 +245,7 @@ $('.locButton').live('click', function() {
 if($(this).css("background-color") != clickColorL){
   	
   	var groupName = $(this).attr('name');
-  	alert(groupName); 
+  	//alert(groupName); 
   	$('[name=' + groupName+']').each(function(index, obj){
     	if($(obj).css("background-color") == clickColorL){
 			$(obj).css("background-color", "#C0C0C0"); 
@@ -318,7 +337,7 @@ if($(this).css("background-color") != clickColorL){
 		</tr>
 		
 		<tr>
-		<td><br> Cost of Purchases ($) </td><td><br><input type="text" name="food" size="8"> </td><td> </td><td>	
+		<td><br> Cost of Purchases ($) </td><td><br><input type="text" name="food" size="8" id="purchaseCostI"> </td><td> </td><td>	
 		</td>
 			
 		</tr>
@@ -349,7 +368,7 @@ if($(this).css("background-color") != clickColorL){
     </div>
 		<div id="foodlist">
 			<div id="flbuttonbar">
-			<button>Select</button>      <button>Tags</button>   <button>Delete</button>   
+			<button>Select</button> <button id="deletebutton">Delete</button>   
 			<button>Find Recipes</button>
 			<button name="modal" href="#dialog"><b>Add Foods</b></button>
 
