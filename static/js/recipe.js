@@ -153,7 +153,7 @@ function doQuery(ingredients,needs,focus_,meal_type,page_,do_init) {
 
 //////////// Document Ready ////////////
 
-$(document).ready(function() {
+$(function() {
 
 	ingredients = ["asparagus","butter"];
 	try {
