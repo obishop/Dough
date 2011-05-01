@@ -38,6 +38,10 @@
 	width: 1000px;
 }
 
+.foodBody p {
+	font-size: 12px;
+}
+
 #Pagination {
 	margin-left: auto;
 	margin-right: auto;
