@@ -47,9 +47,20 @@ def budget(request):
     plot_data = plot_data[:-1]+"]"
     plot_xticks = plot_xticks[:-1]+"]"
 
+    # add foodItems to purchase list
+    purchaseList = []
+    for p in purchases:
+        item = {}
+        item['amount'] = p.amount
+        foodItems = models.FoodItem.objects.filter(purchase=p)
+        item['foodItems'] = ", ".join([i.name for i in foodItems])
+        item['date'] = p.date
+        item['id'] = p.id
+        purchaseList.append(item)
+
     args['plot_data'] = plot_data
     args['plot_xticks'] = plot_xticks
-    args['purchases'] = purchases
+    args['purchases'] = purchaseList
     args['spent_this_month'] = spent_this_month
     args['monthly_budget'] = request.user.profile.monthly_budget
     return render_to_response('budget.html',args)
