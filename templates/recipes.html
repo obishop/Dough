@@ -44,7 +44,11 @@ $(function() {
 		"bPaginate":false,
 		"bJQueryUI":true,
 		"bInfo":false,
-		"aoColumnDefs": [{ "bSortable": false, "aTargets": [ 0 ] }]
+		"bFilter":false,
+		"aoColumnDefs": [{ "bSortable": false, "aTargets": [ 0 ] },
+						 { "sWidth": "20px", "aTargets": [ 0 ] },
+						 { "sWidth": "75px", "aTargets": [ 1 ] },
+						 { "sWidth": "75px", "aTargets": [ 2 ] }]
 	});
 	
 	$("input").change(function() {
