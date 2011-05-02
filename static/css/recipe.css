@@ -38,13 +38,9 @@
 #left-panel {
 	width: 35%;
 	float: left;
-	height: 200px;
-	background-color: gray;
 }
 
 #right-panel {
-	width: 55%;
+	width: 60%;
 	float: right;
-	height: 200px;
-	background-color: gray;
 }
