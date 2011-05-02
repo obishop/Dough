@@ -114,13 +114,9 @@ function doQuery(ingredients,needs,focus_,meal_type,page_,do_init) {
 						 focus:focus_.join('|'),
 						 smode:meal_type.join('|'),
 						 page:page_});
-						 
-	alert('http://www.supercook.com/575/main_search.asp?'+query);
 	
 	$.get('http://www.supercook.com/575/main_search.asp?'+query, 
 		function(res) { // Success callback function
-		
-			alert("CALLBACK CALLED");
 			
 			// Get rid of HTML surrounding the returned object
 			var response = res.responseText.slice(149,res.responseText.length-22);

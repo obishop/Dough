@@ -29,6 +29,7 @@
 
 <tbody>
 {% for food in food_list %}
+	<script>alert({{food.name}});</script>
 	<tr>
 	   <td><input type="checkbox" name="food" value={{ food.name }} /></td>
        <td>{{ food.name }}</td>
