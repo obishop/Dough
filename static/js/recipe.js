@@ -75,7 +75,7 @@ function displayCount(total_num,make_num) {
 // Display a recipe search result
 function displayRecipe(name,url,needed,thumb) {
 
-	var short_name = name.slice(0,Math.min(59,name.length-1)+"...";
+	var short_name = name;//name.slice(0,Math.min(59,name.length-1)+"...";
 	
 	
 	// Extra foods needed to make the recipe
@@ -86,7 +86,7 @@ function displayRecipe(name,url,needed,thumb) {
 					   "</p>";
 	} else {
 		var short_need = needed.join(", ");
-		short_need = short_need.slice(0,Math.min(59,short_need.length-1)+"...";
+		//short_need = short_need.slice(0,Math.min(59,short_need.length-1)+"...";
 		needed_foods = "<p><img src='/dough/static/images/attention.png' class='validPic' />"+
 					   "<b>You will also need: </b>"+short_need+
 					   "</p>";
