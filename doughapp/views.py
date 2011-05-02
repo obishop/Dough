@@ -101,6 +101,7 @@ def recipes(request):
 def foodSort(request, food_catagory, food_loc, ftype):
 	# return HttpResponse("lalala")	
 	args = {}
+	args['sorting'] = 'true'
 	args['cSort'] = food_catagory
 	args['lSort'] = food_loc
 	if(ftype == '0'):
@@ -113,7 +114,7 @@ def foodSort(request, food_catagory, food_loc, ftype):
 		food_list = FoodItem.objects.filter(user=request.user, location=food_loc, category=food_catagory)
 		
 	args['food_list'] = food_list
-	return render_to_response('food.html', {'food_list': food_list})
+	return render_to_response('food.html', args)
 	
 
 

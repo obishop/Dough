@@ -14,7 +14,7 @@
 
 <style>
 #need-buttonset .ui-button, #meal-buttonset .ui-button {
-    width: 11em;
+    width: 10em;
 }
 
 .ui-buttonset {
@@ -71,7 +71,6 @@ $(function() {
 				}
 			}
 		} else if (this.name == "meal") {
-			alert(this.value);
 			meal_types = this.value;
 		} else if (this.name == "need") {
 			if (this.checked)
@@ -152,7 +151,7 @@ $(function() {
 
 <h4>Have something to use up?</h4>
 <form name="form_foods">
-<table id="myTable">
+<table id="myTable" style="width:21em">
 <thead style="height:5px"> 
 <tr style="height:5px">
 	<th style="height:5px"><input type="checkbox" name="food" value="all" /></th>
@@ -174,7 +173,7 @@ $(function() {
 </form>
 
 {% else %}
-   <p>No food are available.</p>
+   <p></p>
 {% endif %}
 
 </div>
