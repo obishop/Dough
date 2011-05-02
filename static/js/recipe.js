@@ -114,8 +114,6 @@ function doQuery(ingredients,needs,focus_,meal_type,page_,do_init) {
 						 focus:focus_.join('|'),
 						 smode:meal_type.join('|'),
 						 page:page_});
-						 
-	alert('http://www.supercook.com/575/main_search.asp?'+query);
 	
 	$.get('http://www.supercook.com/575/main_search.asp?'+query, 
 		function(res) { // Success callback function
@@ -156,9 +154,15 @@ function doQuery(ingredients,needs,focus_,meal_type,page_,do_init) {
 //////////// Document Ready ////////////
 
 $(function() {
-
-	ingredients = ["asparagus","butter"];
+	
+	//$("#myTable").tableScroll({height:10});
+	$(".foodTable").tablesorter();
+	
+	
+	//ingredients = ["butter"];
+	
 	try {
+		
 		doQuery(ingredients,excludes,focuses,meal_types,current_page+1,true);
 	} catch (e) {
 		alert(e);

@@ -5,8 +5,8 @@
 	<link rel="stylesheet" type="text/css" media="screen" href="/dough/static/css/recipe.css">
 	<link rel="stylesheet" type="text/css" media="screen" href="/dough/static/css/pagination.css">
 	
-
-	
+	<script type="text/javascript" src="/dough/static/jquery/js/jquery.tablesorter.min.js"></script>
+	<script type="text/javascript" src="/dough/static/jquery/js/jquery.tablescroll.js"></script>
 	<script type="text/javascript" src="/dough/static/jquery/js/jquery.xdomainajax.js"></script>
 	<script type="text/javascript" src="/dough/static/jquery/js/jquery.pagination.js"></script>
 	<script type="text/javascript" src="/dough/static/js/recipe.js"></script>
@@ -16,31 +16,103 @@
 
 <body>
 
-	{% if food_list %}
+<!--<div id="myTable" class="scrollTableContainer">
+{% if food_list %}
 
-   {% for food in food_list %}
-       <tr><td> <input type="checkbox" name="checkall" value="food1" />  </td>
+<table id="myTable">
+<thead class="fixedHeader"> 
+<tr> 
+    <th>Food</th> 
+    <th>Expiration</th> 
+</tr> 
+</thead>
+
+<tbody>
+{% for food in food_list %}
+	<tr>
        <td>{{ food.name }}</td>
-       <td class="tag">
-       {% ifequal food.location 0 %}
-       <div class="fridgeTag">Fridge</div>
-       {% endifequal %}
-       {% ifequal food.location 1 %}
-       <div class="freezerTag">Freezer</div>
-       {% endifequal %}
-       {% ifequal food.location 2 %}
-       <div class="cabinetTag">Cabinet</div>
-       {% endifequal %}
-       </td>
-       <td>catagory</td>
-       <td>{{ food.expiration|date:"m/d/y"  }}</td><td>{{
-food.purchase.date|date:"m/d/y" }}</td>
-       </tr>
-   {% endfor %}
+       <td>{{ food.expiration|date:"m/d/y"  }}</td>
+    </tr>
+{% endfor %}
+	<tr>
+       <td>butter</td>
+       <td>5/11/10</td>
+    </tr>
+    <tr>
+       <td>cheese</td>
+       <td>5/11/10</td>
+    </tr>
+    <tr>
+       <td>bread</td>
+       <td>5/11/10</td>
+    </tr>
+    <tr>
+       <td>milk</td>
+       <td>5/11/10</td>
+    </tr>
+    <tr>
+       <td>eggs</td>
+       <td>5/11/10</td>
+    </tr>
+    <tr>
+       <td>beef</td>
+       <td>5/11/10</td>
+    </tr>
+    <tr>
+       <td>pork</td>
+       <td>5/11/10</td>
+    </tr>
+    <tr>
+       <td>bacon</td>
+       <td>5/11/10</td>
+    </tr>
+</tbody>
+</table>
+</div>
 
 {% else %}
    <p>No food are available.</p>
-{% endif %}
+{% endif %}-->
+
+<table class="foodTable" style="width: 300px" cellpadding="0" cellspacing="0">
+<thead> 
+<tr>
+  <td>Column 1</td>
+  <td>Column 2</td>
+</tr>
+<thead>
+</table>
+
+<div style="overflow: auto;height: 100px; width: 320px;">
+  <table class = "foodTable" style="width: 300px;" cellpadding="0" cellspacing="0">
+  <tbody>
+  <tr>
+    <td>Value 1</td>
+    <td>Value 2</td>
+  </tr>
+  <tr>
+    <td>Value 1</td>
+    <td>Value 2</td>
+  </tr>
+  <tr>
+    <td>Value 1</td>
+    <td>Value 2</td>
+  </tr>
+  <tr>
+    <td>Value 1</td>
+    <td>Value 2</td>
+  </tr>
+  <tr>
+    <td>Value 1</td>
+    <td>Value 2</td>
+  </tr>
+  <tr>
+    <td>Value 1</td>
+    <td>Value 2</td>
+  </tr>
+  </tbody>
+  </table>
+</div>
 
 <div class="searchPanel ui-widget ui-widget-content ui-corner-all ui-dialog">
 	<div class="ui-dialog-content">
