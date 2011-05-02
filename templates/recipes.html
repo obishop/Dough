@@ -60,6 +60,21 @@ $(function() {
 		} else if (this.name == "meal") {
 			alert(this.value);
 			meal_types = this.value;
+		} else if (this.name == "need") {
+			if (this.checked)
+				excludes.push(this.value);
+			else {
+				for (i=0;i<excludes.length;i++) {
+					if (this.value == excludes[i]) {
+						excludes.splice(i,1);
+						break;
+					}
+				}
+			}
+		}
+		
+		for (i=0;i<excludes.length;i++) {
+			alert(excludes[i]);
 		}
 		
 		doQuery(ingredients,excludes,focuses,meal_types,current_page+1,true);
@@ -79,6 +94,15 @@ $(function() {
 <input type="radio" name="meal" value="STARTERS" />Starters<br>
 <input type="radio" name="meal" value="ENTREES" />Entrees<br>
 <input type="radio" name="meal" value="DESSERTS" />Desserts<br>
+</form>
+
+<form name = "form_needs">
+<input type="checkbox" name="need" value="All meat" />No meat<br>
+<input type="checkbox" name="need" value="All dairy" />No dairy<br>
+<input type="checkbox" name="need" value="All fish" />No fish<br>
+<input type="checkbox" name="need" value="All shellfish" />No shellfish<br>
+<input type="checkbox" name="need" value="All gluten" />No gluten<br>
+<input type="checkbox" name="need" value="All nuts" />No nuts<br>
 </form>
 
 {% if food_list %}
