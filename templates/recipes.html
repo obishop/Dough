@@ -40,8 +40,12 @@ $(function() {
 	
 	$("input").change(function() {
 		if (this.value == "all") {
-			for (i = 0; i < document.form_foods.food.length; i++)
+			focuses.length=0;
+			for (i = 0; i < document.form_foods.food.length; i++) {
 				document.form_foods.food[i].checked = this.checked;
+				if (this.checked)
+					focuses.push(this.value);
+			}
 		} else if (this.name == "food") {
 			if (this.checked) {
 				focuses.push(this.value);
