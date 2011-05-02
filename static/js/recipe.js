@@ -151,24 +151,3 @@ function doQuery(ingredients,needs,focus_,meal_type,page_,do_init) {
 }
 
 
-//////////// Document Ready ////////////
-
-$(function() {
-	
-	try {
-		doQuery(ingredients,excludes,focuses,meal_types,current_page+1,true);
-	} catch (e) {
-		alert(e);
-	}
-	
-	$("#myTable").dataTable({
-		"bLengthChange":false,
-		"sScollY":"100px",
-		"bPaginate":false,
-		"bJQueryUI":true,
-		"aoColumnDefs": [{ "bSortable": false, "aTargets": [ 0 ] },
-						 { "sWidth": "10%", "aTargets": [ 0 ] },
-						 { "sWidth": "45%", "aTargets": [ 1 ] },
-						 { "sWidth": "45%", "aTargets": [ 2 ] }]
-	});
-});
