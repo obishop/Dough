@@ -90,6 +90,10 @@ var refreshPlot = function(monthly_budget) {
             min: 0
         } 
     });
+    $('.tickLabel').each(function(){
+        var me = $(this);
+        me.css('left',parseInt(me.css('left'))+16+'px');
+    });
 }
 
 var submitBudgetChange = function() {
@@ -155,6 +159,10 @@ var purchaseEditSubmit = function(newAmount,obj) {
 }
 
 $(function(){
+    themeDiv("summary-div");
+    themeDiv("purchases-div");
+    themeDiv("visualization-div");
+
     refreshBudget({{ spent_this_month }},{{ monthly_budget }});
     refreshPlot({{monthly_budget}});
 
@@ -189,6 +197,7 @@ $(function(){
     });
 
     $('#progress-bar > div').addClass("ui-state-default");
+
 });
 
 
@@ -197,7 +206,8 @@ $(function(){
 <body>
 
 <div id="summary-div">
-    <h3>Summary</h3>
+    <div>Summary</div>
+    <div>
     <p><div id="progress-bar" style="position:relative">
     <span id="budget-progress-spent" style="position:absolute;top:6px;left:10px">$41.27</span>
     <span id="budget-progress-left" style="position:absolute;top:6px;right:10px">$258.73</span>
@@ -210,16 +220,20 @@ $(function(){
 $<input id="change-budget-input" type="number" style="width:80px;" value="{{ monthly_budget }}"/>
 <small><input type="submit" id="change-budget-submit" value="Change monthly budget"/></small>
 </form>
-<br />
+
+</div>
 </div>
 
 <div id="visualization-div">
-    <h3>Spending over the last year</h3>
+    <div>Spending over the last year</div>
+    <div>
     <div id="flot-placeholder" style="height:300px"></div>
+    </div>
 </div>
 
 <div id="purchases-div">
-    <h3>Latest purchases</h3>
+    <div>Latest purchases</div>
+    <div>
     <div id="purchases-table-div">
     <table class="jtable" style="width=100%">
     {% for purchase in purchases %}
@@ -230,7 +244,7 @@ $<input id="change-budget-input" type="number" style="width:80px;" value="{{ mon
     </tr>
     {% endfor %}
     </table>
-    </div>
+    </div></div>
 </div>
 
 <input type="checkbox" name="budget" id="reload-tab-cb" style="display:none;"/>

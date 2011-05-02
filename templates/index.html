@@ -32,9 +32,9 @@
 
 <div style="width:50%;float:left;">
 
-<div class="ui-widget-content ui-corner-all">
-    <div class="ui-widget-header ui-corner-tl ui-corner-tr">Food</div>
-
+<div id="home-food-div">
+    <div>Food</div>
+    <div>
     You have {{numExpiringSoon}} foods expiring in the next 3 days:
     <ul>
         {% for item in expiringSoon %}
@@ -44,6 +44,7 @@
     You have a total of {{ numFoodItems }} food items.
 
     <button id="food-button" href="food.html">Manage food supply</button>    
+    </div>
 </div>
 
 </div>
