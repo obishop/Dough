@@ -73,6 +73,14 @@ $(function() {
 <body>
 
 <div>
+
+<form name = "form_meal">
+<input type="radio" name="meal" value="ALL" checked />All<br>
+<input type="radio" name="meal" value="STARTERS" />Starters<br>
+<input type="radio" name="meal" value="ENTREES" />Entrees<br>
+<input type="radio" name="meal" value="DESSERTS" />Desserts<br>
+</form>
+
 {% if food_list %}
 
 <form name="form_foods">
