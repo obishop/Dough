@@ -56,7 +56,7 @@ function displayCount(total_num,make_num) {
 	var count_display;
 	
 	if (total_num == 0)
-		count_display = "No recipes were found. Please add more ingredients.";
+		count_display = "No recipes were found. Please add more ingredients or remove some search restrictions.";
 	else if (total_num == 1)
 		count_display = "<b>"+total_num+"</b>"+" recipe found";
 	else
@@ -133,9 +133,7 @@ function doQuery(ingredients,needs,focus_,meal_type,page_,do_init) {
 			if (do_init) {
 			
 				displayCount(o.TotalDishes,o.DishesUserCanMake);
-				
-				if (o.TotalPages > 1)
-					initPagination(o.TotalPages);
+				initPagination(o.TotalPages);
 			}
 			
 			$('#Results').empty();
