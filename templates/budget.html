@@ -2,7 +2,8 @@
 <head>
 
 <style>
-#progress-div {
+
+#summary-div {
     float: left;
     width: 48%;
 }
@@ -26,7 +27,7 @@
     border-collapse:collapse;
 }
 
-#progress-div span {
+#summary-div span {
     border-style: none !important;
     font-weight: bold;
 }
@@ -186,6 +187,8 @@ $(function(){
             purchaseEditSubmit(newAmount,this);
         }
     });
+
+    $('#progress-bar > div').addClass("ui-state-default");
 });
 
 
@@ -193,10 +196,10 @@ $(function(){
 </head>
 <body>
 
-<div id="progress-div">
+<div id="summary-div">
     <h3>Summary</h3>
     <p><div id="progress-bar" style="position:relative">
-    <span id="budget-progress-spent" class="ui-widget-header" style="position:absolute;top:6px;left:10px">$41.27</span>
+    <span id="budget-progress-spent" style="position:absolute;top:6px;left:10px">$41.27</span>
     <span id="budget-progress-left" style="position:absolute;top:6px;right:10px">$258.73</span>
     </div></p>
 
@@ -204,7 +207,7 @@ $(function(){
     <p>You have <span id="remaining-span"></span> left to spend this month.</p>
 
 <form>
-<input id="change-budget-input" type="number" style="width:80px;" value="{{ monthly_budget }}"/>
+$<input id="change-budget-input" type="number" style="width:80px;" value="{{ monthly_budget }}"/>
 <small><input type="submit" id="change-budget-submit" value="Change monthly budget"/></small>
 </form>
 <br />
