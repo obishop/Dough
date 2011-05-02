@@ -173,7 +173,8 @@ $(function() {
 	
 	$("#myTable").dataTable({
 		"bLengthChange":false,
-		"sScollY":"200px",
-		"bPaginate":false
+		"sScollY":"100px",
+		"bPaginate":false,
+		"bJQueryUI":true
 	});
 });
