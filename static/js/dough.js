@@ -48,6 +48,7 @@ $(function() {
     $("#recipes-button").click(function(){
         $("#main-tabs").tabs("option","selected",3); 
     });
+    themeDiv("home-food-div");
 });
 
 var onWindowResize = function() {
@@ -66,3 +67,15 @@ var tabIndexFromHash = function() {
     return index;
 }
 
+var themeDiv = function(divId) {
+    $("#"+divId).addClass("ui-widget-content ui-corner-all")
+        .css("margin-bottom","1em");
+    var children = $("#"+divId).children();
+    $(children[0])
+        .addClass("ui-widget-header ui-corner-tl ui-corner-tr")
+        .css("padding","0.5em")
+        .css("padding-left","1em");
+    $(children[1])
+        .css("padding","1em")
+        .css("position","relative")
+}
