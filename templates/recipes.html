@@ -43,6 +43,7 @@ $(function() {
 		"sScollY":"100px",
 		"bPaginate":false,
 		"bJQueryUI":true,
+		"bInfo":false,
 		"aoColumnDefs": [{ "bSortable": false, "aTargets": [ 0 ] },
 						 { "sWidth": "10%", "aTargets": [ 0 ] },
 						 { "sWidth": "45%", "aTargets": [ 1 ] },
@@ -117,8 +118,7 @@ $(function() {
 
 <body>
 
-<div>
-
+<div id="left-panel">
 <form name = "form_meal">
 <div id="meal-buttonset">
 <input type="radio" name="meal" id="meal1" value="ALL" checked />
@@ -171,14 +171,15 @@ $(function() {
 {% endfor %}
 </tbody>
 </table>
-</div>
 </form>
 
 {% else %}
    <p>No food are available.</p>
 {% endif %}
 
-<div class="searchPanel ui-widget ui-widget-content ui-corner-all ui-dialog">
+</div>
+
+<div id="right-panel" class="searchPanel ui-widget-content ui-corner-all">
 	<div class="ui-dialog-content">
 		<div>
 			<div id="Count"></div>

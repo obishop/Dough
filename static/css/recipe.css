@@ -31,23 +31,18 @@
 	margin: -2px 5px 0px 0px;
 }
 
-.searchPanel {
-	position: static;
-	padding:.2em;
-	display: inline-block;
-	width: 1000px;
-}
-
 .foodBody p {
 	font-size: 12px;
 }
 
-#Pagination {
-	margin-left: auto;
-	margin-right: auto;
+#left-panel {
+	width: 35%;
+	float: left;
 }
 
-.tableCol {
-	width:100px;
+#right-panel {
+	width: 60%;
+	float: right;
+	margin: 5px;
+	padding: 5px;
 }
-
