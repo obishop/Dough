@@ -16,10 +16,10 @@
 
 <body>
 
-<div id="food-wrapper">
+<div class="scrollTableContainer">
 {% if food_list %}
 
-<table id="myTable" class="tableContainer tablesorter">
+<table id="myTable">
 <thead class="fixedHeader"> 
 <tr> 
     <th>Food</th> 
@@ -27,7 +27,7 @@
 </tr> 
 </thead>
 
-<tbody class="scrollContent">
+<tbody>
 {% for food in food_list %}
 	<tr>
        <td>{{ food.name }}</td>
