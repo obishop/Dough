@@ -81,12 +81,13 @@ $("#addsubmit").click(function()
 	$('#mask, .window').hide();
 
 		var foodIcount = 0; 
+		var foodItems = [];
 	$('.foodinrow').each(function(index) //each tr 
    {
     	//add food to db
     	if($(this).find('.foodin').val().length >0  ){
     $(function() {
-        var foodItems = [];
+        
         foodItems[foodIcount] = {
             name: $(this).find('.foodin').val(),//"bananas",
             expiration: $.datepicker.formatDate('yy-mm-dd', $(this).find('.datep').datepicker( "getDate" )),
@@ -94,8 +95,7 @@ $("#addsubmit").click(function()
             category: "fruit"
         };
     });
-    
-    		
+        		
     		$('#foods').append( '<tr><td><input type="checkbox" name="checkall" value="food2"/></td><td>' + $(this).find('.foodin').val() +  '</td><td>Tags</td><td>' +
     		$(this).find('.catOption option:selected').text() +'</td><td>'+ 
     		$.datepicker.formatDate('mm/dd/y', $(this).find('.datep').datepicker( "getDate" )) +
@@ -112,7 +112,8 @@ $("#addsubmit").click(function()
    });
    
    //send ajax request
-    $.ajax({
+ $(function() {
+ 	$.ajax({
             type:"POST",
             url:"/dough/ajax/add_food_items/",
             data:{
@@ -121,6 +122,7 @@ $("#addsubmit").click(function()
                 food_items:JSON.stringify(foodItems)
             }
         });
+	});
         
         
    //clear purchase date:
