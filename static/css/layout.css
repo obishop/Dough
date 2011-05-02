@@ -29,8 +29,8 @@ html, body {
 }
 
 #logo {
-    position: absolute;
-    left: 30px;
+    position: relative;
+    top: -20px;
 }
 
 #main-tabs {
