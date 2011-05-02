@@ -10,7 +10,18 @@
 	<script type="text/javascript" src="/dough/static/jquery/js/jquery.pagination.js"></script>
 	<script type="text/javascript" src="/dough/static/js/recipe.js"></script>
 	<!--<script type="text/javascript" src="/dough/static/js/prototype.js"></script>-->
-	
+
+
+<style>
+#need-buttonset .ui-button, #meal-buttonset .ui-button {
+    width: 7em;
+}
+
+.ui-buttonset {
+    margin-bottom: 10px;
+}
+
+</style>
 <script>
 
 $(function() {
@@ -79,6 +90,25 @@ $(function() {
 		
 		doQuery(ingredients,excludes,focuses,meal_types,current_page+1,true);
 	});
+    $("#meal-buttonset > input").button({
+        icons: {primary: "ui-icon-radio-on"}    
+    }).change(function(){
+        $("#meal-buttonset > input").button({
+            icons: {primary: "ui-icon-radio-on"}    
+        });
+        $(this).button({icons:{primary: "ui-icon-bullet"}}); 
+    });
+    $("#meal-buttonset").buttonset();
+    $("#need-buttonset > input").button({
+        icons: {} 
+    }).change(function(){
+        if(this.checked) {
+            $(this).button({icons:{primary: "ui-icon-check"}});
+        } else {
+            $(this).button({icons:{}});
+        }
+    });
+    $("#need-buttonset").buttonset();
 });
 
 </script>
@@ -90,19 +120,33 @@ $(function() {
 <div>
 
 <form name = "form_meal">
-<input type="radio" name="meal" value="ALL" checked />All<br>
-<input type="radio" name="meal" value="STARTERS" />Starters<br>
-<input type="radio" name="meal" value="ENTREES" />Entrees<br>
-<input type="radio" name="meal" value="DESSERTS" />Desserts<br>
+<div id="meal-buttonset">
+<input type="radio" name="meal" id="meal1" value="ALL" checked />
+<label for="meal1">All</label>
+<input type="radio" name="meal" id="meal2" value="STARTERS" />
+<label for="meal2">Starters</label>
+<input type="radio" name="meal" id="meal3" value="ENTREES" />
+<label for="meal3">Entrees</label>
+<input type="radio" name="meal" id="meal4" value="DESSERTS" />
+<label for="meal4">Desserts</label>
+</div>
 </form>
 
 <form name = "form_needs">
-<input type="checkbox" name="need" value="All meat" />No meat<br>
-<input type="checkbox" name="need" value="All dairy" />No dairy<br>
-<input type="checkbox" name="need" value="All fish" />No fish<br>
-<input type="checkbox" name="need" value="All shellfish" />No shellfish<br>
-<input type="checkbox" name="need" value="All gluten" />No gluten<br>
-<input type="checkbox" name="need" value="All nuts" />No nuts<br>
+<div id="need-buttonset">
+<input type="checkbox" name="need" id="need1" value="All meat" />
+<label for="need1">No meat</label>
+<input type="checkbox" name="need" id="need2" value="All dairy" />
+<label for="need2">No dairy</label>
+<input type="checkbox" name="need" id="need3" value="All fish" />
+<label for="need3">No fish</label>
+<input type="checkbox" name="need" id="need4" value="All shellfish" />
+<label for="need4">No shellfish</label>
+<input type="checkbox" name="need" id="need5" value="All gluten" />
+<label for="need5">No gluten</label>
+<input type="checkbox" name="need" id="need6" value="All nuts" />
+<label for="need6">No nuts</label>
+</div>
 </form>
 
 {% if food_list %}
