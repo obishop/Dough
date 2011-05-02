@@ -157,8 +157,6 @@ $(function() {
 	
 	//$("#myTable").tableScroll({height:10});
 	$("#myTable").dataTable({
-		"bInfo":false;
-		"bPaginate":false;
 		"bLengthChange":false
 	});
 	
