@@ -160,10 +160,6 @@ function doQuery(ingredients,needs,focus_,meal_type,page_,do_init) {
 $(function() {
 	
 	//$("#myTable").tableScroll({height:10});
-	/*$("#myTable").dataTable({
-		"bLengthChange":false;
-		"bScollInfinite":true
-	});*/
 	
 	
 	//ingredients = ["butter"];
@@ -174,4 +170,9 @@ $(function() {
 	} catch (e) {
 		alert(e);
 	}
+	
+	$("#myTable").dataTable({
+		"bLengthChange":false;
+		"bScollInfinite":true
+	});
 });
