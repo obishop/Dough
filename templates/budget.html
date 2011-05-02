@@ -17,10 +17,11 @@
 #purchases-div {
     float: left;
     width: 48%;
-    max-height: 200px;
+    position: relative;
 }
 
-#purchases-div > div {
+#purchases-table-div {
+    max-height: 160px;
     overflow: auto;
 }
 
@@ -51,32 +52,6 @@ td, th {
 
 // Global state variable
 var currentState = {}
-
-var refreshBudget = function(progress, budget) {
-    var percent = 100 * progress / budget;
-    $("#progress-bar").progressbar({value:percent});
-
-    var remaining = Math.round((budget-progress)*100)/100;
-    
-    var remaining_text = '$'+remaining;
-    if (remaining < 0)
-    	remaining_text = '-$'+-1*remaining;
-    $("#budget-progress-spent").html("$"+progress);
-    $("#budget-progress-left").html(remaining_text);
-
-    $("#budget-span").html("$"+budget);
-    $("#spent-span").html("$"+progress);
-    $("#remaining-span").html(remaining_text);
-
-    // Display negative amounts in red
-    if (remaining < 0) {
-        $("#budget-progress-left").css("color","red");
-        $("#remaining-span").css("color","red");
-    } else {
-        $("#budget-progress-left").css("color","");
-        $("#remaining-span").css("color","");
-    }
-}
 
 var refreshPlot = function(monthly_budget) {
     $.plot($("#flot-placeholder"), [
@@ -141,11 +116,12 @@ var themeTable = function() {
     );
 }
 
+/*
 var resizePurchasesTable = function() {
     var offset = $("#purchases-table-div").offset();
     var height = $(document).height() - offset.top - 25;
     $("#purchases-table-div").css("height",height);
-}
+}*/
 
 var purchaseEditSubmit = function(newAmount,obj) {
     $.ajax({
@@ -174,7 +150,7 @@ $(function(){
     $("#change-budget-submit").button()
         .click(submitBudgetChange);
     themeTable();
-    resizePurchasesTable();
+    //resizePurchasesTable();
     
     $(".purchase-edit-span").focus(function(){
         currentState.purchaseAmount = $(this).html();
@@ -240,7 +216,7 @@ $<input id="change-budget-input" type="number" style="width:80px;" value="{{ mon
     <div>Latest purchases</div>
     <div>
     <div id="purchases-table-div">
-    <table class="jtable" style="width=100%">
+    <table class="jtable" style="width=100%;">
     {% for purchase in purchases %}
     <tr>
         <td width="40%">{{ purchase.date }}</td>

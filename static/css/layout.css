@@ -24,14 +24,15 @@ html, body {
 
 #account-bar {
     position: absolute;
-    top: 7px;
+    top: -40px;
     right: 10px;
 }
 
 #logo {
-	float:left;
-    position: relative;
-    top: -10px;
+    position: absolute;
+    top: -50px;
+    left: 30px;
+    z-index: -1;
 }
 
 #main-tabs {
