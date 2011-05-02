@@ -156,18 +156,14 @@ function doQuery(ingredients,needs,focus_,meal_type,page_,do_init) {
 //////////// Document Ready ////////////
 
 $(function() {
-		
+	
+	$("#myTable").tablesorter();
+	
+	ingredients = ["asparagus"];
+	
 	try {
-		 //$("#myTable").tablesorter(); 
 		doQuery(ingredients,excludes,focuses,meal_types,current_page+1,true);
 	} catch (e) {
 		alert(e);
 	}
 });
-
-$(document).ready(function() 
-    { 
-        $("#myTable").tablesorter();
-        alert("done");
-    } 
-); 
