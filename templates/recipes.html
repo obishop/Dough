@@ -41,7 +41,7 @@ $(function() {
 	$("input").change(function() {
 		if (this.value == "all") {
 			focuses.length=0;
-			for (i = 0; i < document.form_foods.food.length; i++) {
+			for (i = 1; i < document.form_foods.food.length; i++) {
 				document.form_foods.food[i].checked = this.checked;
 				if (this.checked)
 					focuses.push(document.form_foods.food[i].value);
@@ -61,6 +61,8 @@ $(function() {
 		for (i=0;i<focuses.length;i++) {
 			alert(focuses[i]);
 		}
+		
+		doQuery(ingredients,excludes,focuses,meal_types,current_page+1,true);
 	});
 });
 
