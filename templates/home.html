@@ -35,11 +35,6 @@ function doQuery() {
 			else
 				$("#num_recipes").html("You can make"+o.DishesUserCanMake+"recipes right now!");
 			
-			for (var i=0;i<o.results.length;i++) {
-			
-				displayRecipe(o.results[i].Name,o.results[i].URL,o.results[i].Needed,o.results[i].Thumb);
-			}
-			
 		}
 	);
 	
@@ -66,7 +61,7 @@ $(function(){
     displayBudgetProgress({{spent_this_month}},{{monthly_budget}});
     $(".progressbar-placeholder > div").addClass("ui-state-default");
 
-
+	doQuery();
 })
 </script>
 
