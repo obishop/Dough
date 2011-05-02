@@ -5,8 +5,7 @@
 	<link rel="stylesheet" type="text/css" media="screen" href="/dough/static/css/recipe.css">
 	<link rel="stylesheet" type="text/css" media="screen" href="/dough/static/css/pagination.css">
 	
-	<script type="text/javascript" src="/dough/static/jquery/js/jquery.tablesorter.min.js"></script>
-	<script type="text/javascript" src="/dough/static/jquery/js/jquery.tablescroll.js"></script>
+	<script type="text/javascript" src="/dough/static/jquery/js/jquery.dataTables.js"></script>
 	<script type="text/javascript" src="/dough/static/jquery/js/jquery.xdomainajax.js"></script>
 	<script type="text/javascript" src="/dough/static/jquery/js/jquery.pagination.js"></script>
 	<script type="text/javascript" src="/dough/static/js/recipe.js"></script>
@@ -16,7 +15,7 @@
 
 <body>
 
-<!--<div id="myTable" class="scrollTableContainer">
+<div id="myTable" class="scrollTableContainer">
 {% if food_list %}
 
 <table id="myTable">
@@ -72,47 +71,7 @@
 
 {% else %}
    <p>No food are available.</p>
-{% endif %}-->
-
-<table class="foodTable" style="width: 300px" cellpadding="0" cellspacing="0">
-<thead> 
-<tr>
-  <td>Column 1</td>
-  <td>Column 2</td>
-</tr>
-<thead>
-</table>
-
-<div style="overflow: auto;height: 100px; width: 320px;">
-  <table class = "foodTable" style="width: 300px;" cellpadding="0" cellspacing="0">
-  <tbody>
-  <tr>
-    <td>Value 1</td>
-    <td>Value 2</td>
-  </tr>
-  <tr>
-    <td>Value 1</td>
-    <td>Value 2</td>
-  </tr>
-  <tr>
-    <td>Value 1</td>
-    <td>Value 2</td>
-  </tr>
-  <tr>
-    <td>Value 1</td>
-    <td>Value 2</td>
-  </tr>
-  <tr>
-    <td>Value 1</td>
-    <td>Value 2</td>
-  </tr>
-  <tr>
-    <td>Value 1</td>
-    <td>Value 2</td>
-  </tr>
-  </tbody>
-  </table>
-</div>
+{% endif %}
 
 <div class="searchPanel ui-widget ui-widget-content ui-corner-all ui-dialog">
 	<div class="ui-dialog-content">
