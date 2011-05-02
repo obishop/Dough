@@ -3,7 +3,7 @@
 var current_page = 0;
 var ingredients = [];
 var focuses = []
-var meal_types = [];
+var meal_types = "ALL";
 var excludes = [];
 
 
@@ -112,7 +112,7 @@ function doQuery(ingredients,needs,focus_,meal_type,page_,do_init) {
 	var query = $.param({kitchen:ingredients.join('|'),
 						 exclude:needs.join('|'),
 						 focus:focus_.join('|'),
-						 smode:meal_type.join('|'),
+						 smode:meal_type,
 						 page:page_});
 	
 	$.get('http://www.supercook.com/575/main_search.asp?'+query, 

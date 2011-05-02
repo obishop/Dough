@@ -57,9 +57,9 @@ $(function() {
 					}
 				}
 			}
-		}
-		for (i=0;i<focuses.length;i++) {
-			alert(focuses[i]);
+		} else if (this.name == "meal") {
+			alert(this.value);
+			meal_types = this.value;
 		}
 		
 		doQuery(ingredients,excludes,focuses,meal_types,current_page+1,true);
