@@ -19,15 +19,15 @@
 <div id="food-wrapper">
 {% if food_list %}
 
-<table id="myTable" class="tablesorter">
-<thead> 
+<table id="myTable" class="tablesorter tableContainer">
+<thead class="fixedHeader"> 
 <tr> 
     <th>Food</th> 
     <th>Expiration</th> 
 </tr> 
 </thead>
 
-<tbody>
+<tbody class="scrollContent">
 {% for food in food_list %}
 	<tr>
        <td>{{ food.name }}</td>
