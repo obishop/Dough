@@ -169,6 +169,7 @@ $(function() {
 		"bLengthChange":false,
 		"sScollY":"100px",
 		"bPaginate":false,
-		"bJQueryUI":true
+		"bJQueryUI":true,
+		"aoColumnDefs": [{ "bSortable": false, "aTargets": [ 0 ] }]
 	});
 });
