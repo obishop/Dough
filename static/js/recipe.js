@@ -172,7 +172,8 @@ $(function() {
 	}
 	
 	$("#myTable").dataTable({
-		"bLengthChange":false;
-		"bScollInfinite":true
+		"bLengthChange":false,
+		"sScollY":"200px",
+		"bPaginate":false
 	});
 });
