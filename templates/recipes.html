@@ -88,61 +88,45 @@ $(function() {
 <body>
 
 <div id="left-panel">
-<form name = "form_meal">
-<input type="radio" name="meal" value="ALL" checked />All<br>
-<input type="radio" name="meal" value="STARTERS" />Starters<br>
-<input type="radio" name="meal" value="ENTREES" />Entrees<br>
-<input type="radio" name="meal" value="DESSERTS" />Desserts<br>
-</form>
 
-<form name = "form_needs">
-<input type="checkbox" name="need" value="All+meat" />No meat<br>
-<input type="checkbox" name="need" value="All+dairy" />No dairy<br>
-<input type="checkbox" name="need" value="All+fish" />No fish<br>
-<input type="checkbox" name="need" value="All+shellfish" />No shellfish<br>
-<input type="checkbox" name="need" value="All+gluten" />No gluten<br>
-<input type="checkbox" name="need" value="All+nuts" />No nuts<br>
-</form>
+	<form name = "form_meal">
+		<input type="radio" name="meal" value="ALL" checked />All<br>
+		<input type="radio" name="meal" value="STARTERS" />Starters<br>
+		<input type="radio" name="meal" value="ENTREES" />Entrees<br>
+		<input type="radio" name="meal" value="DESSERTS" />Desserts<br>
+	</form>
 
-{% if food_list %}
+	<form name = "form_needs">
+		<input type="checkbox" name="need" value="All+meat" />No meat<br>
+		<input type="checkbox" name="need" value="All+dairy" />No dairy<br>
+		<input type="checkbox" name="need" value="All+fish" />No fish<br>
+		<input type="checkbox" name="need" value="All+shellfish" />No shellfish<br>
+		<input type="checkbox" name="need" value="All+gluten" />No gluten<br>
+		<input type="checkbox" name="need" value="All+nuts" />No nuts<br>
+	</form>
 
-<form name="form_foods">
-<table id="myTable">
-<thead> 
-<tr>
-	<th><input type="checkbox" name="food" value="all" /></th>
-    <th class="tableCol">Food</th> 
-    <th class="tableCol">Expiration</th> 
-</tr> 
-</thead>
-
-<tbody>
-{% for food in food_list %}
-	<tr>
-	   <td><input type="checkbox" name="food" value={{ food.name }} /></td>
-       <td>{{ food.name }}</td>
-       <td>{{ food.expiration|date:"m/d/y"}}</td>
-    </tr>
-{% endfor %}
-</tbody>
-</table>
-</form>
-
-{% else %}
-   <p>No food are available.</p>
-{% endif %}
-
-</div>
-
-<div class="searchPanel ui-widget ui-widget-content ui-corner-all ui-dialog">
-	<div class="ui-dialog-content">
-		<div>
-			<div id="Count"></div>
-			<div id="Results"></div>
-			<div id="Pagination"></div>
-		</div>
-	</div>
-</div>
+	<form name="form_foods">
+		<table id="myTable">
+		<thead> 
+		<tr>
+			<th><input type="checkbox" name="food" value="all" /></th>
+    		<th class="tableCol">Food</th> 
+    		<th class="tableCol">Expiration</th> 
+		</tr> 
+		</thead>
+		<tbody>
+		{% if food_list %}
+		{% for food in food_list %}
+		<tr>
+	   		<td><input type="checkbox" name="food" value={{ food.name }} /></td>
+       		<td>{{ food.name }}</td>
+       		<td>{{ food.expiration|date:"m/d/y"}}</td>
+    	</tr>
+		{% endfor %}
+		</tbody>
+		</table>
+	</form>
+	
 </div>
 
 <div id="right-panel" class="searchPanel ui-widget-content ui-corner-all">
