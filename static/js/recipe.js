@@ -161,7 +161,7 @@ $(function() {
 	//ingredients = ["butter"];
 	
 	try {
-		$("#myTable").tableScroll({height:200});
+		$("#myTable").tableScroll({height:10});
 		doQuery(ingredients,excludes,focuses,meal_types,current_page+1,true);
 	} catch (e) {
 		alert(e);
