@@ -36,6 +36,10 @@ $(function() {
     });
     $("#main-tabs").tabs("select",start_tab);
 
+    themeDiv("home-food-div");
+    themeDiv("home-budget-div");
+    themeDiv("home-recipes-div");
+
     $("#food-button").button();
     $("#food-button").click(function(){
         $("#main-tabs").tabs("option","selected",1); 
@@ -48,7 +52,7 @@ $(function() {
     $("#recipes-button").click(function(){
         $("#main-tabs").tabs("option","selected",3); 
     });
-    themeDiv("home-food-div");
+
 });
 
 var onWindowResize = function() {
@@ -65,6 +69,24 @@ var tabIndexFromHash = function() {
     if (hash == "#budget") index = 2;
     if (hash == "#recipes") index = 3;
     return index;
+}
+
+
+var displayBudgetProgress = function(progress, budget) {
+    var percent = 100 * progress / budget;
+    $(".progressbar-placeholder").progressbar({value:percent});
+    
+    var remaining = Math.round((budget-progress)*100)/100;
+    $(".budget-progress-spent").html("$"+progress);
+    $(".budget-progress-left").html("$"+remaining);
+    $(".budget-progress-budget").html("$"+budget);
+                            
+    // Display negative amounts in red
+    if (remaining < 0) {
+        $(".budget-progress-left").css("color","red");
+    } else {
+        $(".budget-progress-left").css("color","");
+    }
 }
 
 var themeDiv = function(divId) {

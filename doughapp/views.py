@@ -25,8 +25,15 @@ def index(request):
 
     args['numExpiringSoon'] = args['expiringSoon'].count()
 
-    purchases = models.Purchase.objects.filter(user=request.user).order_by('-date')
-    
+    nyear, nmonth, nday = time.localtime()[:3]
+
+    p_thismonth = models.Purchase.objects.filter(
+        user=request.user
+    ).filter(
+        date__month=nmonth
+    ).order_by('-date')
+   
+    args['spent_this_month'] = sum([p.amount for p in p_thismonth])
     args['monthly_budget'] = request.user.profile.monthly_budget
     return render_to_response('index.html',args)
 

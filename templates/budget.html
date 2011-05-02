@@ -108,7 +108,7 @@ var submitBudgetChange = function() {
         data:{budget:val},
         complete:function(res,status){
             if (status == "success") {
-                refreshBudget({{ spent_this_month }},val);
+                displayBudgetProgress({{ spent_this_month }},val);
                 refreshPlot(val);
             } else {
                 alert(res.responseText);
@@ -163,7 +163,7 @@ $(function(){
     themeDiv("purchases-div");
     themeDiv("visualization-div");
 
-    refreshBudget({{ spent_this_month }},{{ monthly_budget }});
+    displayBudgetProgress({{ spent_this_month }},{{ monthly_budget }});
     refreshPlot({{monthly_budget}});
 
     $("#change-budget-submit").button()
@@ -196,7 +196,7 @@ $(function(){
         }
     });
 
-    $('#progress-bar > div').addClass("ui-state-default");
+    $('.progressbar-placeholder > div').addClass("ui-state-default");
 
 });
 
@@ -208,13 +208,13 @@ $(function(){
 <div id="summary-div">
     <div>Summary</div>
     <div>
-    <p><div id="progress-bar" style="position:relative">
-    <span id="budget-progress-spent" style="position:absolute;top:6px;left:10px">$41.27</span>
-    <span id="budget-progress-left" style="position:absolute;top:6px;right:10px">$258.73</span>
+    <p><div class="progressbar-placeholder" style="position:relative">
+    <span class="budget-progress-spent" style="position:absolute;top:6px;left:10px">$41.27</span>
+    <span class="budget-progress-left" style="position:absolute;top:6px;right:10px">$258.73</span>
     </div></p>
 
-    <p>You've spent <span id="spent-span">${{ spent_this_month }}</span> of your <span id="budget-span">${{ monthly_budget }}</span> budget.</p>
-    <p>You have <span id="remaining-span"></span> left to spend this month.</p>
+    <p>You've spent <span class="budget-progress-spent">${{ spent_this_month }}</span> of your <span class="budget-progress-budget">${{ monthly_budget }}</span> budget.</p>
+    <p>You have <span class="budget-progress-left"></span> left to spend this month.</p>
 
 <form>
 $<input id="change-budget-input" type="number" style="width:80px;" value="{{ monthly_budget }}"/>
