@@ -34,6 +34,10 @@
     font-weight: bold;
 }
 
+.purchase-edit-span {
+    border: 1px dotted gray;
+}
+
 td, th {
     text-align: left;
     padding: 0.4em;
@@ -130,7 +134,7 @@ var purchaseEditSubmit = function(newAmount,obj) {
         data:{amount:newAmount},
         complete:function(res,status) {
             if (status == "success") {
-                $(obj).html("$"+newAmount);
+                $(obj).html(newAmount);
                 $("#reload-tab-cb").get(0).click();
             } else {
                 alert("Failed to set purchase amount. Please refresh page.");
@@ -220,7 +224,7 @@ $<input id="change-budget-input" type="number" style="width:80px;" value="{{ mon
     {% for purchase in purchases %}
     <tr>
         <td width="40%">{{ purchase.date }}</td>
-        <td><span contentEditable="true" title="{{purchase.id}}" class="purchase-edit-span">${{ purchase.amount }}</span></td>
+        <td>$<span contentEditable="true" title="{{purchase.id}}" class="purchase-edit-span">{{ purchase.amount }}</span></td>
         <td width="100%">{{ purchase.foodItems }}</td>
     </tr>
     {% endfor %}
