@@ -20,7 +20,8 @@
 
 <table id="myTable" class="tablesorter">
 <thead> 
-<tr> 
+<tr>
+	<input type="checkbox" name="food" value="all" />
     <th>Food</th> 
     <th>Expiration</th> 
 </tr> 
@@ -29,42 +30,11 @@
 <tbody>
 {% for food in food_list %}
 	<tr>
+	   <td><input type="checkbox" name="food" value={{ food.name }} /></td>
        <td>{{ food.name }}</td>
        <td>{{ food.expiration|date:"m/d/y"  }}</td>
     </tr>
 {% endfor %}
-	<tr>
-       <td>butter</td>
-       <td>5/11/10</td>
-    </tr>
-    <tr>
-       <td>cheese</td>
-       <td>5/11/10</td>
-    </tr>
-    <tr>
-       <td>bread</td>
-       <td>5/11/10</td>
-    </tr>
-    <tr>
-       <td>milk</td>
-       <td>5/11/10</td>
-    </tr>
-    <tr>
-       <td>eggs</td>
-       <td>5/11/10</td>
-    </tr>
-    <tr>
-       <td>beef</td>
-       <td>5/11/10</td>
-    </tr>
-    <tr>
-       <td>pork</td>
-       <td>5/11/10</td>
-    </tr>
-    <tr>
-       <td>bacon</td>
-       <td>5/11/10</td>
-    </tr>
 </tbody>
 </table>
 </div>
