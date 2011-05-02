@@ -16,6 +16,7 @@
 
 <body>
 
+{% if food_list %}
 <table id="myTable" class="tablesorter">
 <thead> 
 <tr> 
@@ -23,9 +24,8 @@
     <th>Expiration</th> 
 </tr> 
 </thead>
-<div>
+<div id="food-wrapper">
 <tbody>
-{% if food_list %}
 {% for food in food_list %}
 	<tr>
        <td>{{ food.name }}</td>
@@ -34,6 +34,34 @@
 {% endfor %}
 	<tr>
        <td>butter</td>
+       <td>5/11/10</td>
+    </tr>
+    <tr>
+       <td>cheese</td>
+       <td>5/11/10</td>
+    </tr>
+    <tr>
+       <td>bread</td>
+       <td>5/11/10</td>
+    </tr>
+    <tr>
+       <td>milk</td>
+       <td>5/11/10</td>
+    </tr>
+    <tr>
+       <td>eggs</td>
+       <td>5/11/10</td>
+    </tr>
+    <tr>
+       <td>beef</td>
+       <td>5/11/10</td>
+    </tr>
+    <tr>
+       <td>pork</td>
+       <td>5/11/10</td>
+    </tr>
+    <tr>
+       <td>bacon</td>
        <td>5/11/10</td>
     </tr>
 </tbody>

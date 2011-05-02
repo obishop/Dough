@@ -47,6 +47,11 @@
 	margin-right: auto;
 }
 
+#food-wrapper {
+	height:50px;
+	overflow: auto;
+}
+
 table.tablesorter {
 	font-family:arial;
 	background-color: #CDCDCD;
