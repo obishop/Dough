@@ -13,6 +13,11 @@ def index(request):
     args = {}
     args['username'] = request.user.username
 
+    return render_to_response('index.html',args)
+
+@login_required
+def home(request):
+    args = {}
     args['numFoodItems'] = models.FoodItem.objects.filter(user=request.user).count()
 
     expirationSoon = date.today() + timedelta(days=3)
@@ -35,7 +40,8 @@ def index(request):
    
     args['spent_this_month'] = sum([p.amount for p in p_thismonth])
     args['monthly_budget'] = request.user.profile.monthly_budget
-    return render_to_response('index.html',args)
+
+    return render_to_response('home.html',args)
 
 @login_required
 def food(request):

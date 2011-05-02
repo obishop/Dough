@@ -1,0 +1,73 @@
+<script>
+$(function(){
+    themeDiv("home-food-div");
+    themeDiv("home-budget-div");
+    themeDiv("home-recipes-div");
+
+    $("#food-button").button();
+    $("#food-button").click(function(){
+        $("#main-tabs").tabs("option","selected",1);
+    });
+    $("#budget-button").button();
+    $("#budget-button").click(function(){
+        $("#main-tabs").tabs("option","selected",2);
+    });
+    $("#recipes-button").button();
+    $("#recipes-button").click(function(){
+        $("#main-tabs").tabs("option","selected",3);
+    });
+
+
+    displayBudgetProgress({{spent_this_month}},{{monthly_budget}});
+    $(".progressbar-placeholder > div").addClass("ui-state-default");
+
+
+})
+</script>
+
+
+<div>
+
+<div id="home-food-div">
+    <div>Food</div>
+    <div>
+    You have {{numExpiringSoon}} foods expiring in the next 3 days:
+    <ul>
+        {% for item in expiringSoon %}
+        <li>{{item.name}}</li>
+        {% endfor %}
+    </ul>
+    You have a total of {{ numFoodItems }} food items.
+
+    <button id="food-button" href="food.html">Manage food supply</button>    
+    </div>
+</div>
+
+</div>
+
+<div>
+
+<div id="home-budget-div">
+    <div>Budget</div>
+    <div>
+        <p><div class="progressbar-placeholder" style="position:relative">
+            <span class="budget-progress-spent" style="position:absolute;top:6px;left:10px">$</span>
+            <span class="budget-progress-left" style="position:absolute;top:6px;right:10px">$</span>
+        </div></p>
+        <p>You've spent <span class=budget-progress-spent"">${{ spent_this_month }}</span> of your <span class="budget-progress-budget">${{ monthly_budget }}</span> budget.</p>
+        <button id="budget-button" href="budget.html">Manage budget</button>
+    </div>
+
+</div>
+
+
+<div id="home-recipes-div">
+    <div>Recipies</div>
+    <div>
+    <button id="recipes-button" href="recipies.html">Search for recipes</button>
+    </div>
+</div>
+
+</div>
+
+

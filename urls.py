@@ -21,7 +21,8 @@ urlpatterns = patterns('',
     (r'^static/(?P<path>.*)$', 'django.views.static.serve',
             {'document_root': settings.STATIC_ROOT}),
 
-    # Tabs views, only to be called through the home page
+    # Tabs views, only to be called through the index page
+    (r'^home/', 'dough.doughapp.views.home'),
     (r'^food/', 'dough.doughapp.views.food'),
     (r'^budget/', 'dough.doughapp.views.budget'),
     (r'^recipes/', 'dough.doughapp.views.recipes'),

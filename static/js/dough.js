@@ -36,10 +36,6 @@ $(function() {
     });
     $("#main-tabs").tabs("select",start_tab);
 
-    themeDiv("home-food-div");
-    themeDiv("home-budget-div");
-    themeDiv("home-recipes-div");
-
     $("#food-button").button();
     $("#food-button").click(function(){
         $("#main-tabs").tabs("option","selected",1); 
