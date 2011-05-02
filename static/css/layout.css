@@ -29,6 +29,7 @@ html, body {
 }
 
 #logo {
+	float:left;
     position: relative;
     top: -10px;
 }
