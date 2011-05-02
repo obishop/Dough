@@ -74,6 +74,9 @@ function displayCount(total_num,make_num) {
 
 // Display a recipe search result
 function displayRecipe(name,url,needed,thumb) {
+
+	var short_name = name.slice(0,Math.min(59,name.length-1)+"...";
+	
 	
 	// Extra foods needed to make the recipe
 	var needed_foods;
@@ -82,8 +85,10 @@ function displayRecipe(name,url,needed,thumb) {
 					   "<b>You have all the ingredients for this recipe!</b>"+
 					   "</p>";
 	} else {
+		var short_need = needed.join(", ");
+		short_need = short_need.slice(0,Math.min(59,short_need.length-1)+"...";
 		needed_foods = "<p><img src='/dough/static/images/attention.png' class='validPic' />"+
-					   "<b>You will also need: </b>"+needed.join(", ")+
+					   "<b>You will also need: </b>"+short_need+
 					   "</p>";
 	}
 	
@@ -99,7 +104,7 @@ function displayRecipe(name,url,needed,thumb) {
 	$('#Results').append("<div class='foodResult'>"+
 						 recipe_img +
 						 "<div class='foodBody'>"+
-						 "<a class='foodHeading' href='"+url+"' onClick='return popup(this,"+'"'+name+'"'+")'>"+name+"</a>"+
+						 "<a class='foodHeading' href='"+url+"' onClick='return popup(this,"+'"'+name+'"'+")'>"+short_name+"</a>"+
 						 needed_foods+"</div></div>");
 						 
 	$('#Results').append("<hr />");	// Make a divider
