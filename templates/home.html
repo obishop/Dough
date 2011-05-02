@@ -1,4 +1,47 @@
 <script>
+
+function doQuery() {
+
+	var ingredients = [];
+	
+	{% if food_list %}
+	{% for food in food_list %}
+	ingredients.push("{{ food.name }}");
+	{% endfor %}
+	{% endif %}
+	
+	// Assemble a query string to send to www.supercook.com
+	var query = $.param({kitchen:ingredients.join('|')});
+	
+	$.get('http://www.supercook.com/575/main_search.asp?'+query, 
+		function(res) { // Success callback function
+			
+			// Get rid of HTML surrounding the returned object
+			var response = res.responseText.slice(149,res.responseText.length-22);
+			response = response.replace(/[\s]+/g," ");	// Eliminate illegal whitespace characters
+			
+			try {
+				// Try converting response back into an object
+				var o = eval("("+response+")");
+			} catch(e) {
+				alert("We are experiencing problems due to invalid search results. Please try again later.");
+			}
+			
+			if (o.DishesUserCanMake == 1)
+				$("#num_recipes").html("You can make 1 recipe right now!");
+			else
+				$("#num_recipes").html("You can make"+o.DishesUserCanMake+"recipes right now!");
+			
+			for (var i=0;i<o.results.length;i++) {
+			
+				displayRecipe(o.results[i].Name,o.results[i].URL,o.results[i].Needed,o.results[i].Thumb);
+			}
+			
+		}
+	);
+	
+}
+
 $(function(){
     themeDiv("home-food-div");
     themeDiv("home-budget-div");
@@ -37,8 +80,7 @@ $(function(){
         <li>{{item.name}}</li>
         {% endfor %}
     </ul>
-    You have a total of {{ numFoodItems }} food items.
-
+    <p>You have a total of {{ numFoodItems }} foods.</p>
     <button id="food-button" href="food.html">Manage food supply</button>    
     </div>
 </div>
@@ -64,7 +106,9 @@ $(function(){
 <div id="home-recipes-div">
     <div>Recipies</div>
     <div>
-    <button id="recipes-button" href="recipies.html">Search for recipes</button>
+    	<div id="num_recipes"></div>
+    	<div id="recipes"></div>
+    	<button id="recipes-button" href="recipies.html">Search for recipes</button>
     </div>
 </div>
 
