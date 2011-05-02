@@ -21,8 +21,7 @@ urlpatterns = patterns('',
     (r'^static/(?P<path>.*)$', 'django.views.static.serve',
             {'document_root': settings.STATIC_ROOT}),
 
-    # Tabs views, only to be called through the index page
-    (r'^home/', 'dough.doughapp.views.home'),
+    # Tabs views, only to be called through the home page
     (r'^food/', 'dough.doughapp.views.food'),
     (r'^budget/', 'dough.doughapp.views.budget'),
     (r'^recipes/', 'dough.doughapp.views.recipes'),
@@ -33,7 +32,7 @@ urlpatterns = patterns('',
     (r'^ajax/add_food_items/$', 'dough.doughapp.ajax.add_food_items'),
     
     #Ajax deleters ? 
-    (r'^ajax/delete_food_items/$', 'dough.doughapp.ajax.delete_food_items'),
+    (r'^ajax/delete_food_items/(?P<id>[0-9]*)/$', 'dough.doughapp.ajax.delete_food_items'),
     
     #for sorting food on food page
     (r'^foodS/(?P<food_catagory>.*)/(?P<food_loc>[0-9]*)/(?P<ftype>[0-9]*)/$', 'dough.doughapp.views.foodSort'),
