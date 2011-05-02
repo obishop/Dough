@@ -89,6 +89,25 @@ def budget(request):
 def recipes(request):
 	food_list = FoodItem.objects.filter(user=request.user)
 	return render_to_response('recipes.html', {'food_list': food_list})
+	
+@login_required
+def foodSort(request, food_catagory, food_loc, ftype):
+	# return HttpResponse("lalala")	
+	args = {}
+	args['cSort'] = food_catagory
+	args['lSort'] = food_loc
+	if(ftype == '0'):
+		food_list = FoodItem.objects.filter(user=request.user)
+	elif(ftype =='1'): 
+		food_list = FoodItem.objects.filter(user=request.user, category=food_catagory)
+	elif(ftype =='2'):
+		food_list = FoodItem.objects.filter(user=request.user, location=food_loc)
+	else:
+		food_list = FoodItem.objects.filter(user=request.user, location=food_loc, category=food_catagory)
+		
+	args['food_list'] = food_list
+	return render_to_response('food.html', {'food_list': food_list})
+	
 
 
    

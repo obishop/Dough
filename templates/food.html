@@ -15,29 +15,6 @@
 
 
 
-//add datepicker();
-
-    /*
-    $(function() {
-        var foodItems = [];
-        foodItems[0] = {
-            name: "bananas",
-            expiration: "2012-05-22",
-            location: "1",
-            category: "fruit"
-        };
-        $.ajax({
-            type:"POST",
-            url:"/dough/ajax/add_food_items/",
-            data:{
-                purchase_amount:"88.88",
-                purchase_date:"2011-04-23",
-                food_items:JSON.stringify(foodItems)
-            }
-        });
-    });
-    */
-
 	$(function() {
 	$("#datepickerP").datepicker()
 	$( "#datepickerP" ).datepicker( "option", "dateFormat", 'mm-dd-yy' );
@@ -85,22 +62,30 @@ $("#addsubmit").click(function()
 	$('.foodinrow').each(function(index) //each tr 
    {
     	//add food to db
-    	if($(this).find('.foodin').val().length >0  ){
+    	var foodItemName = $(this).find('.foodin').val();
+    	var foodItemExp = $.datepicker.formatDate('yy-mm-dd', $(this).find('.datep').datepicker( "getDate" ));
+    	var foodItemLoc = $(this).find('.selectedB').find('img').attr("name") ;
+    	var foodItemCat = $(this).find('.catOption').val();
+    	if(foodItemName.length >0  ){
+    	
+    	
     $(function() {
         
+        
         foodItems[foodIcount] = {
-            name: $(this).find('.foodin').val(),//"bananas",
-            expiration: $.datepicker.formatDate('yy-mm-dd', $(this).find('.datep').datepicker( "getDate" )),
-            location: "1",
-            category: "fruit"
+            name: foodItemName, //$(this).find('.foodin').val(),//"bananas",
+            expiration: foodItemExp, //$.datepicker.formatDate('yy-mm-dd', $(this).find('.datep').datepicker( "getDate" )),
+            location: foodItemLoc, //$(this).find('.selectedB').find('img').attr("name") ,//$(this).find('.selectedB').attr("name"),//"1",
+            category: foodItemCat //$(this).find('.catOption').find( ':selected').text()//"fruit"
         };
     });
-        		
-    		$('#foods').append( '<tr><td><input type="checkbox" name="checkall" value="food2"/></td><td>' + $(this).find('.foodin').val() +  '</td><td>Tags</td><td>' +
-    		$(this).find('.catOption option:selected').text() +'</td><td>'+ 
+        	/*	
+    		$('#foods').append( '<tr><td><input type="checkbox" name="checkall" value="food2"/></td><td>' + $(this).find('.foodin').val() +  '</td><td> ' +
+    		$(this).find('.selectedB').find('img').attr("name") + '</td><td>' +
+    		$(this).find('.catOption').val() +'</td><td>'+ 
     		$.datepicker.formatDate('mm/dd/y', $(this).find('.datep').datepicker( "getDate" )) +
     		'</td><td>'+ $.datepicker.formatDate('mm/dd/y', $('#datepickerP').datepicker( "getDate" )) + ' </td></tr>') ;
-    		
+    		*/
     		//clear row
     		$(this).find('.foodin').val('');
     		$(this).find('.datep').datepicker( "setDate" , null );
@@ -112,6 +97,7 @@ $("#addsubmit").click(function()
    });
    
    //send ajax request
+   alert(JSON.stringify(foodItems));
  $(function() {
  	$.ajax({
             type:"POST",
@@ -124,7 +110,7 @@ $("#addsubmit").click(function()
         });
 	});
         
-        
+    $("#reload-tab-cb").get(0).click();  
    //clear purchase date:
    $("#datepickerP").datepicker("setDate", new Date());  //reset to today
    	
@@ -203,9 +189,9 @@ var limit = 10;
           //newtr.innerHTML ='<td><input type="text" name="foodname" size="25" class="foodin">  </td><td>  <input type="text" id="datepicker3"></td><td>Tags </td><td><select><option>Dairy</option><option>Fruit</option><option>Grains</option><option>Protein</option><option>Vegetables</option></select></td>';
           //document.getElementById(divName).appendChild(newtr);
           $("#addfoodtable tr:last").prev().before('<tr><td><input type="text" name="foodname" size="25" class="foodin">  </td><td>  <input type="text" class="datep"></td><td><ui class ="locI"><li><div class ="locButton" ' 
-          + 'name="foodGroup' + foodINum + '" ><img src="/dough/static/images/_fridge_icon.png"></div></li><li><div class ="locButton" '
-          + 'name="foodGroup' + foodINum + '" ><img src="/dough/static/images/_ice_icon.png" ></div></li><li><div class ="locButton" '
-          + 'name="foodGroup' + foodINum + '" ><img src="/dough/static/images/_shelf_icon.png" ></div></li></ui></td><td><select class="catOption" ><option >Dairy</option><option>Fruit</option><option>Grains</option><option>Protein</option><option>Vegetables</option></select></td></tr>');
+          + 'name="foodGroup' + foodINum + '" ><img src="/dough/static/images/_fridge_icon.png" name="0"></div></li><li><div class ="locButton" '
+          + 'name="foodGroup' + foodINum + '" ><img src="/dough/static/images/_ice_icon.png" name="1" >"/div></li><li><div class ="locButton" '
+          + 'name="foodGroup' + foodINum + '" ><img src="/dough/static/images/_shelf_icon.png"  name="2"></div></li></ui></td><td><select class="catOption" ><option >Dairy</option><option>Fruits</option><option>Grains</option><option>Protein</option><option>Vegetables</option></select></td></tr>');
           registerDP(); //make sure new datepickers are registered
            //same for buttons
           counter++;
@@ -240,7 +226,7 @@ $('.locButton').live('mouseenter', function() {
 	if($(this).css("background-color") != clickColorL){
 		$(this).css("background-color", "#686868"); 
 		}
-});
+}); 
 
 $('.locButton').live('mouseleave', function() {
 if($(this).css("background-color") != clickColorL){
@@ -257,27 +243,49 @@ if($(this).css("background-color") != clickColorL){
   	$('[name=' + groupName+']').each(function(index, obj){
     	if($(obj).css("background-color") == clickColorL){
 			$(obj).css("background-color", "#C0C0C0"); 
+			$(this).removeClass("selectedB");
 		}
 	});
 	$(this).css("background-color", clickColor);
+	$(this).addClass("selectedB"); 
 }
 });
 
-//sorting
+//sorting navs
 	navClickColor = "#B9FAD1";
 	noClick = "#369"; 
-	$( ".navCI" ).click(function() { 
-		alert("click"); 
-		$( ".navCI" ).each(function(index, obj){
-			alert("inner"); 
-    		if($(obj).css("background-color") == navClickColor){
-				$(obj).css("background-color", noClick); 
-			}
-		});
-		
+	
+	$( ".navCI" ).click(function() {  
+		//$(this).preventDefault();
+		$( ".currentC" ).css('backgorund-color', noClick); 
+		$( ".currentC").removeClass( "currentC" );
 		$(this).css('backgorund-color', navClickColor); 
+		$(this).addClass( "currentC" );
+
+		alert($(this).text() + " "+  $( ".currentL" ).text()); 
+		/* alert($(this).text() ); 
+		var viewLink = "foodS/" + $(this).text() + "/" + $( ".currentL" ).text() + "/" ; 
+		if( $(this).text() == "All" && $( ".currentL" ).text() =="All"){
+			viewLink = viewLink + "0" ;
+		}else if ( $(this).text() == "All"){
+			viewLink = viewLink + "2" ;
+		}else{
+			viewLink = viewLink + "0" ;
+		}
+		$("#reload-tab-cb").attr("name", viewLink); 
+		$("#reload-tab-cb").get(0).click();
+		*/
 		});
 
+	$( ".navLI" ).click(function() {  
+		$( ".currentL" ).css('backgorund-color', noClick); 
+		$( ".currentL").removeClass( "currentL" );
+		$(this).css('backgorund-color', navClickColor); 
+		$(this).addClass( "currentL" );
+		});
+		
+function searchResponse(cText, lText){
+}
 
 
 </script> 
@@ -307,52 +315,52 @@ if($(this).css("background-color") != clickColorL){
 		<td > <input type="text" name="foodname" size="25" class="foodin" height="100"> </td><td>  <input type="text"  class="datep"></td><td>
 		
 		<ui class ="locI">
-		<li><div class ="locButton" ><img src="/dough/static/images/_fridge_icon.png"></div></li>
-		<li><div class ="locButton"><img src="/dough/static/images/_ice_icon.png" ></div></li>
-		<li><div class ="locButton"><img src="/dough/static/images/_shelf_icon.png" ></div></li>
+		<li><div class ="locButton" ><img src="/dough/static/images/_fridge_icon.png" name="0" ></div></li>
+		<li><div class ="locButton" ><img src="/dough/static/images/_ice_icon.png" name="1" ></div></li>
+		<li><div class ="locButton" ><img src="/dough/static/images/_shelf_icon.png" name="2" ></div></li>
 		</ui>
 		 
 		</td><td>
-			<select class="catOption"><option>Dairy</option><option>Fruit</option><option>Grains</option><option>Protein</option><option>Vegetables</option></select></td>
+			<select class="catOption"><option>Dairy</option><option>Fruits</option><option>Grains</option><option>Other</option><option>Protein</option><option>Vegetables</option></select></td>
 		</tr>
 		<tr class="foodinrow">
 		<td> <input type="text" name="foodname" size="25" class="foodin"> </td><td> <input type="text"  class="datep"></td><td>
 		<ui class ="locI">
-		<li><div class ="locButton" ><img src="/dough/static/images/_fridge_icon.png"></div></li>
-		<li><div class ="locButton"><img src="/dough/static/images/_ice_icon.png" ></div></li>
-		<li><div class ="locButton"><img src="/dough/static/images/_shelf_icon.png" ></div></li>
+		<li><div class ="locButton" ><img src="/dough/static/images/_fridge_icon.png" name="0"></div></li>
+		<li><div class ="locButton"><img src="/dough/static/images/_ice_icon.png" name="1" ></div></li>
+		<li><div class ="locButton"><img src="/dough/static/images/_shelf_icon.png" name="2"></div></li>
 		</ui>
 		</td><td>
-					<select class="catOption"><option>Dairy</option><option>Fruit</option><option>Grains</option><option>Protein</option><option>Vegetables</option></select></td>
+					<select class="catOption"><option>Dairy</option><option>Fruits</option><option>Grains</option><option>Other</option><option>Protein</option><option>Vegetables</option></select></td>
 		</tr>
 		<tr class="foodinrow">
 		<td> <input type="text" name="foodname" size="25" class="foodin">  </td><td>  <input type="text" class="datep"></td><td>
 		<ui class ="locI">
-		<li><div class ="locButton" ><img src="/dough/static/images/_fridge_icon.png"></div></li>
-		<li><div class ="locButton"><img src="/dough/static/images/_ice_icon.png" ></div></li>
-		<li><div class ="locButton"><img src="/dough/static/images/_shelf_icon.png" ></div></li>
+		<li><div class ="locButton" ><img src="/dough/static/images/_fridge_icon.png" name="0"></div></li>
+		<li><div class ="locButton"><img src="/dough/static/images/_ice_icon.png" name="1"></div></li>
+		<li><div class ="locButton"><img src="/dough/static/images/_shelf_icon.png" name="2"></div></li>
 		</ui></td><td>	
-			<select class="catOption"><option>Dairy</option><option>Fruit</option><option>Grains</option><option>Protein</option><option>Vegetables</option></select></td>
+			<select class="catOption"><option>Dairy</option><option>Fruits</option><option>Grains</option><option>Other</option><option>Protein</option><option>Vegetables</option></select></td>
 		</tr>
 		<tr class="foodinrow">
 		<td> <input type="text" name="foodname" size="25" class="foodin">  </td><td>  <input type="text"  class="datep"></td><td>
 			<ui class ="locI">
-		<li><div class ="locButton" ><img src="/dough/static/images/_fridge_icon.png"></div></li>
-		<li><div class ="locButton"><img src="/dough/static/images/_ice_icon.png" ></div></li>
-		<li><div class ="locButton"><img src="/dough/static/images/_shelf_icon.png" ></div></li>
+		<li><div class ="locButton" ><img src="/dough/static/images/_fridge_icon.png" name="0"></div></li>
+		<li><div class ="locButton"><img src="/dough/static/images/_ice_icon.png"  name="1"></div></li>
+		<li><div class ="locButton"><img src="/dough/static/images/_shelf_icon.png" name="2" ></div></li>
 		</ui>
 		</td><td>	
-			<select class="catOption"><option>Dairy</option><option>Fruit</option><option>Grains</option><option>Protein</option><option>Vegetables</option></select></td>
+			<select class="catOption"><option>Dairy</option><option>Fruits</option><option>Grains</option><option>Other</option><option>Protein</option><option>Vegetables</option></select></td>
 		</tr>		
 		<tr class="foodinrow">
 		<td> <input type="text" name="foodname" size="25" class="foodin">  </td><td>  <input type="text"  class="datep"></td><td>
 		<ui class ="locI">
-		<li><div class ="locButton" ><img src="/dough/static/images/_fridge_icon.png"></div></li>
-		<li><div class ="locButton"><img src="/dough/static/images/_ice_icon.png" ></div></li>
-		<li><div class ="locButton"><img src="/dough/static/images/_shelf_icon.png" ></div></li>
+		<li><div class ="locButton" ><img src="/dough/static/images/_fridge_icon.png" name="0"></div></li>
+		<li><div class ="locButton"><img src="/dough/static/images/_ice_icon.png" name="1"></div></li>
+		<li><div class ="locButton"><img src="/dough/static/images/_shelf_icon.png" name="2" ></div></li>
 		</ui>
 		</td><td>	
-			<select class="catOption"><option>Dairy</option><option>Fruit</option><option>Grains</option><option>Protein</option><option>Vegetables</option></select></td>
+			<select class="catOption"><option>Dairy</option><option>Fruits</option><option>Grains</option><option>Other</option><option>Protein</option><option>Vegetables</option></select></td>
 		</tr>	
 				<tr>
 		<td> </td><td> </td><td> </td><td>	
@@ -426,7 +434,7 @@ if($(this).css("background-color") != clickColorL){
         <div class="cabinetTag">Cabinet</div> 
         {% endifequal %} 
         </td>
-        <td>catagory</td> 
+        <td>{{ food.category }}</td> 
         <td>{{ food.expiration|date:"m/d/y"  }}</td><td>{{ food.purchase.date|date:"m/d/y" }}</td>
         </tr>
     {% endfor %}
@@ -434,6 +442,7 @@ if($(this).css("background-color") != clickColorL){
 {% else %}
     <p>No food are available.</p>
 {% endif %}
+
 		
 		
 		</table>
@@ -450,10 +459,11 @@ if($(this).css("background-color") != clickColorL){
 	
 		<div id="navcontainer">
 		<ul class="navlist">
-		<li ><a href="#" id="currentC" class="navCI" ><b>All</b></a></li>
-		<li ><a href="#" class="navCI">Dairy</a></li>
+		<li ><a href="#" class="navCI currentC" ><b>All</b></a></li>
+		<li ><a href="#" title="food"" class="navCI">Dairy</a></li>
 		<li><a href="#" class="navCI">Fruits</a></li>
 		<li><a href="#" class="navCI">Grains</a></li>
+		<li><a href="#" class="navCI">Other</a></li>
 		<li><a href="#" class="navCI">Protein</a></li>
 		<li><a href="#" class="navCI">Vegetables</a></li>
 		</ul>
@@ -463,19 +473,23 @@ if($(this).css("background-color") != clickColorL){
 	
 		<div id="navcontainer">
 		<ul class="navlist">
-		<li><a href="#" id="currentL" class="navLI"><b>All</b></a></li>
-		<li><a href="#" class="navLI">Refrigerator</a></li>
-		<li><a href="#" class="navLI">Freezer</a></li>
-		<li><a href="#" class="navLI">Cabinet</a></li>
+		<li><a href="#" class="navLI currentL" name = "99"><b>All</b></a></li>
+		<li><a href="#" class="navLI" name="0">Refrigerator</a></li>
+		<li><a href="#" class="navLI" name="1">Freezer</a></li>
+		<li><a href="#" class="navLI" name ="2" >Cabinet</a></li>
 		</ul>
 		</div>
 		<br><br><br><br><br>
 	
 	
 	
-	
+	{% if blah %}
+<b>Is blah here? : {{ blah }}</b>
+{% else %}
+<b> no blah</b>
+{% endif %}
 </div> 
  
- 
+ <input type="checkbox" name="food" id="reload-tab-cb" style="display:none;"/>
 </body> 
 </html> 

@@ -14,7 +14,7 @@
 
 <style>
 #need-buttonset .ui-button, #meal-buttonset .ui-button {
-    width: 7em;
+    width: 11em;
 }
 
 .ui-buttonset {
@@ -40,14 +40,15 @@ $(function() {
 	
 	$("#myTable").dataTable({
 		"bLengthChange":false,
-		"sScollY":"100px",
+		"sScollY":"20px",
 		"bPaginate":false,
 		"bJQueryUI":true,
 		"bInfo":false,
+		"bFilter":false,
 		"aoColumnDefs": [{ "bSortable": false, "aTargets": [ 0 ] },
-						 { "sWidth": "10%", "aTargets": [ 0 ] },
-						 { "sWidth": "45%", "aTargets": [ 1 ] },
-						 { "sWidth": "45%", "aTargets": [ 2 ] }]
+						 { "sWidth": "20px", "aTargets": [ 0 ] },
+						 { "sWidth": "145px", "aTargets": [ 1 ] },
+						 { "sWidth": "145px", "aTargets": [ 2 ] }]
 	});
 	
 	$("input").change(function() {
@@ -85,10 +86,6 @@ $(function() {
 			}
 		}
 		
-		for (i=0;i<excludes.length;i++) {
-			alert(excludes[i]);
-		}
-		
 		doQuery(ingredients,excludes,focuses,meal_types,current_page+1,true);
 	});
     $("#meal-buttonset > input").button({
@@ -119,6 +116,7 @@ $(function() {
 <body>
 
 <div id="left-panel">
+<h4>Type of meal:</h4>
 <form name = "form_meal">
 <div id="meal-buttonset">
 <input type="radio" name="meal" id="meal1" value="ALL" checked />
@@ -133,6 +131,7 @@ $(function() {
 </form>
 
 <form name = "form_needs">
+<h4>Dietary needs:</h4>
 <div id="need-buttonset">
 <input type="checkbox" name="need" id="need1" value="All meat" />
 <label for="need1">No meat</label>
@@ -151,13 +150,14 @@ $(function() {
 
 {% if food_list %}
 
+<h4>Have something to use up?</h4>
 <form name="form_foods">
 <table id="myTable">
-<thead> 
-<tr>
-	<th><input type="checkbox" name="food" value="all" /></th>
-    <th class="tableCol">Food</th> 
-    <th class="tableCol">Expiration</th> 
+<thead style="height:5px"> 
+<tr style="height:5px">
+	<th style="height:5px"><input type="checkbox" name="food" value="all" /></th>
+    <th style="height:5px" class="tableCol">Food</th> 
+    <th style="height:5px" class="tableCol">Expiration</th> 
 </tr> 
 </thead>
 
