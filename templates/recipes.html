@@ -16,7 +16,9 @@
 
 <body>
 
+<div id="food-wrapper">
 {% if food_list %}
+
 <table id="myTable" class="tablesorter">
 <thead> 
 <tr> 
@@ -24,7 +26,8 @@
     <th>Expiration</th> 
 </tr> 
 </thead>
-<tbody id="food-wrapper">
+
+<tbody>
 {% for food in food_list %}
 	<tr>
        <td>{{ food.name }}</td>
@@ -65,6 +68,7 @@
     </tr>
 </tbody>
 </table>
+</div>
 
 {% else %}
    <p>No food are available.</p>
