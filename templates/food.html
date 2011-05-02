@@ -263,6 +263,22 @@ if($(this).css("background-color") != clickColorL){
 }
 });
 
+//sorting
+	navClickColor = "#B9FAD1";
+	noClick = "#369"; 
+	$( ".navCI" ).click(function() { 
+		alert("click"); 
+		$( ".navCI" ).each(function(index, obj){
+			alert("inner"); 
+    		if($(obj).css("background-color") == navClickColor){
+				$(obj).css("background-color", noClick); 
+			}
+		});
+		
+		$(this).css('backgorund-color', navClickColor); 
+		});
+
+
 
 </script> 
 </head> 
@@ -433,24 +449,24 @@ if($(this).css("background-color") != clickColorL){
 	<b>Catagories</b> 
 	
 		<div id="navcontainer">
-		<ul id="navlist">
-		<li id="active"><a href="#" id="current"><b>All</b></a></li>
-		<li id="active"><a href="#">Dairy</a></li>
-		<li><a href="#">Fruits</a></li>
-		<li><a href="#">Grains</a></li>
-		<li><a href="#">Protein</a></li>
-		<li><a href="#">Vegetables</a></li>
+		<ul class="navlist">
+		<li ><a href="#" id="currentC" class="navCI" ><b>All</b></a></li>
+		<li ><a href="#" class="navCI">Dairy</a></li>
+		<li><a href="#" class="navCI">Fruits</a></li>
+		<li><a href="#" class="navCI">Grains</a></li>
+		<li><a href="#" class="navCI">Protein</a></li>
+		<li><a href="#" class="navCI">Vegetables</a></li>
 		</ul>
 		</div>
 		<br>
 	<b>Location</b> 
 	
 		<div id="navcontainer">
-		<ul id="navlist">
-		<li id="active"><a href="#" id="current"><b>All</b></a></li>
-		<li><a href="#">Refrigerator</a></li>
-		<li><a href="#">Freezer</a></li>
-		<li><a href="#">Cabinet</a></li>
+		<ul class="navlist">
+		<li><a href="#" id="currentL" class="navLI"><b>All</b></a></li>
+		<li><a href="#" class="navLI">Refrigerator</a></li>
+		<li><a href="#" class="navLI">Freezer</a></li>
+		<li><a href="#" class="navLI">Cabinet</a></li>
 		</ul>
 		</div>
 		<br><br><br><br><br>

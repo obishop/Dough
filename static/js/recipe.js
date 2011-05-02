@@ -3,7 +3,7 @@
 var current_page = 0;
 var ingredients = [];
 var focuses = []
-var meal_types = [];
+var meal_types = "ALL";
 var excludes = [];
 
 
@@ -56,7 +56,7 @@ function displayCount(total_num,make_num) {
 	var count_display;
 	
 	if (total_num == 0)
-		count_display = "No recipes were found. Please add more ingredients.";
+		count_display = "No recipes were found. Please add more ingredients or remove some search restrictions.";
 	else if (total_num == 1)
 		count_display = "<b>"+total_num+"</b>"+" recipe found";
 	else
@@ -112,7 +112,7 @@ function doQuery(ingredients,needs,focus_,meal_type,page_,do_init) {
 	var query = $.param({kitchen:ingredients.join('|'),
 						 exclude:needs.join('|'),
 						 focus:focus_.join('|'),
-						 smode:meal_type.join('|'),
+						 smode:meal_type,
 						 page:page_});
 	
 	$.get('http://www.supercook.com/575/main_search.asp?'+query, 
@@ -133,9 +133,7 @@ function doQuery(ingredients,needs,focus_,meal_type,page_,do_init) {
 			if (do_init) {
 			
 				displayCount(o.TotalDishes,o.DishesUserCanMake);
-				
-				if (o.TotalPages > 1)
-					initPagination(o.TotalPages);
+				initPagination(o.TotalPages);
 			}
 			
 			$('#Results').empty();
@@ -149,26 +147,3 @@ function doQuery(ingredients,needs,focus_,meal_type,page_,do_init) {
 	);
 	
 }
-
-
-//////////// Document Ready ////////////
-
-$(function() {
-	
-	//$("#myTable").tableScroll({height:10});
-	$("#myTable").dataTable({
-		"bInfo":false;
-		"bPaginate":false;
-		"bLengthChange":false
-	});
-	
-	
-	//ingredients = ["butter"];
-	
-	try {
-		
-		doQuery(ingredients,excludes,focuses,meal_types,current_page+1,true);
-	} catch (e) {
-		alert(e);
-	}
-});
