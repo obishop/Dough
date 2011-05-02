@@ -6,27 +6,33 @@ from models import FoodItem
 from dough.doughapp import models
 
 import time, calendar
-from datetime import date, timedelta
 
 @login_required
 def index(request):
     args = {}
     args['username'] = request.user.username
 
-    args['numFoodItems'] = models.FoodItem.objects.filter(user=request.user).count()
-
-    expirationSoon = date.today() + timedelta(days=3)
-
-    args['expiringSoon'] = models.FoodItem.objects.filter(
-        user=request.user
-    ).filter(
-        expiration__lt = expirationSoon
-    ).order_by('expiration')
-
-    args['numExpiringSoon'] = args['expiringSoon'].count()
-
     purchases = models.Purchase.objects.filter(user=request.user).order_by('-date')
     
+    nyear, nmonth, nday = time.localtime()[:3]
+
+    # Format data for spending graph
+    cur_month = nmonth #begin with the current month
+    purchase_index = 0
+    for i in range(12,0,-1):
+        spent = 0
+        while purchase_index<len(purchases) and purchases[purchase_index].date.month == cur_month:
+            spent = spent + purchases[purchase_index].amount
+            purchase_index += 1
+            if purchase_index >= len(purchases):
+                break
+        if cur_month == nmonth:
+            spent_this_month = spent
+        cur_month = cur_month - 1
+        if cur_month == 0:
+            cur_month = 12
+
+    args['spent_this_month'] = spent_this_month
     args['monthly_budget'] = request.user.profile.monthly_budget
     return render_to_response('index.html',args)
 
@@ -94,6 +100,7 @@ def recipes(request):
 def foodSort(request, food_catagory, food_loc, ftype):
 	# return HttpResponse("lalala")	
 	args = {}
+	args['sorting'] = 'true'
 	args['cSort'] = food_catagory
 	args['lSort'] = food_loc
 	if(ftype == '0'):
@@ -106,7 +113,7 @@ def foodSort(request, food_catagory, food_loc, ftype):
 		food_list = FoodItem.objects.filter(user=request.user, location=food_loc, category=food_catagory)
 		
 	args['food_list'] = food_list
-	return render_to_response('food.html', {'food_list': food_list})
+	return render_to_response('food.html', args)
 	
 
 

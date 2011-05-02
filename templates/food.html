@@ -262,19 +262,9 @@ if($(this).css("background-color") != clickColorL){
 		$(this).css('backgorund-color', navClickColor); 
 		$(this).addClass( "currentC" );
 
-		alert($(this).text() + " "+  $( ".currentL" ).text()); 
-		/* alert($(this).text() ); 
-		var viewLink = "foodS/" + $(this).text() + "/" + $( ".currentL" ).text() + "/" ; 
-		if( $(this).text() == "All" && $( ".currentL" ).text() =="All"){
-			viewLink = viewLink + "0" ;
-		}else if ( $(this).text() == "All"){
-			viewLink = viewLink + "2" ;
-		}else{
-			viewLink = viewLink + "0" ;
-		}
-		$("#reload-tab-cb").attr("name", viewLink); 
-		$("#reload-tab-cb").get(0).click();
-		*/
+		//alert($(this).text() + " "+  $( ".currentL" ).text()); 
+		searchResponse($(this).text(), $( ".currentL" ).attr("name")); 
+
 		});
 
 	$( ".navLI" ).click(function() {  
@@ -282,12 +272,52 @@ if($(this).css("background-color") != clickColorL){
 		$( ".currentL").removeClass( "currentL" );
 		$(this).css('backgorund-color', navClickColor); 
 		$(this).addClass( "currentL" );
+		
+		searchResponse($(".currentC").text(), $(this).attr("name")); 
 		});
 		
 function searchResponse(cText, lText){
+	var viewLink = "foodS/" + cText + "/" + lText + "/" ; 
+	//alert(viewLink); 
+	if(cText == "All" && lText == "99"){
+		viewLink = viewLink + "0" ;
+	}else if( lText == "99") {
+		viewLink = viewLink + "1" ;
+	}else if( cText == "All") {
+		viewLink = viewLink + "2" ;
+	}else {
+		viewLink = viewLink + "3" ;
+	}
+	//alert(viewLink); 
+	$("#reload-tab-cb").attr("name", viewLink); 
+	$("#reload-tab-cb").get(0).click();
 }
 
+//update highlights in menu
 
+$(function(){
+  	if($("#searchNoteI").attr("name") == "sort"){
+  		
+  		//alert($("#searchNoteI").text());
+  		
+  		var sortKeys = $("#searchNoteI").text().split("/"); //C then L
+  		
+  		//alert(sortKeys[0] + "  " + sortKeys[1]); 
+  		//update cat
+  		$( ".currentC" ).css('backgorund-color', noClick); 
+		$( ".currentC").removeClass( "currentC" );
+		$('a[name=' + sortKeys[0]+']').css('backgorund-color', navClickColor); 
+		$('a[name=' + sortKeys[0]+']').addClass( "currentC" );
+		
+		//update loc
+  		$( ".currentL" ).css('backgorund-color', noClick); 
+		$( ".currentL").removeClass( "currentL" );
+		$('a[name=' + sortKeys[1]+']').css('backgorund-color', navClickColor); 
+		$('a[name=' + sortKeys[1]+']').addClass( "currentL" );
+  		
+  		sortKeys[1];
+  		}
+ });
 </script> 
 </head> 
 <body> 
@@ -308,7 +338,7 @@ function searchResponse(cText, lText){
  		<col width=100>
  
 		<tr>
-		<td > Item </td><td>  Expiration Date</td><td>Location </td><td>Catagory</td>
+		<td > Item </td><td>  Expiration Date</td><td>Location </td><td>Category</td>
 		</tr>
 		
 		<tr class="foodinrow">
@@ -401,7 +431,7 @@ function searchResponse(cText, lText){
 		<div id="foodlist">
 			<div id="flbuttonbar">
 			<button>Select</button> <button id="deletebutton">Delete</button>   
-			<button>Find Recipes</button>
+			
 			<button name="modal" href="#dialog"><b>Add Foods</b></button>
 
 			</div>
@@ -415,11 +445,11 @@ function searchResponse(cText, lText){
  		<col width=160>
  		<col width=160>
  		
-		<tr id="foodlistcol">
-		<td class="unsortable"> <input type="checkbox" name="food" id="checkboxall" />  </td><td>  Name</td><td>Tags </td><td>Catagory </td><td>Expiration Date</td><td>Purchase Date</td>
-		</tr>
+
 		{% if food_list %}
-    
+    	<tr id="foodlistcol">
+		<td class="unsortable"> <input type="checkbox" name="food" id="checkboxall" />  </td><td>  Name</td><td>Tags </td><td>Category </td><td>Expiration Date</td><td>Purchase Date</td>
+		</tr>
     {% for food in food_list %}
     	<tr><td> <input type="checkbox" name="checkall" value="food1" />  </td>
         <td>{{ food.name }}</td>
@@ -455,17 +485,17 @@ function searchResponse(cText, lText){
 
 	<div id="leftcolumn" class="ui-corner-all">
 
-	<b>Catagories</b> 
+	<b>Categories</b> 
 	
 		<div id="navcontainer">
 		<ul class="navlist">
-		<li ><a href="#" class="navCI currentC" ><b>All</b></a></li>
-		<li ><a href="#" title="food"" class="navCI">Dairy</a></li>
-		<li><a href="#" class="navCI">Fruits</a></li>
-		<li><a href="#" class="navCI">Grains</a></li>
-		<li><a href="#" class="navCI">Other</a></li>
-		<li><a href="#" class="navCI">Protein</a></li>
-		<li><a href="#" class="navCI">Vegetables</a></li>
+		<li ><a href="#" class="navCI currentC" name="All" ><b>All</b></a></li>
+		<li ><a href="#" name="Dairy" class="navCI">Dairy</a></li>
+		<li><a href="#" class="navCI" name="Fruits">Fruits</a></li>
+		<li><a href="#" class="navCI" name="Grains">Grains</a></li>
+		<li><a href="#" class="navCI" name="Other">Other</a></li>
+		<li><a href="#" class="navCI" name="Protein">Protein</a></li>
+		<li><a href="#" class="navCI" name="Vegetables">Vegetables</a></li>
 		</ul>
 		</div>
 		<br>
@@ -483,13 +513,13 @@ function searchResponse(cText, lText){
 	
 	
 	
-	{% if blah %}
-<b>Is blah here? : {{ blah }}</b>
+ {% if sorting %}
+ <div id="searchNoteI" name ="sort" style="display:none;"> {{ cSort }}/{{ lSort}} </div>
 {% else %}
-<b> no blah</b>
+ <div id="searchNoteI" name = "noSort" style="display:none;" > no sorting</div>
 {% endif %}
 </div> 
- 
+
  <input type="checkbox" name="food" id="reload-tab-cb" style="display:none;"/>
 </body> 
 </html> 
