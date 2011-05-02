@@ -2,6 +2,8 @@
 
 var setupTabReload = function(event, ui) {
     $('#reload-tab-cb', ui.panel).change(function() {
+    	//alert(this.name); 
+    	
         $(ui.panel).load(this.name, function() {
             setupTabReload(event, ui);    
         });

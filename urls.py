@@ -33,6 +33,9 @@ urlpatterns = patterns('',
     
     #Ajax deleters ? 
     (r'^ajax/delete_food_items/$', 'dough.doughapp.ajax.delete_food_items'),
+    
+    #for sorting food on food page
+    (r'^foodS/(?P<food_catagory>.*)/(?P<food_loc>[0-9]*)/(?P<ftype>[0-9]*)/$', 'dough.doughapp.views.foodSort'),
 
     (r'/$', 'dough.doughapp.views.index'),
 
