@@ -57,6 +57,36 @@ var onWindowResize = function() {
     $("#main-tabs").css("height",(total_height - 120)+"px");
 }
 
+var displayBudgetProgress = function(progress, budget) {
+    var percent = 100 * progress / budget;
+    $(".progressbar-placeholder").progressbar({value:percent});
+
+    var remaining = Math.round((budget-progress)*100)/100;      
+    $(".budget-progress-spent").html("$"+progress);
+    $(".budget-progress-left").html("$"+remaining);
+    $(".budget-progress-budget").html("$"+budget);
+
+    // Display negative amounts in red
+    if (remaining < 0) {
+        $(".budget-progress-left").css("color","red");
+    } else {
+        $(".budget-progress-left").css("color","");
+    }
+}
+
+var themeDiv = function(divId) {
+    $("#"+divId).addClass("ui-widget-content ui-corner-all")
+        .css("margin-bottom","1em");
+    var children = $("#"+divId).children();
+    $(children[0])
+        .addClass("ui-widget-header ui-corner-tl ui-corner-tr")
+        .css("padding","0.5em")
+        .css("padding-left","1em");
+    $(children[1])
+        .css("padding","1em")
+        .css("position","relative")
+}
+
 var tabIndexFromHash = function() {
     var hash = document.location.hash;
     var index = 0;
