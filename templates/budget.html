@@ -62,11 +62,11 @@ var refreshBudget = function(progress, budget) {
 
     var remaining = Math.round((budget-progress)*100)/100;
     $("#budget-progress-spent").html("$"+progress);
-    $("#budget-progress-left").html("$"+remaining);
+    $("#budget-progress-left").html("$"+remaining_text);
 
     $("#budget-span").html("$"+budget);
     $("#spent-span").html("$"+progress);
-    $("#remaining-span").html("$"+remaining);
+    $("#remaining-span").html("$"+remaining_text);
 
     // Display negative amounts in red
     if (remaining < 0) {
