@@ -17,7 +17,7 @@ $(function() {
 
 	{% if food_list %}
 	{% for food in food_list %}
-	alert("{{ food.name }}");
+	ingredients.push("{{ food.name }}");
 	{% endfor %}
 	{% endif %}
 	
