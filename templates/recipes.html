@@ -39,7 +39,10 @@ $(function() {
 	});
 	
 	$("input").change(function() {
-		alert("changed");
+		if (this.value == "all") {
+			for (i = 0; i < document.form_foods.food.length; i++)
+				document.form_foods.food[i].checked = true;
+		}
 	});
 });
 
@@ -52,6 +55,7 @@ $(function() {
 <div>
 {% if food_list %}
 
+<form name="form_foods">
 <table id="myTable">
 <thead> 
 <tr>
@@ -66,12 +70,13 @@ $(function() {
 	<tr>
 	   <td><input type="checkbox" name="food" value={{ food.name }} /></td>
        <td>{{ food.name }}</td>
-       <td>{{ food.expiration|date:"m/d/y"  }}</td>
+       <td>{{ food.expiration|date:"m/d/y"}}</td>
     </tr>
 {% endfor %}
 </tbody>
 </table>
 </div>
+</form>
 
 {% else %}
    <p>No food are available.</p>
