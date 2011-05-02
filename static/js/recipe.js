@@ -156,11 +156,12 @@ function doQuery(ingredients,needs,focus_,meal_type,page_,do_init) {
 $(function() {
 	
 	$("#myTable").tablesorter();
-	$("#myTable").tableScroll({height:200});
+	
 	
 	//ingredients = ["butter"];
 	
 	try {
+		$("#myTable").tableScroll({height:200});
 		doQuery(ingredients,excludes,focuses,meal_types,current_page+1,true);
 	} catch (e) {
 		alert(e);
