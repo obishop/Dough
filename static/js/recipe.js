@@ -157,7 +157,8 @@ $(function() {
 	
 	//$("#myTable").tableScroll({height:10});
 	$("#myTable").dataTable({
-		"bLengthChange":false
+		"bLengthChange":false;
+		"bScollInfinite":true
 	});
 	
 	
