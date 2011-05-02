@@ -42,6 +42,20 @@ $(function() {
 		if (this.value == "all") {
 			for (i = 0; i < document.form_foods.food.length; i++)
 				document.form_foods.food[i].checked = this.checked;
+		} else if (this.name == "food") {
+			if (this.checked) {
+				focuses.push(this.value);
+			} else {
+				for (i=0;i<focuses.length;i++) {
+					if (this.value == focuses[i]) {
+						focuses.splice(i,1);
+						break;
+					}
+				}
+			}
+		}
+		for (i=0;i<focuses.length;i++) {
+			alert(focuses[i]);
 		}
 	});
 });
