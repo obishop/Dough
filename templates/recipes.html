@@ -24,8 +24,7 @@
     <th>Expiration</th> 
 </tr> 
 </thead>
-<div id="food-wrapper">
-<tbody>
+<tbody id="food-wrapper">
 {% for food in food_list %}
 	<tr>
        <td>{{ food.name }}</td>
@@ -65,7 +64,6 @@
        <td>5/11/10</td>
     </tr>
 </tbody>
-</div>
 </table>
 
 {% else %}
