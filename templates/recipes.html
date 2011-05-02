@@ -41,7 +41,7 @@ $(function() {
 	$("input").change(function() {
 		if (this.value == "all") {
 			for (i = 0; i < document.form_foods.food.length; i++)
-				document.form_foods.food[i].checked = true;
+				document.form_foods.food[i].checked = this.checked;
 		}
 	});
 });
