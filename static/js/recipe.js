@@ -170,6 +170,9 @@ $(function() {
 		"sScollY":"100px",
 		"bPaginate":false,
 		"bJQueryUI":true,
-		"aoColumnDefs": [{ "bSortable": false, "aTargets": [ 0 ] }]
+		"aoColumnDefs": [{ "bSortable": false, "aTargets": [ 0 ] },
+						 { "sWidth": "10%", "aTargets": [ 0 ] },
+						 { "sWidth": "45%", "aTargets": [ 1 ] },
+						 { "sWidth": "45%", "aTargets": [ 2 ] }]
 	});
 });
