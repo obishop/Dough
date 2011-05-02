@@ -1,3 +1,6 @@
+<html>
+<head>
+
 <script>
 $(function(){
     themeDiv("home-food-div");
@@ -17,7 +20,6 @@ $(function(){
         $("#main-tabs").tabs("option","selected",3);
     });
 
-
     displayBudgetProgress({{spent_this_month}},{{monthly_budget}});
     $(".progressbar-placeholder > div").addClass("ui-state-default");
 
@@ -25,7 +27,9 @@ $(function(){
 })
 </script>
 
+</head>
 
+<body>
 <div>
 
 <div id="home-food-div">
@@ -70,4 +74,5 @@ $(function(){
 
 </div>
 
-
+</body>
+</html>
