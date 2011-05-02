@@ -48,8 +48,8 @@
 }
 
 #food-wrapper {
-	height: 50px;
-	overflow: scroll;
+	height: 200px;
+	overflow: auto;
 }
 
 table.tablesorter {
