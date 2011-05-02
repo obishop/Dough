@@ -54,7 +54,11 @@ var currentState = {}
 
 var refreshBudget = function(progress, budget) {
     var percent = 100 * progress / budget;
-    $("#progress-bar").progressbar({value:percent}); 
+    $("#progress-bar").progressbar({value:percent});
+    
+    var remaining_text = '$'+remaining;
+    if (remaining < 0)
+    	remaining_text = '-$'+-1*remaining;
 
     var remaining = Math.round((budget-progress)*100)/100;
     $("#budget-progress-spent").html("$"+progress);
