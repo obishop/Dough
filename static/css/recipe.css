@@ -43,9 +43,5 @@
 #right-panel {
 	width: 60%;
 	float: right;
-}
-
-.searchPanel {
-	width: 100%;
-	padding: 5px;
+	margin: 5px;
 }
