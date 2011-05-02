@@ -58,6 +58,7 @@ table.tablesorter {
 	margin:10px 0pt 15px;
 	font-size: 8pt;
 	width: 100%;
+	height: 200px;
 	text-align: left;
 }
 table.tablesorter thead tr th, table.tablesorter tfoot tr th {
